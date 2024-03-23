@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import myplugin.generator.fmmodel.stereotypes.Entity;
 
-public class FMClass extends FMType {	
+
+public class FMClass extends FMType {
+
+	private Entity entity;
 	
 	private String visibility;
-	
 
 	//Class properties
 	private List<FMProperty> FMProperties = new ArrayList<FMProperty>();
@@ -63,6 +66,14 @@ public class FMClass extends FMType {
 	public void setVisibility(String visibility) {
 		this.visibility = visibility;
 	}	
+	
+	public Entity getEntity() {
+		return entity;
+	}
+
+	public void setEntity(Entity entity) {
+		this.entity = entity;
+	}
 
 	
 	

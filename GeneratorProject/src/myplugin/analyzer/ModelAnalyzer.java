@@ -7,6 +7,8 @@ import myplugin.generator.fmmodel.FMClass;
 import myplugin.generator.fmmodel.FMEnumeration;
 import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.fmmodel.FMProperty;
+import myplugin.generator.fmmodel.FMType;
+import myplugin.generator.fmmodel.stereotypes.Entity;
 
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
@@ -17,6 +19,7 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Enumeration;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type;
+import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 
 /** Model Analyzer takes necessary metadata from the MagicDraw model and puts it in 
@@ -107,8 +110,16 @@ public class ModelAnalyzer {
 			fmClass.addProperty(prop);	
 		}	
 		
-		/** @ToDo:
-		 * Add import declarations etc. */		
+		Stereotype entityStereotype = StereotypesHelper.getAppliedStereotypeByString(cl, "Entity");
+		if (entityStereotype != null) {
+			List<Property> entitytags = entityStereotype.getOwnedAttribute();
+				Property tableName = entitytags.get(0);
+				String tagName = tableName.getName();
+				Object value = StereotypesHelper.getStereotypePropertyValue(cl, entityStereotype, tagName).get(0);
+
+			Entity entity = new Entity((String)value);
+			fmClass.setEntity(entity);
+		}	
 		return fmClass;
 	}
 	
@@ -123,6 +134,7 @@ public class ModelAnalyzer {
 			p.getName() + " must have type!");
 		
 		String typeName = attType.getName();
+		String typePackage = attType.getPackage().getName();
 		if (typeName == null)
 			throw new AnalyzeException("Type ot the property " + cl.getName() + "." +
 			p.getName() + " must have name!");		
@@ -130,7 +142,7 @@ public class ModelAnalyzer {
 		int lower = p.getLower();
 		int upper = p.getUpper();
 		
-		FMProperty prop = new FMProperty(attName, typeName, p.getVisibility().toString(), 
+		FMProperty prop = new FMProperty(attName, new FMType(typeName, typePackage), p.getVisibility().toString(),
 				lower, upper);
 		return prop;		
 	}	

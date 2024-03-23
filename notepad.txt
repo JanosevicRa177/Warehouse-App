@@ -1,0 +1,13 @@
+BE:
+controller,		Path
+Entity,			RelationMultiplicity, Loading(Lazy, Eager)
+
+FE:
+CreateForm,		Title, Description
+UpdateForm,		Title, Description
+DeleteModal,		Description				
+PageView,		GetAll, Create, Update, Delete
+Field,			Editable
+
+
+
