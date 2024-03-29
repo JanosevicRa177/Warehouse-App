@@ -82,7 +82,7 @@ public abstract class BasicGenerator {
 		String fullPath = outputPath
 				+ File.separator
 				+ (filePackage.isEmpty() ? "" : packageToPath(filePackage)
-						+ File.separator)
+				+ File.separator)
 				+ outputFileName.replace("{0}", fileNamePart);
 
 		File of = new File(fullPath);

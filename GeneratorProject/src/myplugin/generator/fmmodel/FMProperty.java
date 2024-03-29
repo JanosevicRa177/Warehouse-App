@@ -1,5 +1,7 @@
 package myplugin.generator.fmmodel;
 
+import myplugin.generator.fmmodel.stereotypes.Field;
+import myplugin.generator.fmmodel.stereotypes.PropertyStereotype;
 
 public class FMProperty extends FMElement  {
 	//Property type
@@ -11,10 +13,9 @@ public class FMProperty extends FMElement  {
 	//Multiplicity (upper value) 
 	private Integer upper;
 	
-	/** @ToDo: Add length, precision, unique... whatever is needed for ejb class generation
-	 * Also, provide these meta-attributes or tags in the modeling languange metaclass or 
-	 * stereotype */
-
+	private PropertyStereotype property;
+	
+	private Field field;
 	
 	public FMProperty(String name, FMType type, String visibility, int lower, int upper) {
 		super(name);
@@ -25,6 +26,12 @@ public class FMProperty extends FMElement  {
 		this.upper = upper;		
 	}
 	
+	public Field getField() {
+		return field;
+	}
+	public void setField(Field field) {
+		this.field = field;
+	}
 	public FMType getType() {
 		return type;
 	}
@@ -53,4 +60,13 @@ public class FMProperty extends FMElement  {
 	public void setUpper(Integer upper) {
 		this.upper = upper;
 	}
+
+	public PropertyStereotype getProperty() {
+		return property;
+	}
+
+	public void setProperty(PropertyStereotype property) {
+		this.property = property;
+	}
+	
 }

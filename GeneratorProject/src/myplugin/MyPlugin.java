@@ -2,8 +2,6 @@ package myplugin;
 
 import java.io.File;
 
-import javax.swing.JOptionPane;
-
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
 
@@ -15,24 +13,27 @@ import com.nomagic.magicdraw.actions.ActionsConfiguratorsManager;
 public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	
 	String pluginDir = null; 
+	String projectDir = "D:/Faks/master/1 semestar/MBRS/Projekat/";
 	
 	public void init() {
-		JOptionPane.showMessageDialog( null, "My Plugin init");
-		
 		pluginDir = getDescriptor().getPluginDirectory().getPath();
-		
-		// Creating submenu in the MagicDraw main menu 	
-		ActionsConfiguratorsManager manager = ActionsConfiguratorsManager.getInstance();		
+		ActionsConfiguratorsManager manager = ActionsConfiguratorsManager.getInstance();
 		manager.addMainMenuConfigurator(new MainMenuConfigurator(getSubmenuActions()));
-		
-		/** @Todo: load project options (@see myplugin.generator.options.ProjectOptions) from 
-		 * ProjectOptions.xml and take ejb generator options */
-		
-		//for test purpose only:
-		GeneratorOptions ejbOptions = new GeneratorOptions("c:/temp", "ejbclass", "templates", "{0}.java", true, "ejb"); 				
-		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
-				
-		ejbOptions.setTemplateDir(pluginDir + File.separator + ejbOptions.getTemplateDir()); //apsolutna putanja
+
+		modelOptions();
+		enumOptions();
+	}
+	
+	private void modelOptions() {
+		GeneratorOptions generatorOptions = new GeneratorOptions(projectDir + "BackendProject/BackendProject", "entity", "templates", "{0}.cs", true, "BackendProject.Model");
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEntityGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
+	}
+	
+	private void enumOptions() {
+		GeneratorOptions generatorOptions = new GeneratorOptions(projectDir + "BackendProject/BackendProject/Model", "enum", "templates", "{0}.cs", true, "BackendProject.Model");
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEnumGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 
 	private NMAction[] getSubmenuActions()

@@ -22,9 +22,9 @@ import myplugin.generator.options.GeneratorOptions;
  *        complete ejb classes
  */
 
-public class EJBGenerator extends BasicGenerator {
+public class BackendEntityGenerator extends BasicGenerator {
 
-	public EJBGenerator(GeneratorOptions generatorOptions) {
+	public BackendEntityGenerator(GeneratorOptions generatorOptions) {
 		super(generatorOptions);
 	}
 
