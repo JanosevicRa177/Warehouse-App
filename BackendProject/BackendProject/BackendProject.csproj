@@ -16,7 +16,6 @@
       <Folder Include="Api\" />
       <Folder Include="Application\" />
       <Folder Include="Infrastructure\" />
-      <Folder Include="Model\" />
     </ItemGroup>
 
 </Project>

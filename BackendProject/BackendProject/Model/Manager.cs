@@ -3,5 +3,6 @@ namespace BackendProject.Model;
 
 public class Manager 
 {  
-      private List<Warehouse> Warehouses {get; set;} = new();
+      public Guid Id {get; private set;}
+      public List<Warehouse> Warehouses {get; private set;} = new();
 }

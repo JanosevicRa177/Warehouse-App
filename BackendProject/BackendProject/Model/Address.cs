@@ -3,10 +3,12 @@ namespace BackendProject.Model;
 
 public class Address 
 {  
-      private Warehouse Warehouse {get; set;}
-      private User User {get; set;}
-      private string Country {get; set;}
-      private string City {get; set;}
-      private string Street {get; set;}
-      private int StreetNumber {get; set;}
+      public Guid Id {get; private set;}
+      public Guid WarehouseId {get; private set;} 
+      public Warehouse Warehouse {get; private set;}
+      public User User {get; private set;}
+      public string Country {get; private set;}
+      public string City {get; private set;}
+      public string Street {get; private set;}
+      public int StreetNumber {get; private set;}
 }

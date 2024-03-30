@@ -3,8 +3,10 @@ namespace BackendProject.Model;
 
 public class ReceiptItem 
 {  
-      private Item Item {get; set;}
-      private Receipt Receipts {get; set;}
-      private Warehouse Warehouse {get; set;}
-      private int Price {get; set;}
+      public Guid Id {get; private set;}
+      public Guid ItemId {get; private set;} 
+      public Item Item {get; private set;}
+      public Receipt Receipts {get; private set;}
+      public Warehouse Warehouse {get; private set;}
+      public int Price {get; private set;}
 }

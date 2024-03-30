@@ -3,5 +3,7 @@ namespace BackendProject.Model;
 
 public class Worker 
 {  
-      private Warehouse Warehouse {get; set;}
+      public Guid Id {get; private set;}
+      public Guid WarehouseId {get; private set;} 
+      public Warehouse Warehouse {get; private set;}
 }

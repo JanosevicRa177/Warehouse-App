@@ -4,7 +4,8 @@ namespace BackendProject.Model;
 
 public class Item 
 {  
-      private List<Product> Products {get; set;} = new();
-      private List<ReceiptItem> ReceiptItems {get; set;} = new();
-      private ItemType ItemType {get; set;}
+      public Guid Id {get; private set;}
+      public List<Product> Products {get; private set;} = new();
+      public List<ReceiptItem> ReceiptItems {get; private set;} = new();
+      public ItemType ItemType {get; private set;}
 }

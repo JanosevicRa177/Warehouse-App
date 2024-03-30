@@ -3,8 +3,10 @@ namespace BackendProject.Model;
 
 public class User 
 {  
-      private string Email {get; set;}
-      private string FirstName {get; set;}
-      private Address Address {get; set;}
-      private string Contact {get; set;}
+      public Guid Id {get; private set;}
+      public string Email {get; private set;}
+      public string FirstName {get; private set;}
+      public Guid AddressId {get; private set;} 
+      public Address Address {get; private set;}
+      public string Contact {get; private set;}
 }

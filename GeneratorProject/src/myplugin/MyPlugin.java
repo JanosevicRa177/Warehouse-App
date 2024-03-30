@@ -51,5 +51,3 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		return true;
 	}
 }
-
-

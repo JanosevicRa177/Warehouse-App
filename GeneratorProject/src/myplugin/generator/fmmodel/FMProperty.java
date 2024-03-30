@@ -17,15 +17,25 @@ public class FMProperty extends FMElement  {
 	
 	private Field field;
 	
+	private Boolean isClass;
+	
 	public FMProperty(String name, FMType type, String visibility, int lower, int upper) {
 		super(name);
 		this.type = type;
 		this.visibility = visibility;
 		
 		this.lower = lower;
-		this.upper = upper;		
+		this.upper = upper;	
+		this.isClass = false;
 	}
 	
+	
+	public Boolean getIsClass() {
+		return isClass;
+	}
+	public void setIsClass(Boolean isClass) {
+		this.isClass = isClass;
+	}
 	public Field getField() {
 		return field;
 	}

@@ -59,6 +59,8 @@ public class ModelAnalyzer {
 		FMModel.getInstance().getClasses().clear();
 		FMModel.getInstance().getEnumerations().clear();
 		processPackage(root, filePackage);
+		FMModel.getInstance().setpIsPropertyAClass();
+		
 	}
 	
 	private void processPackage(Package pack, String packageOwner) throws AnalyzeException {

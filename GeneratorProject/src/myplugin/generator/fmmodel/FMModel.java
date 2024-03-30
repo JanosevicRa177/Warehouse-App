@@ -1,7 +1,9 @@
 package myplugin.generator.fmmodel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /** FMModel: Singleton class. This is intermediate data structure that keeps metadata
  * extracted from MagicDraw model. Data structure should be optimized for code generation
@@ -41,6 +43,20 @@ public class FMModel {
 		this.enumerations = enumerations;
 	}
 
+	public void setpIsPropertyAClass() {
+	    Map<String, FMClass> classMap = new HashMap<>();
+	    for (FMClass aClass : classes) {
+	        classMap.put(aClass.getName(), aClass);
+	    }
+	    for (FMClass aClass : classes) {
+	        for (FMProperty prop : aClass.getProperties()) {
+	            if (classMap.containsKey(prop.getType().getName())) {
+	                prop.setIsClass(true);
+	                break;
+	            }
+	        }
+	    }
+	}
 
 
 }
