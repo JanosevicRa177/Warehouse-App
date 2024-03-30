@@ -13,7 +13,7 @@ import com.nomagic.magicdraw.actions.ActionsConfiguratorsManager;
 public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	
 	String pluginDir = null; 
-	String projectDir = "D:/Faks/master/1 semestar/MBRS/Projekat/";
+	String dusan = "D:/Faks/master/1 semestar/MBRS/Projekat/";
 	
 	public void init() {
 		pluginDir = getDescriptor().getPluginDirectory().getPath();
@@ -25,13 +25,13 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	}
 	
 	private void modelOptions() {
-		GeneratorOptions generatorOptions = new GeneratorOptions(projectDir + "BackendProject/BackendProject", "entity", "templates", "{0}.cs", true, "BackendProject.Model");
+		GeneratorOptions generatorOptions = new GeneratorOptions(dusan + "BackendProject/BackendProject", "entity", "templates", "{0}.cs", true, "BackendProject.Model");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEntityGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 	
 	private void enumOptions() {
-		GeneratorOptions generatorOptions = new GeneratorOptions(projectDir + "BackendProject/BackendProject/Model", "enum", "templates", "{0}.cs", true, "BackendProject.Model");
+		GeneratorOptions generatorOptions = new GeneratorOptions(dusan + "BackendProject/BackendProject/Model", "enum", "templates", "{0}.cs", true, "BackendProject.Model");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEnumGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
