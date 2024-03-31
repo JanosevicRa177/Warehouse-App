@@ -1,6 +1,8 @@
 package myplugin;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import com.nomagic.magicdraw.actions.MDAction;
@@ -9,11 +11,15 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
 
 import myplugin.analyzer.AnalyzeException;
 import myplugin.analyzer.ModelAnalyzer;
+import myplugin.generator.AppComponentGenerator;
+import myplugin.generator.AppModuleGenerator;
+import myplugin.generator.AppTemplateGenerator;
 import myplugin.generator.BackendEntityGenerator;
 import myplugin.generator.BackendEnumGenerator;
 import myplugin.generator.DbContextGenerator;
 import myplugin.generator.RepositoryGenerator;
 import myplugin.generator.RepositoryInterfaceGenerator;
+import myplugin.generator.ServiceGenerator;
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
 
@@ -35,8 +41,10 @@ class GenerateAction extends MDAction{
 			generateDbContext();
 			generateRepositories();
 			generateRepositoryInterfaces();
-			
-
+			generateAppModule();
+			generateAppComponent();
+			generateAppTemplate();
+			generateService();
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
@@ -90,6 +98,41 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("RepositoryInterfaceGenerator");
 		RepositoryInterfaceGenerator generator = new RepositoryInterfaceGenerator(generatorOptions);
+	}
+	
+	private void generateAppModule() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("AppModuleGenerator");
+		AppModuleGenerator generator = new AppModuleGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateAppComponent() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("AppComponentGenerator");
+		AppComponentGenerator generator = new AppComponentGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateAppTemplate() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("AppTemplateGenerator");
+		AppTemplateGenerator generator = new AppTemplateGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateService() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ServiceGenerator");
+		ServiceGenerator generator = new ServiceGenerator(generatorOptions);
 		generator.generate();
 	}
 
