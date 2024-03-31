@@ -11,6 +11,9 @@ import myplugin.analyzer.AnalyzeException;
 import myplugin.analyzer.ModelAnalyzer;
 import myplugin.generator.BackendEntityGenerator;
 import myplugin.generator.BackendEnumGenerator;
+import myplugin.generator.DbContextGenerator;
+import myplugin.generator.RepositoryGenerator;
+import myplugin.generator.RepositoryInterfaceGenerator;
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
 
@@ -29,6 +32,10 @@ class GenerateAction extends MDAction{
 		try {
 			generateBackendModel();
 			generateBackendEnum();
+			generateDbContext();
+			generateRepositories();
+			generateRepositoryInterfaces();
+			
 
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
@@ -54,6 +61,35 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("BackendEnumGenerator");
 		BackendEnumGenerator generator = new BackendEnumGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateDbContext()
+			throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Persistence");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("DbContextGenerator");
+		DbContextGenerator generator = new DbContextGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateRepositories()
+			throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Repositories");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("RepositoryGenerator");
+		RepositoryGenerator generator = new RepositoryGenerator(generatorOptions);
+		generator.generate();
+	}
+	private void generateRepositoryInterfaces()
+			throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Interfaces");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("RepositoryInterfaceGenerator");
+		RepositoryInterfaceGenerator generator = new RepositoryInterfaceGenerator(generatorOptions);
 		generator.generate();
 	}
 

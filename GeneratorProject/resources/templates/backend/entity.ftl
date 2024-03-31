@@ -4,7 +4,7 @@ using BackendProject.Model.Enum;
 
 namespace BackendProject.${class.typePackage};
 
-${class.visibility} class ${class.name} : Entity
+public class ${class.name} : Entity
 {  
 <#list properties as property>
 	<#if property.upper == 1 >
