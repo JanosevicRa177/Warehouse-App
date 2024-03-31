@@ -1,9 +1,13 @@
 
 namespace BackendProject.Model;
 
-public class Worker 
+public class Worker : Entity
 {  
-      public Guid Id {get; private set;}
       public Guid WarehouseId {get; private set;} 
       public Warehouse Warehouse {get; private set;}
+	public Worker(){ }
+	public Worker(Guid warehouseId ) 
+	{
+      	WarehouseId = warehouseId;
+	}
 }
