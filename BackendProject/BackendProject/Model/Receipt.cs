@@ -1,9 +1,13 @@
 
 namespace BackendProject.Model;
 
-public class Receipt 
+public class Receipt : Entity
 {  
-      public Guid Id {get; private set;}
       public List<ReceiptItem> ReceiptItems {get; private set;} = new();
       public int FullPrice {get; private set;}
+	public Receipt(){ }
+	public Receipt(int fullPrice) 
+	{
+      	FullPrice = fullPrice;
+	}
 }
