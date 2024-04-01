@@ -19,6 +19,7 @@ import myplugin.generator.BackendEnumGenerator;
 import myplugin.generator.DbContextGenerator;
 import myplugin.generator.RepositoryGenerator;
 import myplugin.generator.RepositoryInterfaceGenerator;
+import myplugin.generator.RoutingGenerator;
 import myplugin.generator.ServiceGenerator;
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
@@ -45,6 +46,7 @@ class GenerateAction extends MDAction{
 			generateAppComponent();
 			generateAppTemplate();
 			generateService();
+			generateRouter();
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
@@ -133,6 +135,15 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ServiceGenerator");
 		ServiceGenerator generator = new ServiceGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateRouter() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("RoutingGenerator");
+		RoutingGenerator generator = new RoutingGenerator(generatorOptions);
 		generator.generate();
 	}
 
