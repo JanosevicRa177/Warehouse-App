@@ -5,14 +5,16 @@
 	    <tr>
 	    	      <th>Name</th>
 	      <th>Size</th>
+	      <th>Address</th>
 	      <th></th>
 	      <th></th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr *ngFor="let item of data">
-	      <th>{{ item.name }}</th>
-	      <th>{{ item.size }}</th>
+	      <td>{{ item.name }}</td>
+	      <td>{{ item.size }}</td>
+	      <td>{{ item.address?.street}} {{ item.address?.streetNumber }} {{ item.address?.city }} {{ item.address?.country }}</td>
 	      <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
 	      <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
 	    </tr>
@@ -32,6 +34,10 @@
 	  <label for="size">Size:</label>
 	  <input type="number" id="size" name="size" [ngModel]="selectedItem ? selectedItem.size : null" required>
 
+	  <label for="address">Address:</label>
+      <select id="address" name="addressId" [ngModel]="selectedItem ? selectedItem.address?.id : null" required>
+        <option *ngFor="let address of addresses" [value]="address.id">{{ address.street }} {{address.streetNumber}} {{address.city}} {{address.country}}</option>
+      </select>
 	
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>

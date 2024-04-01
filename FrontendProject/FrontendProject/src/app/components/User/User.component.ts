@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../services/User.service';
+import { AddressService } from '../../services/Address.service'
 //import { User } from '../../models/User'
 
 @Component({
@@ -13,8 +14,9 @@ export class UserComponent implements OnInit {
 	//data: User[] = []
 	data: any[] = []
 	selectedItem: any = null
+	addresses: any = []
 	
-	constructor(private userService: UserService) { } 
+	constructor(private userService: UserService, private addressService: AddressService ) { } 
 	
 	ngOnInit(): void {
 		this.userService.getUser().subscribe(
@@ -22,6 +24,13 @@ export class UserComponent implements OnInit {
 				this.data = data
 			} 
 		)
+		
+		this.addressService.getAddress().subscribe(
+			(data) => {
+				this.addresses = data
+			} 
+		)
+		
 	}
   
 	delete(id: number) : void {

@@ -14,7 +14,7 @@ export class ReceiptComponent implements OnInit {
 	data: any[] = []
 	selectedItem: any = null
 	
-	constructor(private receiptService: ReceiptService) { } 
+	constructor(private receiptService: ReceiptService ) { } 
 	
 	ngOnInit(): void {
 		this.receiptService.getReceipt().subscribe(
@@ -22,6 +22,8 @@ export class ReceiptComponent implements OnInit {
 				this.data = data
 			} 
 		)
+		
+		
 	}
   
 	delete(id: number) : void {

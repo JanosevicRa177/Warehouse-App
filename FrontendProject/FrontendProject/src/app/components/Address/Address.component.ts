@@ -14,7 +14,7 @@ export class AddressComponent implements OnInit {
 	data: any[] = []
 	selectedItem: any = null
 	
-	constructor(private addressService: AddressService) { } 
+	constructor(private addressService: AddressService ) { } 
 	
 	ngOnInit(): void {
 		this.addressService.getAddress().subscribe(
@@ -22,6 +22,8 @@ export class AddressComponent implements OnInit {
 				this.data = data
 			} 
 		)
+		
+		
 	}
   
 	delete(id: number) : void {

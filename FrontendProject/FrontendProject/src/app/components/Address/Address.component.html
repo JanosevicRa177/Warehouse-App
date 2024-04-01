@@ -3,12 +3,22 @@
     <table class="data-table">
 	  <thead>
 	    <tr>
-	    	      <th></th>
+	    	      <th>Street</th>
+	      <th>Street number</th>
+  	      <th>City</th>
+  	      <th>Country</th>
+  	      <th>User</th>
+	      <th></th>
 	      <th></th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr *ngFor="let item of data">
+	  	  <td>{{ item.street }}</td>
+	  	  <td>{{ item.streetNumber }}</td>
+	  	  <td>{{ item.city }}</td>
+	  	  <td>{{ item.country }}</td>
+	  	  <td>{{ item.user.email }}</td>
 	      <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
 	      <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
 	    </tr>
@@ -22,6 +32,18 @@
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
 	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">
+	  <label for="street">Street:</label>
+	  <input type="text" id="street" name="street" [ngModel]="selectedItem ? selectedItem.street : null" required>
+	
+	  <label for="streetNumber">StreetNumber:</label>
+	  <input type="text" id="streetNumber" name="streetNumber" [ngModel]="selectedItem ? selectedItem.streetNumber : null" required>
+	  
+	  <label for="city">City:</label>
+	  <input type="text" id="city" name="city" [ngModel]="selectedItem ? selectedItem.city : null" required>
+	  
+	  <label for="Country">Country:</label>
+	  <input type="text" id="country" name="country" [ngModel]="selectedItem ? selectedItem.country : null" required>
+
 	
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>

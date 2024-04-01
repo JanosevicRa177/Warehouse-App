@@ -6,6 +6,8 @@
 	    	      <th>Email</th>
 	      <th>First name</th>
 	      <th>Contact</th>
+	      <th>Address</th>
+	      <th>Warehouse</th>
 	      <th></th>
 	      <th></th>
 	    </tr>
@@ -15,6 +17,8 @@
 	  	  <td>{{ item.email }}</td>
 	  	  <td>{{ item.firstName }}</td>
 	  	  <td>{{ item.contact }}</td>
+	  	  <td>{{ item.address?.street}} {{ item.address?.streetNumber }} {{ item.address?.city }} {{ item.address?.country }}</td>
+	  	  <td>{{ item.warehouse?.name }}</td>
 	      <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
 	      <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
 	    </tr>
@@ -36,6 +40,18 @@
 
 	  <label for="contact">Contact:</label>
 	  <input type="text" id="contact" name="contact" [ngModel]="selectedItem ? selectedItem.contact : null" required>
+	  
+	  <label for="address">Address:</label>
+      <select id="address" name="addressId" [ngModel]="selectedItem ? selectedItem.address?.id : null" required>
+        <option *ngFor="let address of addresses" [value]="address.id">{{ address.street }} {{address.streetNumber}} {{address.city}} {{address.country}}</option>
+      </select>
+      
+  	  <label for="warehouse">Warehouse:</label>
+      <select id="warehouse" name="warehouseId" [ngModel]="selectedItem ? selectedItem.warehouse?.id : null" required>
+        <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{ warehouse.name }}</option>
+      </select>
+      
+      
 	
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>

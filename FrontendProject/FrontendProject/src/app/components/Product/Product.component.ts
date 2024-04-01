@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../../services/Product.service';
+import { WarehouseService } from '../../services/Warehouse.service'
 //import { Product } from '../../models/Product'
 
 @Component({
@@ -13,13 +14,21 @@ export class ProductComponent implements OnInit {
 	//data: Product[] = []
 	data: any[] = []
 	selectedItem: any = null
+	warehouses: any = []
 	
-	constructor(private productService: ProductService) { } 
+	constructor(private productService: ProductService , private warehouseService: WarehouseService) { } 
 	
 	ngOnInit(): void {
 		this.productService.getProduct().subscribe(
 			(data) => {
 				this.data = data
+			} 
+		)
+		
+		
+		this.warehouseService.getWarehouse().subscribe(
+			(data) => {
+				this.warehouses = data
 			} 
 		)
 	}

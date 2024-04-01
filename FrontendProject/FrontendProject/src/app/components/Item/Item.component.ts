@@ -14,7 +14,7 @@ export class ItemComponent implements OnInit {
 	data: any[] = []
 	selectedItem: any = null
 	
-	constructor(private itemService: ItemService) { } 
+	constructor(private itemService: ItemService ) { } 
 	
 	ngOnInit(): void {
 		this.itemService.getItem().subscribe(
@@ -22,6 +22,8 @@ export class ItemComponent implements OnInit {
 				this.data = data
 			} 
 		)
+		
+		
 	}
   
 	delete(id: number) : void {
