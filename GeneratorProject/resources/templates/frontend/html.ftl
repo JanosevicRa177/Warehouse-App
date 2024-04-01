@@ -34,6 +34,11 @@
 	</table>
   </div>
   <div class="form-container">
+  	<div class="create-btn-wrapper">
+	  <button class="submit-btn" (click)="selectedItem = null">Open create form</button>
+	</div>
+	<h2 *ngIf="!selectedItem">Create form</h2>
+	<h2 *ngIf="selectedItem">Edit form</h2>
 	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">
 	<#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager'>
 	  <label for="email">Email:</label>

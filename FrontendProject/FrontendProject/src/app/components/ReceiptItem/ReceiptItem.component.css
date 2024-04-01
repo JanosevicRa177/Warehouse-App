@@ -70,3 +70,9 @@
 .submit-btn:hover {
     background-color: #218838; 
 }
+
+.create-btn-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px
+}
