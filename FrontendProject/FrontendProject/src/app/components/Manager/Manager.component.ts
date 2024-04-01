@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ManagerService } from '../services/Manager.service';
-import { Manager } from '../models/Manager'
+import { ManagerService } from '../../services/Manager.service';
+//import { Manager } from '../../models/Manager'
 
 @Component({
   selector: 'app-manager',
   templateUrl: './Manager.component.html',
-  stylesUrl: ['./Manager.component.css']
+  styleUrl: './Manager.component.css'
 })
 
 export class ManagerComponent implements OnInit {
-	data: Manager[] = []
+	//data: Manager[] = []
+	data: any[] = []
 	
 	constructor(private managerService: ManagerService, private toastr: ToastrService) { } 
 	
 	ngOnInit(): void {
-		this.data = this.managerService.getManager()
+		this.managerService.getManager().subscribe(
+			(data) => {
+				this.data = data
+			} 
+		)
 	}
   
 	delete(id: number) : void {
@@ -25,6 +30,17 @@ export class ManagerComponent implements OnInit {
 	  		},
 	  		(error : any) => {
 	  			this.toastr.error('Failed to delete Manager')
+	  		} 
+  		);
+	}
+	
+	create(entity: any) : void {
+	    this.managerService.createManager(entity).subscribe(
+	  		() => {
+	  			this.toastr.success('Manager created!');
+	  		},
+	  		(error : any) => {
+	  			this.toastr.error('Failed to create Manager')
 	  		} 
   		);
 	}

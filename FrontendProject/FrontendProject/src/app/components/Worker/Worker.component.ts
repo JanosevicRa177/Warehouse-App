@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { WorkerService } from '../services/Worker.service';
-import { Worker } from '../models/Worker'
+import { WorkerService } from '../../services/Worker.service';
+//import { Worker } from '../../models/Worker'
 
 @Component({
   selector: 'app-worker',
   templateUrl: './Worker.component.html',
-  stylesUrl: ['./Worker.component.css']
+  styleUrl: './Worker.component.css'
 })
 
 export class WorkerComponent implements OnInit {
-	data: Worker[] = []
+	//data: Worker[] = []
+	data: any[] = []
 	
 	constructor(private workerService: WorkerService, private toastr: ToastrService) { } 
 	
 	ngOnInit(): void {
-		this.data = this.workerService.getWorker()
+		this.workerService.getWorker().subscribe(
+			(data) => {
+				this.data = data
+			} 
+		)
 	}
   
 	delete(id: number) : void {
@@ -25,6 +30,17 @@ export class WorkerComponent implements OnInit {
 	  		},
 	  		(error : any) => {
 	  			this.toastr.error('Failed to delete Worker')
+	  		} 
+  		);
+	}
+	
+	create(entity: any) : void {
+	    this.workerService.createWorker(entity).subscribe(
+	  		() => {
+	  			this.toastr.success('Worker created!');
+	  		},
+	  		(error : any) => {
+	  			this.toastr.error('Failed to create Worker')
 	  		} 
   		);
 	}

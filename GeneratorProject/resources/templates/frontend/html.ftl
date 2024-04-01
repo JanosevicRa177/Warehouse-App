@@ -28,3 +28,17 @@
     </tr>
   </tbody>
 </table>
+
+<form #entityForm="ngForm" (ngSubmit)="create(entityForm.value)">
+<#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager'>
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" ngModel required>
+
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" name="firstName" ngModel required>
+
+  <label for="contact">Contact:</label>
+  <input type="text" id="contact" name="contact" ngModel required>
+</#if>
+  <button type="submit">Create</button>
+</form>
