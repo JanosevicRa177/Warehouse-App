@@ -33,6 +33,7 @@ public class ServiceGenerator extends BasicGenerator {
 			Writer out;
 			Map<String, Object> context = new HashMap<String, Object>();
 			try {
+				if(cl.getCrud() == null) continue;
 				out = getWriter(cl.getName() + ".service", cl.getTypePackage());
 				if (out != null) {
 					context.clear();
