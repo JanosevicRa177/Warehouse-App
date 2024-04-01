@@ -3,8 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
+import { ToastrModule } from 'ngx-toastr';
 <#list classes as class>
-import { ${class.name}Component } from './components/${class.name}/${class.name?lower_case}.component';    
+import { ${class.name}Component } from './components/${class.name?lower_case}/${class.name?lower_case}.component';    
 </#list>
 
 @NgModule({
@@ -16,7 +19,10 @@ import { ${class.name}Component } from './components/${class.name}/${class.name?
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ToastrModule
   ],
   providers: [],
   bootstrap: [AppComponent]

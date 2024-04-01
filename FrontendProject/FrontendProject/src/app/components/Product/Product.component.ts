@@ -5,15 +5,16 @@ import { ProductService } from '../../services/Product.service';
 
 @Component({
   selector: 'app-product',
-  templateUrl: './Product.component.html',
-  styleUrl: './Product.component.css'
+  templateUrl: './product.component.html',
+  styleUrl: './product.component.css'
 })
 
 export class ProductComponent implements OnInit {
 	//data: Product[] = []
 	data: any[] = []
+	selectedItem: any = null
 	
-	constructor(private productService: ProductService, private toastr: ToastrService) { } 
+	constructor(private productService: ProductService) { } 
 	
 	ngOnInit(): void {
 		this.productService.getProduct().subscribe(
@@ -26,10 +27,10 @@ export class ProductComponent implements OnInit {
 	delete(id: number) : void {
 	    this.productService.deleteProduct(id).subscribe(
 	  		() => {
-	  			this.toastr.success('Product is deleted!');
+	  			//this.toastr.success('Product is deleted!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to delete Product')
+	  			//this.toastr.error('Failed to delete Product')
 	  		} 
   		);
 	}
@@ -37,12 +38,24 @@ export class ProductComponent implements OnInit {
 	create(entity: any) : void {
 	    this.productService.createProduct(entity).subscribe(
 	  		() => {
-	  			this.toastr.success('Product created!');
+	  			//this.toastr.success('Product created!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to create Product')
+	  			//this.toastr.error('Failed to create Product')
 	  		} 
   		);
 	}
+	
+	edit(entity: any) : void {
+	    this.productService.updateProduct(entity).subscribe(
+	  		() => {
+	  			//this.toastr.success('Product edited!');
+	  		},
+	  		(error : any) => {
+	  			//this.toastr.error('Failed to edit Product')
+	  		} 
+  		);
+	}
+	
   
 }

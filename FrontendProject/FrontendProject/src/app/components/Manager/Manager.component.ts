@@ -5,15 +5,16 @@ import { ManagerService } from '../../services/Manager.service';
 
 @Component({
   selector: 'app-manager',
-  templateUrl: './Manager.component.html',
-  styleUrl: './Manager.component.css'
+  templateUrl: './manager.component.html',
+  styleUrl: './manager.component.css'
 })
 
 export class ManagerComponent implements OnInit {
 	//data: Manager[] = []
 	data: any[] = []
+	selectedItem: any = null
 	
-	constructor(private managerService: ManagerService, private toastr: ToastrService) { } 
+	constructor(private managerService: ManagerService) { } 
 	
 	ngOnInit(): void {
 		this.managerService.getManager().subscribe(
@@ -26,10 +27,10 @@ export class ManagerComponent implements OnInit {
 	delete(id: number) : void {
 	    this.managerService.deleteManager(id).subscribe(
 	  		() => {
-	  			this.toastr.success('Manager is deleted!');
+	  			//this.toastr.success('Manager is deleted!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to delete Manager')
+	  			//this.toastr.error('Failed to delete Manager')
 	  		} 
   		);
 	}
@@ -37,12 +38,24 @@ export class ManagerComponent implements OnInit {
 	create(entity: any) : void {
 	    this.managerService.createManager(entity).subscribe(
 	  		() => {
-	  			this.toastr.success('Manager created!');
+	  			//this.toastr.success('Manager created!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to create Manager')
+	  			//this.toastr.error('Failed to create Manager')
 	  		} 
   		);
 	}
+	
+	edit(entity: any) : void {
+	    this.managerService.updateManager(entity).subscribe(
+	  		() => {
+	  			//this.toastr.success('Manager edited!');
+	  		},
+	  		(error : any) => {
+	  			//this.toastr.error('Failed to edit Manager')
+	  		} 
+  		);
+	}
+	
   
 }

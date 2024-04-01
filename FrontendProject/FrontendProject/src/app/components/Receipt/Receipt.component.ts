@@ -5,15 +5,16 @@ import { ReceiptService } from '../../services/Receipt.service';
 
 @Component({
   selector: 'app-receipt',
-  templateUrl: './Receipt.component.html',
-  styleUrl: './Receipt.component.css'
+  templateUrl: './receipt.component.html',
+  styleUrl: './receipt.component.css'
 })
 
 export class ReceiptComponent implements OnInit {
 	//data: Receipt[] = []
 	data: any[] = []
+	selectedItem: any = null
 	
-	constructor(private receiptService: ReceiptService, private toastr: ToastrService) { } 
+	constructor(private receiptService: ReceiptService) { } 
 	
 	ngOnInit(): void {
 		this.receiptService.getReceipt().subscribe(
@@ -26,10 +27,10 @@ export class ReceiptComponent implements OnInit {
 	delete(id: number) : void {
 	    this.receiptService.deleteReceipt(id).subscribe(
 	  		() => {
-	  			this.toastr.success('Receipt is deleted!');
+	  			//this.toastr.success('Receipt is deleted!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to delete Receipt')
+	  			//this.toastr.error('Failed to delete Receipt')
 	  		} 
   		);
 	}
@@ -37,12 +38,24 @@ export class ReceiptComponent implements OnInit {
 	create(entity: any) : void {
 	    this.receiptService.createReceipt(entity).subscribe(
 	  		() => {
-	  			this.toastr.success('Receipt created!');
+	  			//this.toastr.success('Receipt created!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to create Receipt')
+	  			//this.toastr.error('Failed to create Receipt')
 	  		} 
   		);
 	}
+	
+	edit(entity: any) : void {
+	    this.receiptService.updateReceipt(entity).subscribe(
+	  		() => {
+	  			//this.toastr.success('Receipt edited!');
+	  		},
+	  		(error : any) => {
+	  			//this.toastr.error('Failed to edit Receipt')
+	  		} 
+  		);
+	}
+	
   
 }

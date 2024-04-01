@@ -5,15 +5,16 @@ import { WorkerService } from '../../services/Worker.service';
 
 @Component({
   selector: 'app-worker',
-  templateUrl: './Worker.component.html',
-  styleUrl: './Worker.component.css'
+  templateUrl: './worker.component.html',
+  styleUrl: './worker.component.css'
 })
 
 export class WorkerComponent implements OnInit {
 	//data: Worker[] = []
 	data: any[] = []
+	selectedItem: any = null
 	
-	constructor(private workerService: WorkerService, private toastr: ToastrService) { } 
+	constructor(private workerService: WorkerService) { } 
 	
 	ngOnInit(): void {
 		this.workerService.getWorker().subscribe(
@@ -26,10 +27,10 @@ export class WorkerComponent implements OnInit {
 	delete(id: number) : void {
 	    this.workerService.deleteWorker(id).subscribe(
 	  		() => {
-	  			this.toastr.success('Worker is deleted!');
+	  			//this.toastr.success('Worker is deleted!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to delete Worker')
+	  			//this.toastr.error('Failed to delete Worker')
 	  		} 
   		);
 	}
@@ -37,12 +38,24 @@ export class WorkerComponent implements OnInit {
 	create(entity: any) : void {
 	    this.workerService.createWorker(entity).subscribe(
 	  		() => {
-	  			this.toastr.success('Worker created!');
+	  			//this.toastr.success('Worker created!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to create Worker')
+	  			//this.toastr.error('Failed to create Worker')
 	  		} 
   		);
 	}
+	
+	edit(entity: any) : void {
+	    this.workerService.updateWorker(entity).subscribe(
+	  		() => {
+	  			//this.toastr.success('Worker edited!');
+	  		},
+	  		(error : any) => {
+	  			//this.toastr.error('Failed to edit Worker')
+	  		} 
+  		);
+	}
+	
   
 }

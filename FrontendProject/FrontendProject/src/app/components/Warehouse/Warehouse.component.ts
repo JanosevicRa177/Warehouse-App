@@ -5,15 +5,16 @@ import { WarehouseService } from '../../services/Warehouse.service';
 
 @Component({
   selector: 'app-warehouse',
-  templateUrl: './Warehouse.component.html',
-  styleUrl: './Warehouse.component.css'
+  templateUrl: './warehouse.component.html',
+  styleUrl: './warehouse.component.css'
 })
 
 export class WarehouseComponent implements OnInit {
 	//data: Warehouse[] = []
 	data: any[] = []
+	selectedItem: any = null
 	
-	constructor(private warehouseService: WarehouseService, private toastr: ToastrService) { } 
+	constructor(private warehouseService: WarehouseService) { } 
 	
 	ngOnInit(): void {
 		this.warehouseService.getWarehouse().subscribe(
@@ -26,10 +27,10 @@ export class WarehouseComponent implements OnInit {
 	delete(id: number) : void {
 	    this.warehouseService.deleteWarehouse(id).subscribe(
 	  		() => {
-	  			this.toastr.success('Warehouse is deleted!');
+	  			//this.toastr.success('Warehouse is deleted!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to delete Warehouse')
+	  			//this.toastr.error('Failed to delete Warehouse')
 	  		} 
   		);
 	}
@@ -37,12 +38,24 @@ export class WarehouseComponent implements OnInit {
 	create(entity: any) : void {
 	    this.warehouseService.createWarehouse(entity).subscribe(
 	  		() => {
-	  			this.toastr.success('Warehouse created!');
+	  			//this.toastr.success('Warehouse created!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to create Warehouse')
+	  			//this.toastr.error('Failed to create Warehouse')
 	  		} 
   		);
 	}
+	
+	edit(entity: any) : void {
+	    this.warehouseService.updateWarehouse(entity).subscribe(
+	  		() => {
+	  			//this.toastr.success('Warehouse edited!');
+	  		},
+	  		(error : any) => {
+	  			//this.toastr.error('Failed to edit Warehouse')
+	  		} 
+  		);
+	}
+	
   
 }

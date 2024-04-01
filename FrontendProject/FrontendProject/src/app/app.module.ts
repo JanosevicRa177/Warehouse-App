@@ -3,31 +3,40 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WarehouseComponent } from './components/Warehouse/warehouse.component';
-import { ManagerComponent } from './components/Manager/manager.component';
-import { ProductComponent } from './components/Product/product.component';
-import { ItemComponent } from './components/Item/item.component';
-import { ReceiptComponent } from './components/Receipt/receipt.component';
-import { WorkerComponent } from './components/Worker/worker.component';
-import { UserComponent } from './components/User/user.component';
-import { ReceiptItemComponent } from './components/ReceiptItem/receiptitem.component';
-import { AddressComponent } from './components/Address/address.component';
+import { FormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
+import { ToastrModule } from 'ngx-toastr';
+import { WarehouseComponent } from './components/warehouse/warehouse.component';    
+import { ManagerComponent } from './components/manager/manager.component';    
+import { ProductComponent } from './components/product/product.component';    
+import { ItemComponent } from './components/item/item.component';    
+import { ReceiptComponent } from './components/receipt/receipt.component';    
+import { WorkerComponent } from './components/worker/worker.component';    
+import { UserComponent } from './components/user/user.component';    
+import { ReceiptItemComponent } from './components/receiptitem/receiptitem.component';    
+import { AddressComponent } from './components/address/address.component';    
 
 @NgModule({
   declarations: [
     AppComponent,
-    WarehouseComponent,
-    ManagerComponent,
-    ProductComponent,
-    ItemComponent,
-    ReceiptComponent,
-    WorkerComponent,
-    UserComponent,
-    ReceiptItemComponent,
-    AddressComponent,
+		WarehouseComponent,  
+		ManagerComponent,  
+		ProductComponent,  
+		ItemComponent,  
+		ReceiptComponent,  
+		WorkerComponent,  
+		UserComponent,  
+		ReceiptItemComponent,  
+		AddressComponent,  
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ToastrModule
+  ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -35,7 +35,7 @@ public class HtmlGenerator extends BasicGenerator {
 			Writer out;
 			Map<String, Object> context = new HashMap<String, Object>();
 			try {
-				out = getWriter(cl.getName() + ".component", cl.getName());
+				out = getWriter(cl.getName().toLowerCase() + ".component", cl.getName().toLowerCase());
 				if (out != null) {
 					context.clear();
 					context.put("class", cl);

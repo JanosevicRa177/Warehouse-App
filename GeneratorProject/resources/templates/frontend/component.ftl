@@ -5,15 +5,16 @@ import { ${class.name}Service } from '../../services/${class.name}.service';
 
 @Component({
   selector: 'app-${class.name?lower_case}',
-  templateUrl: './${class.name}.component.html',
-  styleUrl: './${class.name}.component.css'
+  templateUrl: './${class.name?lower_case}.component.html',
+  styleUrl: './${class.name?lower_case}.component.css'
 })
 
 export class ${class.name}Component implements OnInit {
 	//data: ${class.name}[] = []
 	data: any[] = []
+	selectedItem: any = null
 	
-	constructor(private ${class.name?lower_case}Service: ${class.name}Service, private toastr: ToastrService) { } 
+	constructor(private ${class.name?lower_case}Service: ${class.name}Service) { } 
 	
 	ngOnInit(): void {
 		this.${class.name?lower_case}Service.get${class.name}().subscribe(
@@ -27,10 +28,10 @@ export class ${class.name}Component implements OnInit {
 	delete(id: number) : void {
 	    this.${class.name?lower_case}Service.delete${class.name}(id).subscribe(
 	  		() => {
-	  			this.toastr.success('${class.name} is deleted!');
+	  			//this.toastr.success('${class.name} is deleted!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to delete ${class.name}')
+	  			//this.toastr.error('Failed to delete ${class.name}')
 	  		} 
   		);
 	}
@@ -40,13 +41,27 @@ export class ${class.name}Component implements OnInit {
 	create(entity: any) : void {
 	    this.${class.name?lower_case}Service.create${class.name}(entity).subscribe(
 	  		() => {
-	  			this.toastr.success('${class.name} created!');
+	  			//this.toastr.success('${class.name} created!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to create ${class.name}')
+	  			//this.toastr.error('Failed to create ${class.name}')
 	  		} 
   		);
 	}
 	</#if> 
+	
+	<#if class.crud.update == true >
+	edit(entity: any) : void {
+	    this.${class.name?lower_case}Service.update${class.name}(entity).subscribe(
+	  		() => {
+	  			//this.toastr.success('${class.name} edited!');
+	  		},
+	  		(error : any) => {
+	  			//this.toastr.error('Failed to edit ${class.name}')
+	  		} 
+  		);
+	}
+	</#if> 
+	
   
 }

@@ -5,15 +5,16 @@ import { UserService } from '../../services/User.service';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './User.component.html',
-  styleUrl: './User.component.css'
+  templateUrl: './user.component.html',
+  styleUrl: './user.component.css'
 })
 
 export class UserComponent implements OnInit {
 	//data: User[] = []
 	data: any[] = []
+	selectedItem: any = null
 	
-	constructor(private userService: UserService, private toastr: ToastrService) { } 
+	constructor(private userService: UserService) { } 
 	
 	ngOnInit(): void {
 		this.userService.getUser().subscribe(
@@ -26,10 +27,10 @@ export class UserComponent implements OnInit {
 	delete(id: number) : void {
 	    this.userService.deleteUser(id).subscribe(
 	  		() => {
-	  			this.toastr.success('User is deleted!');
+	  			//this.toastr.success('User is deleted!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to delete User')
+	  			//this.toastr.error('Failed to delete User')
 	  		} 
   		);
 	}
@@ -37,12 +38,24 @@ export class UserComponent implements OnInit {
 	create(entity: any) : void {
 	    this.userService.createUser(entity).subscribe(
 	  		() => {
-	  			this.toastr.success('User created!');
+	  			//this.toastr.success('User created!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to create User')
+	  			//this.toastr.error('Failed to create User')
 	  		} 
   		);
 	}
+	
+	edit(entity: any) : void {
+	    this.userService.updateUser(entity).subscribe(
+	  		() => {
+	  			//this.toastr.success('User edited!');
+	  		},
+	  		(error : any) => {
+	  			//this.toastr.error('Failed to edit User')
+	  		} 
+  		);
+	}
+	
   
 }

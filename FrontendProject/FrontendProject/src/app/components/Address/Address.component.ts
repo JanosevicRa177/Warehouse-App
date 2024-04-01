@@ -5,15 +5,16 @@ import { AddressService } from '../../services/Address.service';
 
 @Component({
   selector: 'app-address',
-  templateUrl: './Address.component.html',
-  styleUrl: './Address.component.css'
+  templateUrl: './address.component.html',
+  styleUrl: './address.component.css'
 })
 
 export class AddressComponent implements OnInit {
 	//data: Address[] = []
 	data: any[] = []
+	selectedItem: any = null
 	
-	constructor(private addressService: AddressService, private toastr: ToastrService) { } 
+	constructor(private addressService: AddressService) { } 
 	
 	ngOnInit(): void {
 		this.addressService.getAddress().subscribe(
@@ -26,10 +27,10 @@ export class AddressComponent implements OnInit {
 	delete(id: number) : void {
 	    this.addressService.deleteAddress(id).subscribe(
 	  		() => {
-	  			this.toastr.success('Address is deleted!');
+	  			//this.toastr.success('Address is deleted!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to delete Address')
+	  			//this.toastr.error('Failed to delete Address')
 	  		} 
   		);
 	}
@@ -37,12 +38,24 @@ export class AddressComponent implements OnInit {
 	create(entity: any) : void {
 	    this.addressService.createAddress(entity).subscribe(
 	  		() => {
-	  			this.toastr.success('Address created!');
+	  			//this.toastr.success('Address created!');
 	  		},
 	  		(error : any) => {
-	  			this.toastr.error('Failed to create Address')
+	  			//this.toastr.error('Failed to create Address')
 	  		} 
   		);
 	}
+	
+	edit(entity: any) : void {
+	    this.addressService.updateAddress(entity).subscribe(
+	  		() => {
+	  			//this.toastr.success('Address edited!');
+	  		},
+	  		(error : any) => {
+	  			//this.toastr.error('Failed to edit Address')
+	  		} 
+  		);
+	}
+	
   
 }
