@@ -13,9 +13,9 @@ import myplugin.generator.fmmodel.FMClass;
 import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.options.GeneratorOptions;
 
-public class AppModuleGenerator extends BasicGenerator {
+public class RoutingGenerator extends BasicGenerator {
 
-	public AppModuleGenerator(GeneratorOptions generatorOptions) {
+	public RoutingGenerator(GeneratorOptions generatorOptions) {
 		super(generatorOptions);
 		// TODO Auto-generated constructor stub
 	}
@@ -26,12 +26,12 @@ public class AppModuleGenerator extends BasicGenerator {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
-	
+		
 		List<FMClass> classes = FMModel.getInstance().getClasses();
 		Writer out;
 		Map<String, Object> context = new HashMap<String, Object>();
 		try {
-			out = getWriter("app.module", "");
+			out = getWriter("app-routing.module", "");
 			if (out != null) {
 				context.clear();
 				context.put("classes", classes);

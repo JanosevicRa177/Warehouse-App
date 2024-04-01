@@ -34,6 +34,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		componentOptions();
 		htmlOptions();
 		cssOptions();
+		routingOptions();
 	}
 	
 	private void modelOptions() {
@@ -91,9 +92,16 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 	
+
 	private void componentOptions() {
 		GeneratorOptions generatorOptions = new GeneratorOptions(ana + "FrontendProject/FrontendProject/src/app/components", "component", "templates", "{0}.ts", true, "FrontendProject");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("ComponentGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
+    }
+	
+	private void routingOptions() {
+		GeneratorOptions generatorOptions = new GeneratorOptions(ana + "FrontendProject/FrontendProject/src/app", "routing", "templates", "{0}.ts", true, "FrontendProject");
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("RoutingGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 
