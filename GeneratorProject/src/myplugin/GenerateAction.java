@@ -18,6 +18,7 @@ import myplugin.generator.BackendEntityGenerator;
 import myplugin.generator.BackendEnumGenerator;
 import myplugin.generator.ComponentGenerator;
 import myplugin.generator.DbContextGenerator;
+import myplugin.generator.HtmlGenerator;
 import myplugin.generator.RepositoryGenerator;
 import myplugin.generator.RepositoryInterfaceGenerator;
 import myplugin.generator.ServiceGenerator;
@@ -47,6 +48,7 @@ class GenerateAction extends MDAction{
 			generateAppTemplate();
 			generateService();
 			generateComponent();
+			generateHtml();
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
@@ -144,6 +146,15 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ComponentGenerator");
 		ComponentGenerator generator = new ComponentGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateHtml() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("HtmlGenerator");
+		HtmlGenerator generator = new HtmlGenerator(generatorOptions);
 		generator.generate();
 	}
 

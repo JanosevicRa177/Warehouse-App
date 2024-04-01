@@ -32,6 +32,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		appTemplateOptions();
 		serviceOptions();
 		componentOptions();
+		htmlOptions();
 	}
 	
 	private void modelOptions() {
@@ -95,6 +96,12 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 
+	private void htmlOptions() {
+		GeneratorOptions generatorOptions = new GeneratorOptions(ana + "FrontendProject/FrontendProject/src/app/components", "html", "templates", "{0}.html", true, "FrontendProject");
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("HtmlGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
+	}
+	
 	private NMAction[] getSubmenuActions()
 	{
 	   return new NMAction[]{

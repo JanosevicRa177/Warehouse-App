@@ -1,0 +1,12 @@
+<table>
+  <thead>
+    <tr>
+          <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>

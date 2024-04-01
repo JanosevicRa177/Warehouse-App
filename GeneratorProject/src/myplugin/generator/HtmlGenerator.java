@@ -14,9 +14,9 @@ import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.fmmodel.FMClass;
 import myplugin.generator.fmmodel.FMModel;
 
-public class ComponentGenerator extends BasicGenerator {
+public class HtmlGenerator extends BasicGenerator {
 
-	public ComponentGenerator(GeneratorOptions generatorOptions) {
+	public HtmlGenerator(GeneratorOptions generatorOptions) {
 		super(generatorOptions);
 		// TODO Auto-generated constructor stub
 	}
@@ -35,7 +35,7 @@ public class ComponentGenerator extends BasicGenerator {
 			Writer out;
 			Map<String, Object> context = new HashMap<String, Object>();
 			try {
-				out = getWriter(cl.getName() + ".component",  cl.getName());
+				out = getWriter(cl.getName() + ".component", cl.getName());
 				if (out != null) {
 					context.clear();
 					context.put("class", cl);
