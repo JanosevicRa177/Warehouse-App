@@ -35,6 +35,7 @@ public class CssGenerator extends BasicGenerator {
 			Writer out;
 			Map<String, Object> context = new HashMap<String, Object>();
 			try {
+				if(cl.getCrud() == null) continue;
 				out = getWriter(cl.getName().toLowerCase() + ".component", cl.getName().toLowerCase());
 				if (out != null) {
 					context.clear();
