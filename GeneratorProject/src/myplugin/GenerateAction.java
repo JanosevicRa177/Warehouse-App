@@ -16,8 +16,11 @@ import myplugin.generator.AppModuleGenerator;
 import myplugin.generator.AppTemplateGenerator;
 import myplugin.generator.BackendEntityGenerator;
 import myplugin.generator.BackendEnumGenerator;
+import myplugin.generator.ComponentGenerator;
+import myplugin.generator.CssGenerator;
 import myplugin.generator.ConfigGenerator;
 import myplugin.generator.DbContextGenerator;
+import myplugin.generator.HtmlGenerator;
 import myplugin.generator.RepositoryGenerator;
 import myplugin.generator.RepositoryInterfaceGenerator;
 import myplugin.generator.RoutingGenerator;
@@ -47,6 +50,9 @@ class GenerateAction extends MDAction{
 			generateAppComponent();
 			generateAppTemplate();
 			generateService();
+			generateComponent();
+			generateHtml();
+			generateCss();
 			generateRouter();
 			generateConfig();
 		} catch (AnalyzeException e) {
@@ -158,6 +164,33 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("RoutingGenerator");
 		RoutingGenerator generator = new RoutingGenerator(generatorOptions);
+		generator.generate();
+	}
+
+	private void generateComponent() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ComponentGenerator");
+		ComponentGenerator generator = new ComponentGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateHtml() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("HtmlGenerator");
+		HtmlGenerator generator = new HtmlGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateCss() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("CssGenerator");
+		CssGenerator generator = new CssGenerator(generatorOptions);
 		generator.generate();
 	}
 

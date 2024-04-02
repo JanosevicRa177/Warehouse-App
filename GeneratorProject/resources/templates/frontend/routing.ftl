@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 <#list classes as class>
-import { ${class.name}Component } from './components/${class.name}/${class.name?lower_case}.component';    
+import { ${class.name}Component } from './components/${class.name?lower_case}/${class.name?lower_case}.component';    
 </#list>
 
 const routes: Routes = [

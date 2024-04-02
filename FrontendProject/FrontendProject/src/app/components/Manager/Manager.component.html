@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div class="table-container">
+    <table class="data-table">
+	  <thead>
+	    <tr>
+	      <th>Id</th>
+	      	      <th>Warehouses</th>   
+	      <th>FirstName</th>   
+	      <th>Contact</th>   
+	      <th>Address</th>   
+	      <th>Email</th>   
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr *ngFor="let item of data">
+	      <td>{{ item.id }}</td>
+		  <td *ngFor="let p of item.warehouses">{{ p.id }}</td>
+	      <td>{{ item.firstName }}</td>
+	      <td>{{ item.contact }}</td>
+		  <td>{{ item.address?.id }}</td>
+	      <td>{{ item.email }}</td>
+	    </tr>
+	  </tbody>
+	</table>
+  </div>
+  <div class="form-container">
+  	<div class="create-btn-wrapper">
+	  <button class="submit-btn" (click)="selectedItem = null">Open create form</button>
+	</div>
+	<h2 *ngIf="!selectedItem">Create form</h2>
+	<h2 *ngIf="selectedItem">Edit form</h2>
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+		   <label for="warehouse">Warehouse:</label>
+		   <select id="warehouse" name="warehouse" multiple>
+		      <option *ngFor="let item of warehouses" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+	      <label for="firstName">FirstName:</label>
+    	  <input type="text" id="firstName" name="firstName" [ngModel]="selectedItem ? selectedItem.firstName : null" required>
+	      <label for="contact">Contact:</label>
+    	  <input type="text" id="contact" name="contact" [ngModel]="selectedItem ? selectedItem.contact : null" required>
+	      <label for="address">Address:</label>
+		  <select id="address" name="address">
+			  <option *ngFor="let item of addresses" [value]="item.id">{{ item.id }}</option>
+		  </select> 
+	      <label for="email">Email:</label>
+    	  <input type="text" id="email" name="email" [ngModel]="selectedItem ? selectedItem.email : null" required>
+	<div *ngIf="!selectedItem">
+	  <button class="submit-btn" type="submit">Create</button>
+	</div>
+	<div *ngIf="selectedItem">
+	  <button class="submit-btn">Edit</button>
+	</div>
+	</form>
+  <div>
+</div>
