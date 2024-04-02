@@ -1,7 +1,10 @@
 package myplugin.analyzer;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.JOptionPane;
 
@@ -21,10 +24,12 @@ import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.EnumerationLiteral;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Association;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Enumeration;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.TypedElement;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.impl.EnumerationLiteralImpl;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
@@ -59,7 +64,7 @@ public class ModelAnalyzer {
 		FMModel.getInstance().getClasses().clear();
 		FMModel.getInstance().getEnumerations().clear();
 		processPackage(root, filePackage);
-		FMModel.getInstance().setpIsPropertyAClass();
+		FMModel.getInstance().setIsPropertyAClass();
 		
 	}
 	
@@ -131,14 +136,20 @@ public class ModelAnalyzer {
 			throw new AnalyzeException("Classes must have names!");
 		
 		FMClass fmClass = new FMClass(cl.getName(), packageName, cl.getVisibility().toString());
-		Iterator<Property> it = ModelHelper.attributes(cl);
-		while (it.hasNext()) {
-			Property p = it.next();
-			FMProperty prop = getPropertyData(p, cl);
-			if(doesClassHaveEnum(prop.getType().getName()))
-				fmClass.setHasEnum(true);
-			fmClass.addProperty(prop);	
-		}	
+		
+		List<FMProperty> classProperties = getClassProperties(fmClass, cl);
+		for(FMProperty property: classProperties){
+			fmClass.addProperty(property);
+		}
+		
+		Collection<Class> superClasses = cl.getSuperClass();
+		
+		for(Class cla: superClasses) {
+			List<FMProperty> superClassProperties = getClassProperties(null, cla);
+			for(FMProperty property: superClassProperties){
+				fmClass.addProperty(property);
+			}
+		}
 		
 		Stereotype entityStereotype = StereotypesHelper.getAppliedStereotypeByString(cl, "Entity");
 		if (entityStereotype != null) {
@@ -154,6 +165,38 @@ public class ModelAnalyzer {
 		}	
 		
 		return fmClass;
+	}
+	
+	private List<FMProperty> getClassProperties(FMClass fmClass, Class cl) throws AnalyzeException {
+		List<FMProperty> properties = new ArrayList<FMProperty>();
+		Iterator<Property> it = ModelHelper.pureAttributes(cl);
+		
+		while (it.hasNext()) {
+			Property p = it.next();
+			FMProperty prop = getPropertyData(p, cl);
+//			Iterator<Association> associations = ModelHelper.associations(cl);
+//			while (associations.hasNext()) {
+//				Association association = associations.next();
+//				
+//				Stereotype associationStereotype = StereotypesHelper.getAppliedStereotypeByString(association, "Configuration");
+//				if(associationStereotype != null) {
+//					JOptionPane.showMessageDialog(null, fmClass.getName() + ":" + prop.getType().getName() + getIsConfigOwner(associationStereotype,cl));
+//					prop.setIsOwnerOf(getIsConfigOwner(associationStereotype,cl));
+//				}
+//			}
+			if(doesClassHaveEnum(prop.getType().getName()) && fmClass != null)
+				fmClass.setHasEnum(true);
+			properties.add(prop);
+		}
+		return properties;
+	}
+	
+	private Boolean getIsConfigOwner(Stereotype associationStereotype, Class aClass) {
+		List<Property> entityTags = associationStereotype.getOwnedAttribute();
+		Property tagDef = entityTags.get(0);
+		String tagName = tagDef.getName();
+		List<Object> value = StereotypesHelper.getStereotypePropertyValue(aClass, associationStereotype, tagName);
+		return value.size() > 0 && ((String) value.get(0)).equals(aClass.getName());
 	}
 	
 	private CRUD getCRUD(Stereotype crudStereotype, Class aClass) {
