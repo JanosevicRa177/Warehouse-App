@@ -19,17 +19,11 @@ export class ${class.name}Component implements OnInit {
 	//data: ${class.name}[] = []
 	data: any[] = []
 	selectedItem: any = null
-	
 	<#list properties as property><#if property.isClass >   
 	<#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if> : any = []	
 	</#if></#list>
 	
-	constructor(private ${class.name?uncap_first}Service: ${class.name}Service
-	<#list properties as property>
-				<#if property.isClass >   
-	, private ${property.type.name?lower_case}Service : ${property.type.name}Service	
-			</#if>    
-	</#list>) { } 
+	constructor(private ${class.name?uncap_first}Service: ${class.name}Service<#list properties as property><#if property.isClass>, private ${property.type.name?uncap_first}Service : ${property.type.name}Service</#if></#list>) { } 
 	
 	ngOnInit(): void {
 		this.${class.name?uncap_first}Service.get${class.name}().subscribe(
@@ -43,7 +37,7 @@ export class ${class.name}Component implements OnInit {
 				<#if property.isClass >   
 		this.${property.type.name?uncap_first}Service.get${property.type.name}().subscribe(
 			(data) => {
-				this.${property.type.name?uncap_first}s = data
+				this.<#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if> = data
 			} 
 		)
 			</#if>    

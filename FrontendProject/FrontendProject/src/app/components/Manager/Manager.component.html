@@ -3,22 +3,22 @@
     <table class="data-table">
 	  <thead>
 	    <tr>
-	    	      <th>Email</th>
-	      <th>First name</th>
-	      <th>Contact</th>
-	      <th>Address</th>
-	      <th></th>
-	      <th></th>
+	      <th>Id</th>
+	      	      <th>Warehouses</th>   
+	      <th>FirstName</th>   
+	      <th>Contact</th>   
+	      <th>Address</th>   
+	      <th>Email</th>   
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr *ngFor="let item of data">
-	  	  <td>{{ item.email }}</td>
-	  	  <td>{{ item.firstName }}</td>
-	  	  <td>{{ item.contact }}</td>
-	  	  <td>{{ item.address?.street}} {{ item.address?.streetNumber }} {{ item.address?.city }} {{ item.address?.country }}</td>
-	      <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
-	      <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
+	      <td>{{ item.id }}</td>
+		  <td *ngFor="let p of item.warehouses">{{ p.id }}</td>
+	      <td>{{ item.firstName }}</td>
+	      <td>{{ item.contact }}</td>
+		  <td>{{ item.address?.id }}</td>
+	      <td>{{ item.email }}</td>
 	    </tr>
 	  </tbody>
 	</table>
@@ -34,6 +34,16 @@
 		   <select id="warehouse" name="warehouse" multiple>
 		      <option *ngFor="let item of warehouses" [value]="item.id">{{ item.id }}</option>
 		   </select> 
+	      <label for="firstName">FirstName:</label>
+    	  <input type="text" id="firstName" name="firstName" [ngModel]="selectedItem ? selectedItem.firstName : null" required>
+	      <label for="contact">Contact:</label>
+    	  <input type="text" id="contact" name="contact" [ngModel]="selectedItem ? selectedItem.contact : null" required>
+	      <label for="address">Address:</label>
+		  <select id="address" name="address">
+			  <option *ngFor="let item of addresses" [value]="item.id">{{ item.id }}</option>
+		  </select> 
+	      <label for="email">Email:</label>
+    	  <input type="text" id="email" name="email" [ngModel]="selectedItem ? selectedItem.email : null" required>
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>
 	</div>

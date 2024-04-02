@@ -7,6 +7,7 @@ import { ProductComponent } from './components/product/product.component';
 import { ItemComponent } from './components/item/item.component';    
 import { ReceiptComponent } from './components/receipt/receipt.component';    
 import { WorkerComponent } from './components/worker/worker.component';    
+import { UserComponent } from './components/user/user.component';    
 import { ReceiptItemComponent } from './components/receiptitem/receiptitem.component';    
 import { AddressComponent } from './components/address/address.component';    
 
@@ -34,7 +35,11 @@ const routes: Routes = [
 	{
 		path: 'worker',
 		component: WorkerComponent
-	}, 
+	},    
+	{
+		path: 'user',
+		component: UserComponent
+	},    
 	{
 		path: 'receiptitem',
 		component: ReceiptItemComponent

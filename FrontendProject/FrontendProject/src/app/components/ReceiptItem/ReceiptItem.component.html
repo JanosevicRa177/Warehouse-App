@@ -3,14 +3,20 @@
     <table class="data-table">
 	  <thead>
 	    <tr>
-	    	      <th></th>
-	      <th></th>
+	      <th>Id</th>
+	      	      <th>Item</th>   
+	      <th>Receipts</th>   
+	      <th>Warehouse</th>   
+	      <th>Price</th>   
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr *ngFor="let item of data">
-	      <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
-	      <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
+	      <td>{{ item.id }}</td>
+		  <td>{{ item.item?.id }}</td>
+		  <td>{{ item.receipt?.id }}</td>
+		  <td>{{ item.warehouse?.id }}</td>
+	      <td>{{ item.price }}</td>
 	    </tr>
 	  </tbody>
 	</table>
@@ -26,10 +32,14 @@
 		  <select id="item" name="item">
 			  <option *ngFor="let item of items" [value]="item.id">{{ item.id }}</option>
 		  </select> 
-	      <label for="receipts">Receipts:</label>
-    	  <input type="text" id="receipts" name="receipts" [ngModel]="selectedItem ? selectedItem.receipts : null" required>
+	      <label for="receipt">Receipt:</label>
+		  <select id="receipt" name="receipt">
+			  <option *ngFor="let item of receipts" [value]="item.id">{{ item.id }}</option>
+		  </select> 
 	      <label for="warehouse">Warehouse:</label>
-    	  <input type="text" id="warehouse" name="warehouse" [ngModel]="selectedItem ? selectedItem.warehouse : null" required>
+		  <select id="warehouse" name="warehouse">
+			  <option *ngFor="let item of warehouses" [value]="item.id">{{ item.id }}</option>
+		  </select> 
 	      <label for="price">Price:</label>
     	  <input type="text" id="price" name="price" [ngModel]="selectedItem ? selectedItem.price : null" required>
 	<div *ngIf="!selectedItem">

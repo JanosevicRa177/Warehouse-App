@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { WorkerService } from '../../services/Worker.service';
 import { WarehouseService } from '../../services/Warehouse.service'
+import { AddressService } from '../../services/Address.service'
 
 //import { Worker } from '../../models/Worker'
 
@@ -15,12 +16,10 @@ export class WorkerComponent implements OnInit {
 	//data: Worker[] = []
 	data: any[] = []
 	selectedItem: any = null
-	
 	warehouses : any = []	
+	addresses : any = []	
 	
-	constructor(private workerService: WorkerService
-	, private warehouseService : WarehouseService	
-	) { } 
+	constructor(private workerService: WorkerService, private warehouseService : WarehouseService, private addressService : AddressService) { } 
 	
 	ngOnInit(): void {
 		this.workerService.getWorker().subscribe(
@@ -33,6 +32,11 @@ export class WorkerComponent implements OnInit {
 		this.warehouseService.getWarehouse().subscribe(
 			(data) => {
 				this.warehouses = data
+			} 
+		)
+		this.addressService.getAddress().subscribe(
+			(data) => {
+				this.addresses = data
 			} 
 		)
 		

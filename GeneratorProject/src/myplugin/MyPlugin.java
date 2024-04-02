@@ -35,7 +35,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		htmlOptions();
 		cssOptions();
 		routingOptions();
-		//configOptions();
+		configOptions();
 	}
 	
 	private void modelOptions() {
@@ -46,7 +46,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	
 	private void configOptions() {
 		GeneratorOptions generatorOptions = new GeneratorOptions(ana + "BackendProject/BackendProject", "config", "templates", "{0}.cs", true, "BackendProject");
-		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEntityGenerator", generatorOptions);
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("ConfigGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 	
@@ -55,7 +55,6 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEnumGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
-	
 
 	private void dbContextOptions() {
 		GeneratorOptions generatorOptions = new GeneratorOptions(ana + "BackendProject/BackendProject/Infrastructure/", "dbContext", "templates", "{0}.cs", true, "BackendProject");

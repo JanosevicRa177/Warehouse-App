@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ReceiptItemService } from '../../services/ReceiptItem.service';
 import { ItemService } from '../../services/Item.service'
+import { ReceiptService } from '../../services/Receipt.service'
+import { WarehouseService } from '../../services/Warehouse.service'
 
 //import { ReceiptItem } from '../../models/ReceiptItem'
 
@@ -15,12 +17,11 @@ export class ReceiptItemComponent implements OnInit {
 	//data: ReceiptItem[] = []
 	data: any[] = []
 	selectedItem: any = null
-	
 	items : any = []	
+	receipts : any = []	
+	warehouses : any = []	
 	
-	constructor(private receiptItemService: ReceiptItemService
-	, private itemService : ItemService	
-				) { } 
+	constructor(private receiptItemService: ReceiptItemService, private itemService : ItemService, private receiptService : ReceiptService, private warehouseService : WarehouseService) { } 
 	
 	ngOnInit(): void {
 		this.receiptItemService.getReceiptItem().subscribe(
@@ -33,6 +34,16 @@ export class ReceiptItemComponent implements OnInit {
 		this.itemService.getItem().subscribe(
 			(data) => {
 				this.items = data
+			} 
+		)
+		this.receiptService.getReceipt().subscribe(
+			(data) => {
+				this.receipts = data
+			} 
+		)
+		this.warehouseService.getWarehouse().subscribe(
+			(data) => {
+				this.warehouses = data
 			} 
 		)
 		

@@ -3,64 +3,26 @@
     <table class="data-table">
 	  <thead>
 	    <tr>
-	    <#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager'>
-	      <th>Email</th>
-	      <th>First name</th>
-	      <th>Contact</th>
-	      <th>Address</th>
-	      <#if '${class.name}' == 'Worker'>
-	      <th>Warehouse</th>
-	      </#if>
-	    </#if>
-	    <#if '${class.name}' == 'Warehouse'>
-	      <th>Name</th>
-	      <th>Size</th>
-	      <th>Address</th>
-	    </#if>
-	    <#if '${class.name}' == 'Address'>
-	      <th>Street</th>
-	      <th>Street number</th>
-  	      <th>City</th>
-  	      <th>Country</th>
-  	      <th>User</th>
-	    </#if>
-	    <#if '${class.name}' == 'Product'>
-	      <th>Price</th>
-	      <th>Warehouse</th>
-	    </#if>
-	      <th></th>
-	      <th></th>
+	      <th>Id</th>
+	      <#list properties as property>
+	      <th>${property.name}</th>   
+		  </#list>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr *ngFor="let item of data">
-	    <#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager'>
-	  	  <td>{{ item.email }}</td>
-	  	  <td>{{ item.firstName }}</td>
-	  	  <td>{{ item.contact }}</td>
-	  	  <td>{{ item.address?.street}} {{ item.address?.streetNumber }} {{ item.address?.city }} {{ item.address?.country }}</td>
-	  	  <#if '${class.name}' == 'Worker'>
-	  	  <td>{{ item.warehouse?.name }}</td>
-	  	  </#if>
-	    </#if>
-	    <#if '${class.name}' == 'Warehouse'>
-	      <td>{{ item.name }}</td>
-	      <td>{{ item.size }}</td>
-	      <td>{{ item.address?.street}} {{ item.address?.streetNumber }} {{ item.address?.city }} {{ item.address?.country }}</td>
-	    </#if>
-	    <#if '${class.name}' == 'Address'>
-	  	  <td>{{ item.street }}</td>
-	  	  <td>{{ item.streetNumber }}</td>
-	  	  <td>{{ item.city }}</td>
-	  	  <td>{{ item.country }}</td>
-	  	  <td>{{ item.user.email }}</td>
-	    </#if>
-	    <#if '${class.name}' == 'Product'>
-	  	  <td>{{ item.price }}</td>
-	  	  <td>{{ item.warehouse?.name }}</td>
-	    </#if>
-	      <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
-	      <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
+	      <td>{{ item.id }}</td>
+	    <#list properties as property>
+			<#if property.upper == 1 && property.isClass> 
+		  <td>{{ item.${property.type.name?uncap_first}?.id }}</td>
+			 </#if>
+	   		 <#if property.upper == 1 && !property.isClass>  
+	      <td>{{ item.${property.name?uncap_first} }}</td>
+  			 </#if>
+		     <#if property.upper == -1 > 
+		  <td *ngFor="let p of item.${property.name?uncap_first}">{{ p.id }}</td>
+		     </#if>     
+		</#list>
 	    </tr>
 	  </tbody>
 	</table>
@@ -73,11 +35,10 @@
 	<h2 *ngIf="selectedItem">Edit form</h2>
 	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
 		<#list properties as property>
-		${property.isClass}
 			<#if property.upper == 1 && property.isClass> 
 	      <label for="${property.type.name?uncap_first}">${property.type.name}:</label>
 		  <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}">
-			  <option *ngFor="let item of ${property.type.name?uncap_first}s" [value]="item.id">{{ item.id }}</option>
+			  <option *ngFor="let item of <#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if>" [value]="item.id">{{ item.id }}</option>
 		  </select> 
 			 </#if>
 	   		 <#if property.upper == 1 && !property.isClass>  
@@ -87,7 +48,7 @@
 		     <#if property.upper == -1 > 
 		   <label for="${property.type.name?uncap_first}">${property.type.name}:</label>
 		   <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}" multiple>
-		      <option *ngFor="let item of ${property.type.name?uncap_first}s" [value]="item.id">{{ item.id }}</option>
+		      <option *ngFor="let item of <#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if>" [value]="item.id">{{ item.id }}</option>
 		   </select> 
 		    </#if>     
 		</#list>

@@ -15,12 +15,9 @@ export class ReceiptComponent implements OnInit {
 	//data: Receipt[] = []
 	data: any[] = []
 	selectedItem: any = null
-	
 	receiptItems : any = []	
 	
-	constructor(private receiptService: ReceiptService
-	, private receiptitemService : ReceiptItemService	
-		) { } 
+	constructor(private receiptService: ReceiptService, private receiptItemService : ReceiptItemService) { } 
 	
 	ngOnInit(): void {
 		this.receiptService.getReceipt().subscribe(

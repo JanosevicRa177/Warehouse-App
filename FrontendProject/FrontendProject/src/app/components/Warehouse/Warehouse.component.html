@@ -3,20 +3,26 @@
     <table class="data-table">
 	  <thead>
 	    <tr>
-	    	      <th>Name</th>
-	      <th>Size</th>
-	      <th>Address</th>
-	      <th></th>
-	      <th></th>
+	      <th>Id</th>
+	      	      <th>Managers</th>   
+	      <th>Workers</th>   
+	      <th>ReceiptItems</th>   
+	      <th>Address</th>   
+	      <th>Name</th>   
+	      <th>SizeInM2</th>   
+	      <th>Products</th>   
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr *ngFor="let item of data">
+	      <td>{{ item.id }}</td>
+		  <td *ngFor="let p of item.managers">{{ p.id }}</td>
+		  <td *ngFor="let p of item.workers">{{ p.id }}</td>
+		  <td *ngFor="let p of item.receiptItems">{{ p.id }}</td>
+		  <td>{{ item.address?.id }}</td>
 	      <td>{{ item.name }}</td>
-	      <td>{{ item.size }}</td>
-	      <td>{{ item.address?.street}} {{ item.address?.streetNumber }} {{ item.address?.city }} {{ item.address?.country }}</td>
-	      <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
-	      <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
+	      <td>{{ item.sizeInM2 }}</td>
+		  <td *ngFor="let p of item.products">{{ p.id }}</td>
 	    </tr>
 	  </tbody>
 	</table>
@@ -41,7 +47,9 @@
 		      <option *ngFor="let item of receiptItems" [value]="item.id">{{ item.id }}</option>
 		   </select> 
 	      <label for="address">Address:</label>
-    	  <input type="text" id="address" name="address" [ngModel]="selectedItem ? selectedItem.address : null" required>
+		  <select id="address" name="address">
+			  <option *ngFor="let item of addresses" [value]="item.id">{{ item.id }}</option>
+		  </select> 
 	      <label for="name">Name:</label>
     	  <input type="text" id="name" name="name" [ngModel]="selectedItem ? selectedItem.name : null" required>
 	      <label for="sizeInM2">SizeInM2:</label>
