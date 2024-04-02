@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ReceiptService } from '../../services/Receipt.service';
+import { ReceiptItemService } from '../../services/ReceiptItem.service'
+
 //import { Receipt } from '../../models/Receipt'
 
 @Component({
@@ -14,7 +16,11 @@ export class ReceiptComponent implements OnInit {
 	data: any[] = []
 	selectedItem: any = null
 	
-	constructor(private receiptService: ReceiptService ) { } 
+	receiptItems : any = []	
+	
+	constructor(private receiptService: ReceiptService
+	, private receiptitemService : ReceiptItemService	
+		) { } 
 	
 	ngOnInit(): void {
 		this.receiptService.getReceipt().subscribe(
@@ -23,6 +29,12 @@ export class ReceiptComponent implements OnInit {
 			} 
 		)
 		
+		
+		this.receiptItemService.getReceiptItem().subscribe(
+			(data) => {
+				this.receiptItems = data
+			} 
+		)
 		
 	}
   

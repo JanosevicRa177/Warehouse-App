@@ -21,8 +21,19 @@
 	</div>
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
-	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">
-	
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+		   <label for="product">Product:</label>
+		   <select id="product" name="product" multiple>
+		      <option *ngFor="let item of products" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+		   <label for="receiptItem">ReceiptItem:</label>
+		   <select id="receiptItem" name="receiptItem" multiple>
+		      <option *ngFor="let item of receiptItems" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+	      <label for="itemType">ItemType:</label>
+    	  <input type="text" id="itemType" name="itemType" [ngModel]="selectedItem ? selectedItem.itemType : null" required>
+	      <label for="itemName">ItemName:</label>
+    	  <input type="text" id="itemName" name="itemName" [ngModel]="selectedItem ? selectedItem.itemName : null" required>
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>
 	</div>

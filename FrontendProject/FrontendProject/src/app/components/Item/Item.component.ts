@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../services/Item.service';
+import { ProductService } from '../../services/Product.service'
+
 //import { Item } from '../../models/Item'
 
 @Component({
@@ -14,7 +16,11 @@ export class ItemComponent implements OnInit {
 	data: any[] = []
 	selectedItem: any = null
 	
-	constructor(private itemService: ItemService ) { } 
+	products : any = []	
+	
+	constructor(private itemService: ItemService
+	, private productService : ProductService	
+				) { } 
 	
 	ngOnInit(): void {
 		this.itemService.getItem().subscribe(
@@ -23,6 +29,12 @@ export class ItemComponent implements OnInit {
 			} 
 		)
 		
+		
+		this.productService.getProduct().subscribe(
+			(data) => {
+				this.products = data
+			} 
+		)
 		
 	}
   

@@ -31,20 +31,21 @@
 	</div>
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
-	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">
-	  <label for="street">Street:</label>
-	  <input type="text" id="street" name="street" [ngModel]="selectedItem ? selectedItem.street : null" required>
-	
-	  <label for="streetNumber">StreetNumber:</label>
-	  <input type="text" id="streetNumber" name="streetNumber" [ngModel]="selectedItem ? selectedItem.streetNumber : null" required>
-	  
-	  <label for="city">City:</label>
-	  <input type="text" id="city" name="city" [ngModel]="selectedItem ? selectedItem.city : null" required>
-	  
-	  <label for="Country">Country:</label>
-	  <input type="text" id="country" name="country" [ngModel]="selectedItem ? selectedItem.country : null" required>
-
-	
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+	      <label for="warehouse">Warehouse:</label>
+		  <select id="warehouse" name="warehouse">
+			  <option *ngFor="let item of warehouses" [value]="item.id">{{ item.id }}</option>
+		  </select> 
+	      <label for="user">User:</label>
+    	  <input type="text" id="user" name="user" [ngModel]="selectedItem ? selectedItem.user : null" required>
+	      <label for="country">Country:</label>
+    	  <input type="text" id="country" name="country" [ngModel]="selectedItem ? selectedItem.country : null" required>
+	      <label for="city">City:</label>
+    	  <input type="text" id="city" name="city" [ngModel]="selectedItem ? selectedItem.city : null" required>
+	      <label for="street">Street:</label>
+    	  <input type="text" id="street" name="street" [ngModel]="selectedItem ? selectedItem.street : null" required>
+	      <label for="streetNumber">StreetNumber:</label>
+    	  <input type="text" id="streetNumber" name="streetNumber" [ngModel]="selectedItem ? selectedItem.streetNumber : null" required>
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>
 	</div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ReceiptItemService } from '../../services/ReceiptItem.service';
+import { ItemService } from '../../services/Item.service'
+
 //import { ReceiptItem } from '../../models/ReceiptItem'
 
 @Component({
@@ -14,20 +16,30 @@ export class ReceiptItemComponent implements OnInit {
 	data: any[] = []
 	selectedItem: any = null
 	
-	constructor(private receiptitemService: ReceiptItemService ) { } 
+	items : any = []	
+	
+	constructor(private receiptItemService: ReceiptItemService
+	, private itemService : ItemService	
+				) { } 
 	
 	ngOnInit(): void {
-		this.receiptitemService.getReceiptItem().subscribe(
+		this.receiptItemService.getReceiptItem().subscribe(
 			(data) => {
 				this.data = data
 			} 
 		)
 		
 		
+		this.itemService.getItem().subscribe(
+			(data) => {
+				this.items = data
+			} 
+		)
+		
 	}
   
 	delete(id: number) : void {
-	    this.receiptitemService.deleteReceiptItem(id).subscribe(
+	    this.receiptItemService.deleteReceiptItem(id).subscribe(
 	  		() => {
 	  			//this.toastr.success('ReceiptItem is deleted!');
 	  		},
@@ -38,7 +50,7 @@ export class ReceiptItemComponent implements OnInit {
 	}
 	
 	create(entity: any) : void {
-	    this.receiptitemService.createReceiptItem(entity).subscribe(
+	    this.receiptItemService.createReceiptItem(entity).subscribe(
 	  		() => {
 	  			//this.toastr.success('ReceiptItem created!');
 	  		},
@@ -49,7 +61,7 @@ export class ReceiptItemComponent implements OnInit {
 	}
 	
 	edit(entity: any) : void {
-	    this.receiptitemService.updateReceiptItem(entity).subscribe(
+	    this.receiptItemService.updateReceiptItem(entity).subscribe(
 	  		() => {
 	  			//this.toastr.success('ReceiptItem edited!');
 	  		},

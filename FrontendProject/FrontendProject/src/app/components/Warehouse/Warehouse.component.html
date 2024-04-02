@@ -27,18 +27,29 @@
 	</div>
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
-	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">
-	  <label for="name">Name:</label>
-	  <input type="text" id="name" name="name" [ngModel]="selectedItem ? selectedItem.name : null" required>
-	
-	  <label for="size">Size:</label>
-	  <input type="number" id="size" name="size" [ngModel]="selectedItem ? selectedItem.size : null" required>
-
-	  <label for="address">Address:</label>
-      <select id="address" name="addressId" [ngModel]="selectedItem ? selectedItem.address?.id : null" required>
-        <option *ngFor="let address of addresses" [value]="address.id">{{ address.street }} {{address.streetNumber}} {{address.city}} {{address.country}}</option>
-      </select>
-	
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+		   <label for="manager">Manager:</label>
+		   <select id="manager" name="manager" multiple>
+		      <option *ngFor="let item of managers" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+		   <label for="worker">Worker:</label>
+		   <select id="worker" name="worker" multiple>
+		      <option *ngFor="let item of workers" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+		   <label for="receiptItem">ReceiptItem:</label>
+		   <select id="receiptItem" name="receiptItem" multiple>
+		      <option *ngFor="let item of receiptItems" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+	      <label for="address">Address:</label>
+    	  <input type="text" id="address" name="address" [ngModel]="selectedItem ? selectedItem.address : null" required>
+	      <label for="name">Name:</label>
+    	  <input type="text" id="name" name="name" [ngModel]="selectedItem ? selectedItem.name : null" required>
+	      <label for="sizeInM2">SizeInM2:</label>
+    	  <input type="text" id="sizeInM2" name="sizeInM2" [ngModel]="selectedItem ? selectedItem.sizeInM2 : null" required>
+		   <label for="product">Product:</label>
+		   <select id="product" name="product" multiple>
+		      <option *ngFor="let item of products" [value]="item.id">{{ item.id }}</option>
+		   </select> 
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>
 	</div>

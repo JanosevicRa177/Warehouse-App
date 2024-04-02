@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AddressService } from '../../services/Address.service';
+import { WarehouseService } from '../../services/Warehouse.service'
+
 //import { Address } from '../../models/Address'
 
 @Component({
@@ -14,7 +16,11 @@ export class AddressComponent implements OnInit {
 	data: any[] = []
 	selectedItem: any = null
 	
-	constructor(private addressService: AddressService ) { } 
+	warehouses : any = []	
+	
+	constructor(private addressService: AddressService
+	, private warehouseService : WarehouseService	
+						) { } 
 	
 	ngOnInit(): void {
 		this.addressService.getAddress().subscribe(
@@ -23,6 +29,12 @@ export class AddressComponent implements OnInit {
 			} 
 		)
 		
+		
+		this.warehouseService.getWarehouse().subscribe(
+			(data) => {
+				this.warehouses = data
+			} 
+		)
 		
 	}
   

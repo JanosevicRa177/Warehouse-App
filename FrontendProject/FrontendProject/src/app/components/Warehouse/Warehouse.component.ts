@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { WarehouseService } from '../../services/Warehouse.service';
-import { AddressService } from '../../services/Address.service'
+import { ManagerService } from '../../services/Manager.service'
+
 //import { Warehouse } from '../../models/Warehouse'
 
 @Component({
@@ -14,9 +15,12 @@ export class WarehouseComponent implements OnInit {
 	//data: Warehouse[] = []
 	data: any[] = []
 	selectedItem: any = null
-	addresses: any = []
 	
-	constructor(private warehouseService: WarehouseService, private addressService: AddressService ) { } 
+	managers : any = []	
+	
+	constructor(private warehouseService: WarehouseService
+	, private managerService : ManagerService	
+							) { } 
 	
 	ngOnInit(): void {
 		this.warehouseService.getWarehouse().subscribe(
@@ -25,9 +29,10 @@ export class WarehouseComponent implements OnInit {
 			} 
 		)
 		
-		this.addressService.getAddress().subscribe(
+		
+		this.managerService.getManager().subscribe(
 			(data) => {
-				this.addresses = data
+				this.managers = data
 			} 
 		)
 		

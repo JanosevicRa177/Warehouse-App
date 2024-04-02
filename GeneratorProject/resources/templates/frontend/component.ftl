@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ${class.name}Service } from '../../services/${class.name}.service';
-<#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager' || '${class.name}' == 'Warehouse'>
-import { AddressService } from '../../services/Address.service'
-</#if>
-<#if '${class.name}' == 'Worker' || '${class.name}' == 'Manager' || '${class.name}' == 'Product'>
-import { WarehouseService } from '../../services/Warehouse.service'
-</#if>
+<#list properties as property>
+	<#if property.isClass >   
+import { ${property.type.name}Service } from '../../services/${property.type.name}.service'
+	</#if>    
+</#list>
+
 //import { ${class.name} } from '../../models/${class.name}'
 
 @Component({
@@ -19,42 +19,41 @@ export class ${class.name}Component implements OnInit {
 	//data: ${class.name}[] = []
 	data: any[] = []
 	selectedItem: any = null
-	<#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager' || '${class.name}' == 'Warehouse'>
-	addresses: any = []
-	</#if>  
-	<#if '${class.name}' == 'Worker' || '${class.name}' == 'Manager' || '${class.name}' == 'Product'>
-	warehouses: any = []
-	</#if>  
 	
-	constructor(private ${class.name?lower_case}Service: ${class.name}Service<#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager' || '${class.name}' == 'Warehouse'>, private addressService: AddressService</#if> <#if '${class.name}' == 'Worker' || '${class.name}' == 'Manager' || '${class.name}' == 'Product'>, private warehouseService: WarehouseService</#if>) { } 
+	<#list properties as property><#if property.isClass >   
+	<#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if> : any = []	
+	</#if></#list>
+	
+	constructor(private ${class.name?uncap_first}Service: ${class.name}Service
+	<#list properties as property>
+				<#if property.isClass >   
+	, private ${property.type.name?lower_case}Service : ${property.type.name}Service	
+			</#if>    
+	</#list>) { } 
 	
 	ngOnInit(): void {
-		this.${class.name?lower_case}Service.get${class.name}().subscribe(
+		this.${class.name?uncap_first}Service.get${class.name}().subscribe(
 			(data) => {
 				this.data = data
 			} 
 		)
 		
-		<#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager' || '${class.name}' == 'Warehouse'>
-		this.addressService.getAddress().subscribe(
-			(data) => {
-				this.addresses = data
-			} 
-		)
-		</#if>
 		
-		<#if '${class.name}' == 'Worker' || '${class.name}' == 'Manager' || '${class.name}' == 'Product'>
-		this.warehouseService.getWarehouse().subscribe(
+		<#list properties as property>
+				<#if property.isClass >   
+		this.${property.type.name?uncap_first}Service.get${property.type.name}().subscribe(
 			(data) => {
-				this.warehouses = data
+				this.${property.type.name?uncap_first}s = data
 			} 
 		)
-		</#if>
+			</#if>    
+		</#list>
+		
 	}
   
     <#if class.crud.delete == true >
 	delete(id: number) : void {
-	    this.${class.name?lower_case}Service.delete${class.name}(id).subscribe(
+	    this.${class.name?uncap_first}Service.delete${class.name}(id).subscribe(
 	  		() => {
 	  			//this.toastr.success('${class.name} is deleted!');
 	  		},
@@ -67,7 +66,7 @@ export class ${class.name}Component implements OnInit {
 	
 	<#if class.crud.create == true >
 	create(entity: any) : void {
-	    this.${class.name?lower_case}Service.create${class.name}(entity).subscribe(
+	    this.${class.name?uncap_first}Service.create${class.name}(entity).subscribe(
 	  		() => {
 	  			//this.toastr.success('${class.name} created!');
 	  		},
@@ -80,7 +79,7 @@ export class ${class.name}Component implements OnInit {
 	
 	<#if class.crud.update == true >
 	edit(entity: any) : void {
-	    this.${class.name?lower_case}Service.update${class.name}(entity).subscribe(
+	    this.${class.name?uncap_first}Service.update${class.name}(entity).subscribe(
 	  		() => {
 	  			//this.toastr.success('${class.name} edited!');
 	  		},

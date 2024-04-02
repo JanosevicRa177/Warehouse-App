@@ -71,73 +71,26 @@
 	</div>
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
-	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">
-	<#if '${class.name}' == 'User' || '${class.name}' == 'Worker' || '${class.name}' == 'Manager'>
-	  <label for="email">Email:</label>
-	  <input type="email" id="email" name="email" [ngModel]="selectedItem ? selectedItem.email : null" required>
-	
-	  <label for="firstName">First Name:</label>
-	  <input type="text" id="firstName" name="firstName" [ngModel]="selectedItem ? selectedItem.firstName : null" required>
-
-	  <label for="contact">Contact:</label>
-	  <input type="text" id="contact" name="contact" [ngModel]="selectedItem ? selectedItem.contact : null" required>
-	  
-	  <label for="address">Address:</label>
-      <select id="address" name="addressId" [ngModel]="selectedItem ? selectedItem.address?.id : null" required>
-        <option *ngFor="let address of addresses" [value]="address.id">{{ address.street }} {{address.streetNumber}} {{address.city}} {{address.country}}</option>
-      </select>
-      
-      <#if '${class.name}' == 'Worker'>
-  	  <label for="warehouse">Warehouse:</label>
-      <select id="warehouse" name="warehouseId" [ngModel]="selectedItem ? selectedItem.warehouse?.id : null" required>
-        <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{ warehouse.name }}</option>
-      </select>
-      </#if>
-      
-      <#if '${class.name}' == 'Manager'>
-      <label for="warehouses">Warehouses:</label>
-	  <select id="warehouses" name="warehouseIds" multiple [ngModel]="selectedItem ? selectedItem.warehouseIds : null" required>
-	    <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{ warehouse.name }}</option>
-	  </select>
-      </#if>
-      
-	</#if>
-	<#if '${class.name}' == 'Warehouse'>
-	  <label for="name">Name:</label>
-	  <input type="text" id="name" name="name" [ngModel]="selectedItem ? selectedItem.name : null" required>
-	
-	  <label for="size">Size:</label>
-	  <input type="number" id="size" name="size" [ngModel]="selectedItem ? selectedItem.size : null" required>
-
-	  <label for="address">Address:</label>
-      <select id="address" name="addressId" [ngModel]="selectedItem ? selectedItem.address?.id : null" required>
-        <option *ngFor="let address of addresses" [value]="address.id">{{ address.street }} {{address.streetNumber}} {{address.city}} {{address.country}}</option>
-      </select>
-	</#if>
-	<#if '${class.name}' == 'Address'>
-	  <label for="street">Street:</label>
-	  <input type="text" id="street" name="street" [ngModel]="selectedItem ? selectedItem.street : null" required>
-	
-	  <label for="streetNumber">StreetNumber:</label>
-	  <input type="text" id="streetNumber" name="streetNumber" [ngModel]="selectedItem ? selectedItem.streetNumber : null" required>
-	  
-	  <label for="city">City:</label>
-	  <input type="text" id="city" name="city" [ngModel]="selectedItem ? selectedItem.city : null" required>
-	  
-	  <label for="Country">Country:</label>
-	  <input type="text" id="country" name="country" [ngModel]="selectedItem ? selectedItem.country : null" required>
-
-	</#if>
-	<#if '${class.name}' == 'Product'>
-	  <label for="price">Price:</label>
-	  <input type="number" id="price" name="price" [ngModel]="selectedItem ? selectedItem.price : null" required>
-	  
-	  <label for="warehouse">Warehouse:</label>
-      <select id="warehouse" name="warehouseId" [ngModel]="selectedItem ? selectedItem.warehouse?.id : null" required>
-        <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{ warehouse?.name }}</option>
-      </select>
-	</#if>
-	
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+		<#list properties as property>
+		${property.isClass}
+			<#if property.upper == 1 && property.isClass> 
+	      <label for="${property.type.name?uncap_first}">${property.type.name}:</label>
+		  <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}">
+			  <option *ngFor="let item of ${property.type.name?uncap_first}s" [value]="item.id">{{ item.id }}</option>
+		  </select> 
+			 </#if>
+	   		 <#if property.upper == 1 && !property.isClass>  
+	      <label for="${property.name?uncap_first}">${property.name}:</label>
+    	  <input type="text" id="${property.name?uncap_first}" name="${property.name?uncap_first}" [ngModel]="selectedItem ? selectedItem.${property.name?uncap_first} : null" required>
+  			 </#if>
+		     <#if property.upper == -1 > 
+		   <label for="${property.type.name?uncap_first}">${property.type.name}:</label>
+		   <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}" multiple>
+		      <option *ngFor="let item of ${property.type.name?uncap_first}s" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+		    </#if>     
+		</#list>
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>
 	</div>

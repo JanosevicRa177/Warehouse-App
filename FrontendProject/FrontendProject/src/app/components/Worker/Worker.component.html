@@ -31,28 +31,11 @@
 	</div>
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
-	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">
-	  <label for="email">Email:</label>
-	  <input type="email" id="email" name="email" [ngModel]="selectedItem ? selectedItem.email : null" required>
-	
-	  <label for="firstName">First Name:</label>
-	  <input type="text" id="firstName" name="firstName" [ngModel]="selectedItem ? selectedItem.firstName : null" required>
-
-	  <label for="contact">Contact:</label>
-	  <input type="text" id="contact" name="contact" [ngModel]="selectedItem ? selectedItem.contact : null" required>
-	  
-	  <label for="address">Address:</label>
-      <select id="address" name="addressId" [ngModel]="selectedItem ? selectedItem.address?.id : null" required>
-        <option *ngFor="let address of addresses" [value]="address.id">{{ address.street }} {{address.streetNumber}} {{address.city}} {{address.country}}</option>
-      </select>
-      
-  	  <label for="warehouse">Warehouse:</label>
-      <select id="warehouse" name="warehouseId" [ngModel]="selectedItem ? selectedItem.warehouse?.id : null" required>
-        <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{ warehouse.name }}</option>
-      </select>
-      
-      
-	
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+	      <label for="warehouse">Warehouse:</label>
+		  <select id="warehouse" name="warehouse">
+			  <option *ngFor="let item of warehouses" [value]="item.id">{{ item.id }}</option>
+		  </select> 
 	<div *ngIf="!selectedItem">
 	  <button class="submit-btn" type="submit">Create</button>
 	</div>
