@@ -19,6 +19,8 @@ public class FMProperty extends FMElement  {
 	
 	private Boolean isClass;
 	
+	private Boolean IsOwnerOf;
+
 	public FMProperty(String name, FMType type, String visibility, int lower, int upper) {
 		super(name);
 		this.type = type;
@@ -38,6 +40,12 @@ public class FMProperty extends FMElement  {
 	}
 	public Field getField() {
 		return field;
+	}
+	public Boolean getIsOwnerOf() {
+		return IsOwnerOf;
+	}
+	public void setIsOwnerOf(Boolean isOwnerOf) {
+		IsOwnerOf = isOwnerOf;
 	}
 	public void setField(Field field) {
 		this.field = field;

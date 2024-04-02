@@ -31,19 +31,11 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		appTemplateOptions();
 		serviceOptions();
 		routingOptions();
-		//configOptions();
+		configOptions();
 	}
 	
 	private void modelOptions() {
 		GeneratorOptions generatorOptions = new GeneratorOptions(dusan + "BackendProject/BackendProject", "entity", "templates", "{0}.cs", true, "BackendProject");
-
-		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEntityGenerator", generatorOptions);
-		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
-	}
-	
-	private void configOptions() {
-		GeneratorOptions generatorOptions = new GeneratorOptions(dusan + "BackendProject/BackendProject", "config", "templates", "{0}.cs", true, "BackendProject");
-
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEntityGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
@@ -53,7 +45,6 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("BackendEnumGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
-	
 
 	private void dbContextOptions() {
 		GeneratorOptions generatorOptions = new GeneratorOptions(dusan + "BackendProject/BackendProject/Infrastructure/", "dbContext", "templates", "{0}.cs", true, "BackendProject");
@@ -70,6 +61,13 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	private void repositoryInterfaceOptions() {
 		GeneratorOptions generatorOptions = new GeneratorOptions(dusan + "BackendProject/BackendProject/Infrastructure/", "repositoryInterface", "templates", "{0}.cs", true, "BackendProject");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("RepositoryInterfaceGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
+	}
+	
+	private void configOptions() {
+		GeneratorOptions generatorOptions = new GeneratorOptions(dusan + "BackendProject/BackendProject/Infrastructure/", "config", "templates", "{0}.cs", true, "BackendProject");
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("ConfigGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 	
 	private void appModuleOptions() {

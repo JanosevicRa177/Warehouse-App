@@ -16,6 +16,7 @@ import myplugin.generator.AppModuleGenerator;
 import myplugin.generator.AppTemplateGenerator;
 import myplugin.generator.BackendEntityGenerator;
 import myplugin.generator.BackendEnumGenerator;
+import myplugin.generator.ConfigGenerator;
 import myplugin.generator.DbContextGenerator;
 import myplugin.generator.RepositoryGenerator;
 import myplugin.generator.RepositoryInterfaceGenerator;
@@ -47,6 +48,7 @@ class GenerateAction extends MDAction{
 			generateAppTemplate();
 			generateService();
 			generateRouter();
+			generateConfig();
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
@@ -93,6 +95,17 @@ class GenerateAction extends MDAction{
 		RepositoryGenerator generator = new RepositoryGenerator(generatorOptions);
 		generator.generate();
 	}
+	
+	private void generateConfig()
+			throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Configuration");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ConfigGenerator");
+		ConfigGenerator generator = new ConfigGenerator(generatorOptions);
+		generator.generate();
+	}
+	
 	private void generateRepositoryInterfaces()
 			throws AnalyzeException {
 		Package root = Application.getInstance().getProject().getModel();
@@ -100,6 +113,7 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("RepositoryInterfaceGenerator");
 		RepositoryInterfaceGenerator generator = new RepositoryInterfaceGenerator(generatorOptions);
+		generator.generate();
 	}
 	
 	private void generateAppModule() throws AnalyzeException {
