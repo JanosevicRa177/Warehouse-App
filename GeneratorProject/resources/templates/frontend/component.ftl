@@ -7,8 +7,6 @@ import { ${property.type.name}Service } from '../../services/${property.type.nam
 	</#if>    
 </#list>
 
-//import { ${class.name} } from '../../models/${class.name}'
-
 @Component({
   selector: 'app-${class.name?lower_case}',
   templateUrl: './${class.name?lower_case}.component.html',
@@ -16,14 +14,13 @@ import { ${property.type.name}Service } from '../../services/${property.type.nam
 })
 
 export class ${class.name}Component implements OnInit {
-	//data: ${class.name}[] = []
 	data: any[] = []
 	selectedItem: any = null
 	<#list properties as property><#if property.isClass >   
 	<#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if> : any = []	
 	</#if></#list>
 	
-	constructor(private ${class.name?uncap_first}Service: ${class.name}Service<#list properties as property><#if property.isClass>, private ${property.type.name?uncap_first}Service : ${property.type.name}Service</#if></#list>) { } 
+	constructor(private ${class.name?uncap_first}Service: ${class.name}Service<#list properties as property><#if property.isClass>, private ${property.type.name?uncap_first}Service : ${property.type.name}Service</#if></#list>, private toastr: ToastrService) { } 
 	
 	ngOnInit(): void {
 		this.${class.name?uncap_first}Service.get${class.name}().subscribe(
@@ -49,10 +46,10 @@ export class ${class.name}Component implements OnInit {
 	delete(id: number) : void {
 	    this.${class.name?uncap_first}Service.delete${class.name}(id).subscribe(
 	  		() => {
-	  			//this.toastr.success('${class.name} is deleted!');
+	  			this.toastr.success('${class.name} is deleted!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to delete ${class.name}')
+	  			this.toastr.error('Failed to delete ${class.name}')
 	  		} 
   		);
 	}
@@ -62,10 +59,10 @@ export class ${class.name}Component implements OnInit {
 	create(entity: any) : void {
 	    this.${class.name?uncap_first}Service.create${class.name}(entity).subscribe(
 	  		() => {
-	  			//this.toastr.success('${class.name} created!');
+	  			this.toastr.success('${class.name} created!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to create ${class.name}')
+	  			this.toastr.error('Failed to create ${class.name}')
 	  		} 
   		);
 	}
@@ -75,10 +72,10 @@ export class ${class.name}Component implements OnInit {
 	edit(entity: any) : void {
 	    this.${class.name?uncap_first}Service.update${class.name}(entity).subscribe(
 	  		() => {
-	  			//this.toastr.success('${class.name} edited!');
+	  			this.toastr.success('${class.name} edited!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to edit ${class.name}')
+	  			this.toastr.error('Failed to edit ${class.name}')
 	  		} 
   		);
 	}

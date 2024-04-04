@@ -76,3 +76,18 @@
 	justify-content: center;
 	margin-bottom: 20px
 }
+
+.ids {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ids div {
+    margin-right: 5px; /* Adjust the margin as needed */
+    margin-bottom: 5px; /* Adjust the margin as needed */
+    white-space: nowrap;
+    max-width: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

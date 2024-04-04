@@ -4,8 +4,6 @@ import { ItemService } from '../../services/Item.service';
 import { ProductService } from '../../services/Product.service'
 import { ReceiptItemService } from '../../services/ReceiptItem.service'
 
-//import { Item } from '../../models/Item'
-
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -13,13 +11,12 @@ import { ReceiptItemService } from '../../services/ReceiptItem.service'
 })
 
 export class ItemComponent implements OnInit {
-	//data: Item[] = []
 	data: any[] = []
 	selectedItem: any = null
 	products : any = []	
 	receiptItems : any = []	
 	
-	constructor(private itemService: ItemService, private productService : ProductService, private receiptItemService : ReceiptItemService) { } 
+	constructor(private itemService: ItemService, private productService : ProductService, private receiptItemService : ReceiptItemService, private toastr: ToastrService) { } 
 	
 	ngOnInit(): void {
 		this.itemService.getItem().subscribe(
@@ -45,10 +42,10 @@ export class ItemComponent implements OnInit {
 	delete(id: number) : void {
 	    this.itemService.deleteItem(id).subscribe(
 	  		() => {
-	  			//this.toastr.success('Item is deleted!');
+	  			this.toastr.success('Item is deleted!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to delete Item')
+	  			this.toastr.error('Failed to delete Item')
 	  		} 
   		);
 	}
@@ -56,10 +53,10 @@ export class ItemComponent implements OnInit {
 	create(entity: any) : void {
 	    this.itemService.createItem(entity).subscribe(
 	  		() => {
-	  			//this.toastr.success('Item created!');
+	  			this.toastr.success('Item created!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to create Item')
+	  			this.toastr.error('Failed to create Item')
 	  		} 
   		);
 	}
@@ -67,10 +64,10 @@ export class ItemComponent implements OnInit {
 	edit(entity: any) : void {
 	    this.itemService.updateItem(entity).subscribe(
 	  		() => {
-	  			//this.toastr.success('Item edited!');
+	  			this.toastr.success('Item edited!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to edit Item')
+	  			this.toastr.error('Failed to edit Item')
 	  		} 
   		);
 	}

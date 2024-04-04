@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { WarehouseComponent } from './components/Warehouse/warehouse.component';    
-import { ProductComponent } from './components/Product/product.component';    
-import { ItemComponent } from './components/Item/item.component';    
-import { ReceiptComponent } from './components/Receipt/receipt.component';    
-import { UserComponent } from './components/User/user.component';    
-import { ReceiptItemComponent } from './components/ReceiptItem/receiptitem.component';    
-import { AddressComponent } from './components/Address/address.component';    
+import { WarehouseComponent } from './components/warehouse/warehouse.component';    
+import { ProductComponent } from './components/product/product.component';    
+import { ItemComponent } from './components/item/item.component';    
+import { ReceiptComponent } from './components/receipt/receipt.component';    
+import { UserComponent } from './components/user/user.component';    
+import { ReceiptItemComponent } from './components/receiptitem/receiptitem.component';    
+import { AddressComponent } from './components/address/address.component';    
 
 const routes: Routes = [
 	{

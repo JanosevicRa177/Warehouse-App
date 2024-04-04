@@ -5,8 +5,6 @@ import { ItemService } from '../../services/Item.service'
 import { ReceiptService } from '../../services/Receipt.service'
 import { WarehouseService } from '../../services/Warehouse.service'
 
-//import { ReceiptItem } from '../../models/ReceiptItem'
-
 @Component({
   selector: 'app-receiptitem',
   templateUrl: './receiptitem.component.html',
@@ -14,14 +12,13 @@ import { WarehouseService } from '../../services/Warehouse.service'
 })
 
 export class ReceiptItemComponent implements OnInit {
-	//data: ReceiptItem[] = []
 	data: any[] = []
 	selectedItem: any = null
 	items : any = []	
 	receipts : any = []	
 	warehouses : any = []	
 	
-	constructor(private receiptItemService: ReceiptItemService, private itemService : ItemService, private receiptService : ReceiptService, private warehouseService : WarehouseService) { } 
+	constructor(private receiptItemService: ReceiptItemService, private itemService : ItemService, private receiptService : ReceiptService, private warehouseService : WarehouseService, private toastr: ToastrService) { } 
 	
 	ngOnInit(): void {
 		this.receiptItemService.getReceiptItem().subscribe(
@@ -52,10 +49,10 @@ export class ReceiptItemComponent implements OnInit {
 	delete(id: number) : void {
 	    this.receiptItemService.deleteReceiptItem(id).subscribe(
 	  		() => {
-	  			//this.toastr.success('ReceiptItem is deleted!');
+	  			this.toastr.success('ReceiptItem is deleted!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to delete ReceiptItem')
+	  			this.toastr.error('Failed to delete ReceiptItem')
 	  		} 
   		);
 	}
@@ -63,10 +60,10 @@ export class ReceiptItemComponent implements OnInit {
 	create(entity: any) : void {
 	    this.receiptItemService.createReceiptItem(entity).subscribe(
 	  		() => {
-	  			//this.toastr.success('ReceiptItem created!');
+	  			this.toastr.success('ReceiptItem created!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to create ReceiptItem')
+	  			this.toastr.error('Failed to create ReceiptItem')
 	  		} 
   		);
 	}
@@ -74,10 +71,10 @@ export class ReceiptItemComponent implements OnInit {
 	edit(entity: any) : void {
 	    this.receiptItemService.updateReceiptItem(entity).subscribe(
 	  		() => {
-	  			//this.toastr.success('ReceiptItem edited!');
+	  			this.toastr.success('ReceiptItem edited!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to edit ReceiptItem')
+	  			this.toastr.error('Failed to edit ReceiptItem')
 	  		} 
   		);
 	}

@@ -3,8 +3,6 @@ import { ToastrService } from 'ngx-toastr';
 import { ReceiptService } from '../../services/Receipt.service';
 import { ReceiptItemService } from '../../services/ReceiptItem.service'
 
-//import { Receipt } from '../../models/Receipt'
-
 @Component({
   selector: 'app-receipt',
   templateUrl: './receipt.component.html',
@@ -12,12 +10,11 @@ import { ReceiptItemService } from '../../services/ReceiptItem.service'
 })
 
 export class ReceiptComponent implements OnInit {
-	//data: Receipt[] = []
 	data: any[] = []
 	selectedItem: any = null
 	receiptItems : any = []	
 	
-	constructor(private receiptService: ReceiptService, private receiptItemService : ReceiptItemService) { } 
+	constructor(private receiptService: ReceiptService, private receiptItemService : ReceiptItemService, private toastr: ToastrService) { } 
 	
 	ngOnInit(): void {
 		this.receiptService.getReceipt().subscribe(
@@ -38,10 +35,10 @@ export class ReceiptComponent implements OnInit {
 	delete(id: number) : void {
 	    this.receiptService.deleteReceipt(id).subscribe(
 	  		() => {
-	  			//this.toastr.success('Receipt is deleted!');
+	  			this.toastr.success('Receipt is deleted!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to delete Receipt')
+	  			this.toastr.error('Failed to delete Receipt')
 	  		} 
   		);
 	}
@@ -49,10 +46,10 @@ export class ReceiptComponent implements OnInit {
 	create(entity: any) : void {
 	    this.receiptService.createReceipt(entity).subscribe(
 	  		() => {
-	  			//this.toastr.success('Receipt created!');
+	  			this.toastr.success('Receipt created!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to create Receipt')
+	  			this.toastr.error('Failed to create Receipt')
 	  		} 
   		);
 	}
@@ -60,10 +57,10 @@ export class ReceiptComponent implements OnInit {
 	edit(entity: any) : void {
 	    this.receiptService.updateReceipt(entity).subscribe(
 	  		() => {
-	  			//this.toastr.success('Receipt edited!');
+	  			this.toastr.success('Receipt edited!');
 	  		},
 	  		(error : any) => {
-	  			//this.toastr.error('Failed to edit Receipt')
+	  			this.toastr.error('Failed to edit Receipt')
 	  		} 
   		);
 	}

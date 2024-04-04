@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { ToastrModule } from 'ngx-toastr';
 <#list classes as class>
 import { ${class.name}Component } from './components/${class.name?lower_case}/${class.name?lower_case}.component';    
@@ -22,7 +23,11 @@ import { ${class.name}Component } from './components/${class.name?lower_case}/${
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass:'toast-top-right',
+      preventDuplicates:true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
