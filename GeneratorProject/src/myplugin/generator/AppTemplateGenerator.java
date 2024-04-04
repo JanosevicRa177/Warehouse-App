@@ -3,11 +3,14 @@ package myplugin.generator;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
 
 import freemarker.template.TemplateException;
+import myplugin.generator.fmmodel.FMClass;
+import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.options.GeneratorOptions;
 
 public class AppTemplateGenerator extends BasicGenerator {
@@ -25,15 +28,16 @@ public class AppTemplateGenerator extends BasicGenerator {
 		}
 
 		
-		//List<FMClass> classes = FMModel.getInstance().getClasses();
+		List<FMClass> classes = FMModel.getInstance().getClasses();
 		//for (int i = 0; i < classes.size(); i++) {
-		//	FMClass cl = classes.get(i);
+			//FMClass cl = classes.get(i);
 			Writer out;
 			Map<String, Object> context = new HashMap<String, Object>();
 			try {
 				out = getWriter("app.component", "");
 				if (out != null) {
 					context.clear();
+					context.put("classes", classes);
 					getTemplate().process(context, out);
 					out.flush();
 				}

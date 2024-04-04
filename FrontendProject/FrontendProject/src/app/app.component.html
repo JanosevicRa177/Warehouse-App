@@ -1,8 +1,26 @@
 <main class="main">
   <div class="content">
-   <div *ngFor="let entity of entities" (click)="handleOpenPage(entity)">
-   	{{entity}}
-   </div>
+  <div (click)="navigateTo('/warehouse')">
+   	Warehouse
+   </div>  
+<div (click)="navigateTo('/product')">
+   	Product
+   </div>  
+<div (click)="navigateTo('/item')">
+   	Item
+   </div>  
+<div (click)="navigateTo('/receipt')">
+   	Receipt
+   </div>  
+<div (click)="navigateTo('/user')">
+   	User
+   </div>  
+<div (click)="navigateTo('/receiptitem')">
+   	ReceiptItem
+   </div>  
+<div (click)="navigateTo('/address')">
+   	Address
+   </div>  
   </div>
 </main>
 <router-outlet></router-outlet>

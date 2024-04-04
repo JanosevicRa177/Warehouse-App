@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,10 @@ import { Component } from '@angular/core';
   //styleUrl: './app.component.css'
 })
 export class AppComponent {
-  entities = ['worker', 'user'];
   
-  handleOpenPage(entity: any){
+  constructor(private router: Router) { }
+
+   navigateTo(url: string) {
+    this.router.navigate([url]);
   }
 }
