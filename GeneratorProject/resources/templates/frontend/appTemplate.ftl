@@ -1,10 +1,8 @@
 <main class="main">
-  <div class="content">
+  <div class="navbar">
   <#list classes as class> 
-<div (click)="navigateTo('/${class.name?lower_case}')">
-   	${class.name}
-   </div>  
-	</#list>
+    <div class="nav-item" (click)="navigateTo('/${class.name?lower_case}')">${class.name}</div>  
+  </#list>
   </div>
 </main>
 <router-outlet></router-outlet>

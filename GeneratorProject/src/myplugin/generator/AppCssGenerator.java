@@ -9,14 +9,13 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import freemarker.template.TemplateException;
-import myplugin.generator.options.GeneratorOptions;
-
 import myplugin.generator.fmmodel.FMClass;
 import myplugin.generator.fmmodel.FMModel;
+import myplugin.generator.options.GeneratorOptions;
 
-public class CssGenerator extends BasicGenerator {
+public class AppCssGenerator extends BasicGenerator {
 
-	public CssGenerator(GeneratorOptions generatorOptions) {
+	public AppCssGenerator(GeneratorOptions generatorOptions) {
 		super(generatorOptions);
 		// TODO Auto-generated constructor stub
 	}
@@ -28,15 +27,12 @@ public class CssGenerator extends BasicGenerator {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 
-		
-		List<FMClass> classes = FMModel.getInstance().getClasses();
-		for (int i = 0; i < classes.size(); i++) {
-			FMClass cl = classes.get(i);
+		//for (int i = 0; i < classes.size(); i++) {
+			//FMClass cl = classes.get(i);
 			Writer out;
 			Map<String, Object> context = new HashMap<String, Object>();
 			try {
-				if(cl.getCrud() == null) continue;
-				out = getWriter(cl.getName().toLowerCase() + ".component", cl.getName().toLowerCase());
+				out = getWriter("app.component", "");
 				if (out != null) {
 					context.clear();
 					getTemplate().process(context, out);
@@ -47,7 +43,9 @@ public class CssGenerator extends BasicGenerator {
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
 			}
-		}
+		//}
 	}	
+	
+	
 
 }

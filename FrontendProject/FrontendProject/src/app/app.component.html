@@ -1,26 +1,12 @@
 <main class="main">
-  <div class="content">
-  <div (click)="navigateTo('/warehouse')">
-   	Warehouse
-   </div>  
-<div (click)="navigateTo('/product')">
-   	Product
-   </div>  
-<div (click)="navigateTo('/item')">
-   	Item
-   </div>  
-<div (click)="navigateTo('/receipt')">
-   	Receipt
-   </div>  
-<div (click)="navigateTo('/user')">
-   	User
-   </div>  
-<div (click)="navigateTo('/receiptitem')">
-   	ReceiptItem
-   </div>  
-<div (click)="navigateTo('/address')">
-   	Address
-   </div>  
+  <div class="navbar">
+      <div class="nav-item" (click)="navigateTo('/warehouse')">Warehouse</div>  
+    <div class="nav-item" (click)="navigateTo('/product')">Product</div>  
+    <div class="nav-item" (click)="navigateTo('/item')">Item</div>  
+    <div class="nav-item" (click)="navigateTo('/receipt')">Receipt</div>  
+    <div class="nav-item" (click)="navigateTo('/user')">User</div>  
+    <div class="nav-item" (click)="navigateTo('/receiptitem')">ReceiptItem</div>  
+    <div class="nav-item" (click)="navigateTo('/address')">Address</div>  
   </div>
 </main>
 <router-outlet></router-outlet>

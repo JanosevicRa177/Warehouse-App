@@ -12,6 +12,7 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
 import myplugin.analyzer.AnalyzeException;
 import myplugin.analyzer.ModelAnalyzer;
 import myplugin.generator.AppComponentGenerator;
+import myplugin.generator.AppCssGenerator;
 import myplugin.generator.AppModuleGenerator;
 import myplugin.generator.AppTemplateGenerator;
 import myplugin.generator.BackendEntityGenerator;
@@ -49,6 +50,7 @@ class GenerateAction extends MDAction{
 			generateAppModule();
 			generateAppComponent();
 			generateAppTemplate();
+			generateAppCss();
 			generateService();
 			generateComponent();
 			generateHtml();
@@ -146,6 +148,15 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("AppTemplateGenerator");
 		AppTemplateGenerator generator = new AppTemplateGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateAppCss() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("AppCssGenerator");
+		AppCssGenerator generator = new AppCssGenerator(generatorOptions);
 		generator.generate();
 	}
 	

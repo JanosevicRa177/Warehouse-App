@@ -30,6 +30,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		appModuleOptions();
 		appComponentOptions();
 		appTemplateOptions();
+		appCssOptions();
 		serviceOptions();
 		componentOptions();
 		htmlOptions();
@@ -89,6 +90,12 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	private void appTemplateOptions() {
 		GeneratorOptions generatorOptions = new GeneratorOptions(ana + "FrontendProject/FrontendProject/src/app", "appTemplate", "templates", "{0}.html", true, "FrontendProject");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("AppTemplateGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
+	}
+	
+	private void appCssOptions() {
+		GeneratorOptions generatorOptions = new GeneratorOptions(ana + "FrontendProject/FrontendProject/src/app", "appCss", "templates", "{0}.css", true, "FrontendProject");
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("AppCssGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 	
