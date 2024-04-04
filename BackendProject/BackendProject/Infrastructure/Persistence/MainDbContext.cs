@@ -12,11 +12,9 @@ public class MainDbContext: DbContext
     }
     
     public DbSet<Warehouse> Warehouses { get; set; } = null!;  
-    public DbSet<Manager> Managers { get; set; } = null!;  
     public DbSet<Product> Products { get; set; } = null!;  
     public DbSet<Item> Items { get; set; } = null!;  
     public DbSet<Receipt> Receipts { get; set; } = null!;  
-    public DbSet<Worker> Workers { get; set; } = null!;  
     public DbSet<User> Users { get; set; } = null!;  
     public DbSet<ReceiptItem> ReceiptItems { get; set; } = null!;  
     public DbSet<Address> Addresses { get; set; } = null!;  

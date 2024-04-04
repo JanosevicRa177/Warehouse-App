@@ -19,18 +19,18 @@ public class FMProperty extends FMElement  {
 	
 	private Boolean isClass;
 	
-	private Boolean IsOwnerOf;
+	private Boolean isOwnerOf;
+
 
 	public FMProperty(String name, FMType type, String visibility, int lower, int upper) {
 		super(name);
 		this.type = type;
 		this.visibility = visibility;
-		
 		this.lower = lower;
 		this.upper = upper;	
 		this.isClass = false;
+		this.isOwnerOf = false;
 	}
-	
 	
 	public Boolean getIsClass() {
 		return isClass;
@@ -42,10 +42,10 @@ public class FMProperty extends FMElement  {
 		return field;
 	}
 	public Boolean getIsOwnerOf() {
-		return IsOwnerOf;
+		return isOwnerOf;
 	}
 	public void setIsOwnerOf(Boolean isOwnerOf) {
-		IsOwnerOf = isOwnerOf;
+		this.isOwnerOf = isOwnerOf;
 	}
 	public void setField(Field field) {
 		this.field = field;

@@ -1,13 +1,19 @@
+using System.ComponentModel.DataAnnotations.Schema;   
 
 namespace BackendProject.Model;
 
+
+[Table("product")]
 public class Product : Entity
 {  
-      public Guid ItemId {get; private set;} 
-      public Item Item {get; private set;}
-      public int Price {get; private set;}
-      public Guid WarehouseId {get; private set;} 
-      public Warehouse Warehouse {get; private set;}
+	 [Column("item_id")] 
+      public Guid ItemId {get; private set;}
+      public Item Item {get; private set;}  
+      [Column("price")] 
+      public int Price {get; private set;}   
+	 [Column("warehouse_id")] 
+      public Guid WarehouseId {get; private set;}
+      public Warehouse Warehouse {get; private set;}  
 	public Product(){ }
 	public Product(Guid itemId , int price, Guid warehouseId ) 
 	{
