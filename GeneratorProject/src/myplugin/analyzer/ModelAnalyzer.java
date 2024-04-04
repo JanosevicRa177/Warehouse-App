@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javax.swing.JOptionPane;
 
@@ -29,7 +28,6 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Enumeration;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.TypedElement;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.impl.EnumerationLiteralImpl;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
@@ -174,16 +172,15 @@ public class ModelAnalyzer {
 		while (it.hasNext()) {
 			Property p = it.next();
 			FMProperty prop = getPropertyData(p, cl);
-//			Iterator<Association> associations = ModelHelper.associations(cl);
-//			while (associations.hasNext()) {
-//				Association association = associations.next();
-//				
-//				Stereotype associationStereotype = StereotypesHelper.getAppliedStereotypeByString(association, "Configuration");
-//				if(associationStereotype != null) {
-//					JOptionPane.showMessageDialog(null, fmClass.getName() + ":" + prop.getType().getName() + getIsConfigOwner(associationStereotype,cl));
-//					prop.setIsOwnerOf(getIsConfigOwner(associationStereotype,cl));
-//				}
-//			}
+			Iterator<Association> associations = ModelHelper.associations(cl);
+			while (associations.hasNext()) {
+				Association association = associations.next();
+				Stereotype associationStereotype = StereotypesHelper.getAppliedStereotypeByString(association, "Configuration");
+				if(associationStereotype != null && getIsConfigOwner(associationStereotype, association, prop)) {
+						prop.setIsOwnerOf(true);
+						break;
+					}
+				}
 			if(doesClassHaveEnum(prop.getType().getName()) && fmClass != null)
 				fmClass.setHasEnum(true);
 			properties.add(prop);
@@ -191,12 +188,21 @@ public class ModelAnalyzer {
 		return properties;
 	}
 	
-	private Boolean getIsConfigOwner(Stereotype associationStereotype, Class aClass) {
+	private Boolean getIsConfigOwner(Stereotype associationStereotype, Association association,FMProperty prop) {
 		List<Property> entityTags = associationStereotype.getOwnedAttribute();
-		Property tagDef = entityTags.get(0);
-		String tagName = tagDef.getName();
-		List<Object> value = StereotypesHelper.getStereotypePropertyValue(aClass, associationStereotype, tagName);
-		return value.size() > 0 && ((String) value.get(0)).equals(aClass.getName());
+		String notOwner = "";
+		for (int j = 0; j < entityTags.size(); ++j) {
+			Property tagDef = entityTags.get(j);
+			String tagName = tagDef.getName();
+			List<Object> value = StereotypesHelper.getStereotypePropertyValue(association, associationStereotype, tagName);
+			if(value.size() > 0) {
+				switch(tagName) {
+					case "notOwner":
+						notOwner = (String) value.get(0);
+				}
+			}
+		}
+		return notOwner.equals(prop.getType().getName());
 	}
 	
 	private CRUD getCRUD(Stereotype crudStereotype, Class aClass) {
@@ -233,14 +239,21 @@ public class ModelAnalyzer {
 	}
 	
 	private Entity getEntity(Stereotype entityStereotype, Class aClass) {
-		List<Property> entitytags = entityStereotype.getOwnedAttribute();
-		Property tableName = entitytags.get(0);
-		String tagName = tableName.getName();
-		List<Object> value = StereotypesHelper.getStereotypePropertyValue(aClass, entityStereotype, tagName);
-		if(value.size() > 0) {
-			return new Entity((String)value.get(0));
-		}
-		return null;
+		List<Property> entityTags = entityStereotype.getOwnedAttribute();
+		String tableName  = "";
+		for (int j = 0; j < entityTags.size(); ++j) {
+			Property tagDef = entityTags.get(j);
+			String tagName = tagDef.getName();
+			List<Object> value = StereotypesHelper.getStereotypePropertyValue(aClass, entityStereotype, tagName);
+			if(value.size() > 0) {
+				switch(tagName) {
+					case "tableName":
+						tableName = (String) value.get(0);
+						break;
+				}
+			}
+		}	
+		return new Entity(tableName);
 	}
 	
 	private FMProperty getPropertyData(Property p, Class cl) throws AnalyzeException {
@@ -273,7 +286,7 @@ public class ModelAnalyzer {
 			prop.setField(field);
 		}	
 		
-		Stereotype propertyStereotype = StereotypesHelper.getAppliedStereotypeByString(p, "Field");
+		Stereotype propertyStereotype = StereotypesHelper.getAppliedStereotypeByString(p, "Property");
 		if (propertyStereotype != null) {
 
 			PropertyStereotype fmPropertyStereotype = getPropertyStereotype(propertyStereotype, p);
@@ -284,14 +297,21 @@ public class ModelAnalyzer {
 	}
 	
 	private PropertyStereotype getPropertyStereotype(Stereotype propertyStereotype, Property p) {
-		List<Property> entitytags = propertyStereotype.getOwnedAttribute();
-		Property tableName = entitytags.get(0);
-		String tagName = tableName.getName();
-		List<Object> value = StereotypesHelper.getStereotypePropertyValue(p, propertyStereotype, tagName);
-		if(value.size() > 0) {
-			return new PropertyStereotype((String)value.get(0));
-		}
-		return null;
+		List<Property> entityTags = propertyStereotype.getOwnedAttribute();
+		String columnName = "";
+		for (int j = 0; j < entityTags.size(); ++j) {
+			Property tagDef = entityTags.get(j);
+			String tagName = tagDef.getName();
+			List<Object> value = StereotypesHelper.getStereotypePropertyValue(p, propertyStereotype, tagName);
+			if(value.size() > 0) {
+				switch(tagName) {
+					case "columnName":
+						columnName = (String) value.get(0);
+						break;
+				}
+			}
+		}	
+		return new PropertyStereotype(columnName);
 	}
 	
 	private Field getField(Stereotype fieldStereotype, Property p) {

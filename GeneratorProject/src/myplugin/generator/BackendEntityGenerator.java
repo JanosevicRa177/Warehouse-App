@@ -40,6 +40,7 @@ public class BackendEntityGenerator extends BasicGenerator {
 		for (int i = 0; i < classes.size(); i++) {
 			FMClass cl = classes.get(i);
 			Writer out;
+			if(cl.getEntity() == null) continue;
 			Map<String, Object> context = new HashMap<String, Object>();
 			try {
 				out = getWriter(cl.getName(), cl.getTypePackage());
