@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div class="table-container">
+    <table class="data-table">
+	  <thead>
+	    <tr>
+	      <th>Id</th>
+	      	      <th>Products</th>   
+	      <th>ReceiptItems</th>   
+	      <th>ItemType</th>   
+	      <th>ItemName</th>   
+		  <th></th>
+		  <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr *ngFor="let item of data">
+	      <td>{{ item.id }}</td>
+		  <td><div class="ids"><div *ngFor="let id of item.productsIds">{{ id }}</div></div></td>
+		  <td><div class="ids"><div *ngFor="let id of item.receiptItemsIds">{{ id }}</div></div></td>
+	      <td>{{ item.itemType }}</td>
+	      <td>{{ item.itemName }}</td>
+		  <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
+		  <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
+	    </tr>
+	  </tbody>
+	</table>
+  </div>
+  <div class="form-container">
+  	<div class="create-btn-wrapper">
+	  <button class="submit-btn" (click)="selectedItem = null">Open create form</button>
+	</div>
+	<h2 *ngIf="!selectedItem">Create form</h2>
+	<h2 *ngIf="selectedItem">Edit form</h2>
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+		   <label for="product">Products:</label>
+		   <select id="product" name="product" multiple [ngModel]="selectedItem ? selectedItem.productsIds : null">
+		      <option *ngFor="let item of products" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+		   <label for="receiptItem">ReceiptItems:</label>
+		   <select id="receiptItem" name="receiptItem" multiple [ngModel]="selectedItem ? selectedItem.receiptItemsIds : null">
+		      <option *ngFor="let item of receiptItems" [value]="item.id">{{ item.id }}</option>
+		   </select> 
+	      <label for="itemType">ItemType:</label>
+    	  <input type="text" id="itemType" name="itemType" [ngModel]="selectedItem ? selectedItem.itemType : null" required>
+	      <label for="itemName">ItemName:</label>
+    	  <input type="text" id="itemName" name="itemName" [ngModel]="selectedItem ? selectedItem.itemName : null" required>
+	<div *ngIf="!selectedItem">
+	  <button class="submit-btn" type="submit">Create</button>
+	</div>
+	<div *ngIf="selectedItem">
+	  <button class="submit-btn">Edit</button>
+	</div>
+	</form>
+  <div>
+</div>

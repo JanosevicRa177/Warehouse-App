@@ -25,9 +25,9 @@ public class Address : Entity
 
 
 public void Update(Address entity) {
-	      		Country = entity.Country;
-	      		City = entity.City;
-	      		Street = entity.Street;
-	      		StreetNumber = entity.StreetNumber;
+	Country = entity.Country;
+	City = entity.City;
+	Street = entity.Street;
+	StreetNumber = entity.StreetNumber;
 }
 }

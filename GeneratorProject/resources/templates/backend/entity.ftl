@@ -62,11 +62,11 @@ public class ${class.name} : Entity
 
 public void Update(${class.name} entity) {
 	<#list properties as property>  
-		<#if property.upper == 1 >
-			<#if property.isClass != true>   
-	      		${property.name} = entity.${property.name};
-		    </#if>
-	    </#if>  
+	<#if property.upper == 1 >
+	<#if property.isClass != true>   
+	${property.name} = entity.${property.name};
+    </#if>
+    </#if>  
 	</#list>
 }
 }
