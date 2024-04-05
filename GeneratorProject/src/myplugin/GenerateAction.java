@@ -30,6 +30,7 @@ import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.CRUDCommandGenerator;
 import myplugin.generator.CommandHandlerGenerator;
 import myplugin.generator.QueryGenerator;
+import myplugin.generator.DtoGenerator;
 import myplugin.generator.QueryHandlerGenerator;
 import myplugin.generator.CRUDControllerGenerator;
 import myplugin.generator.options.ProjectOptions;
@@ -70,7 +71,7 @@ class GenerateAction extends MDAction{
 			generateCss();
 			generateRouter();
 			generateConfig();
-
+			generateDto();
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
@@ -260,6 +261,15 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ControllerGenerator");
 		CRUDControllerGenerator generator = new CRUDControllerGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateDto() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("DtoGenerator");
+		DtoGenerator generator = new DtoGenerator(generatorOptions);
 		generator.generate();
 	}
 

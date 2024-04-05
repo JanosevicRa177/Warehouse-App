@@ -37,10 +37,10 @@ public class WarehouseController: ControllerBase
 	}
 	
 	[HttpDelete]    
-	[Route("/warehouses")]
-	public async Task<IActionResult> Delete([FromBody] DeleteWarehouseDto deleteWarehouseDto)
+	[Route("/warehouses/{id}")]
+	public async Task<IActionResult> Delete(Guid id)
 	{		
-	    await _sender.Send(new DeleteWarehouseCommand(deleteWarehouseDto.toEntity()));
+	    await _sender.Send(new DeleteWarehouseCommand(id));
 	    return Ok();
 	}
 	

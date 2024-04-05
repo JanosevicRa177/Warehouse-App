@@ -37,10 +37,10 @@ public class ReceiptController: ControllerBase
 	}
 	
 	[HttpDelete]    
-	[Route("/receipts")]
-	public async Task<IActionResult> Delete([FromBody] DeleteReceiptDto deleteReceiptDto)
+	[Route("/receipts/{id}")]
+	public async Task<IActionResult> Delete(Guid id)
 	{		
-	    await _sender.Send(new DeleteReceiptCommand(deleteReceiptDto.toEntity()));
+	    await _sender.Send(new DeleteReceiptCommand(id));
 	    return Ok();
 	}
 	

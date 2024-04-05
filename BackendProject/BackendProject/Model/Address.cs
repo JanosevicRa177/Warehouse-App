@@ -22,4 +22,12 @@ public class Address : Entity
       	Street = street;
       	StreetNumber = streetNumber;
 	}
+
+
+public void Update(Address entity) {
+	      		Country = entity.Country;
+	      		City = entity.City;
+	      		Street = entity.Street;
+	      		StreetNumber = entity.StreetNumber;
+}
 }

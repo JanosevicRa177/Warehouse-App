@@ -1,5 +1,4 @@
 <main class="main">
-<<<<<<< HEAD
   <div class="navbar">
       <div class="nav-item" (click)="navigateTo('/warehouse')">Warehouse</div>  
     <div class="nav-item" (click)="navigateTo('/product')">Product</div>  
@@ -8,12 +7,6 @@
     <div class="nav-item" (click)="navigateTo('/user')">User</div>  
     <div class="nav-item" (click)="navigateTo('/receiptitem')">ReceiptItem</div>  
     <div class="nav-item" (click)="navigateTo('/address')">Address</div>  
-=======
-  <div class="content">
-   <div *ngFor="let entity of entities" (click)="handleOpenPage(entity)">
-   	{{entity}}
-   </div>
->>>>>>> a238871 (Added commands, queries, handlers and controller templates/generators)
   </div>
 </main>
 <router-outlet></router-outlet>

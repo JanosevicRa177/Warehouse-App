@@ -33,6 +33,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		queryHandlerOptions();
 		commandHandlerOptions();
 		controllerOptions();
+		dtoOptions();
 		
 		
 		
@@ -187,6 +188,13 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		GeneratorOptions generatorOptions = new GeneratorOptions(srdjan + "BackendProject/BackendProject/WebApi/",
 				"controller", "templates", "{0}.cs", true, "BackendProject");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("ControllerGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
+	}
+	
+	private void dtoOptions() {
+		GeneratorOptions generatorOptions = new GeneratorOptions(srdjan + "BackendProject/BackendProject/WebApi/",
+				"dto", "templates", "{0}.cs", true, "BackendProject");
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("DtoGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 

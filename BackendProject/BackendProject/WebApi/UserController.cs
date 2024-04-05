@@ -37,10 +37,10 @@ public class UserController: ControllerBase
 	}
 	
 	[HttpDelete]    
-	[Route("/users")]
-	public async Task<IActionResult> Delete([FromBody] DeleteUserDto deleteUserDto)
+	[Route("/users/{id}")]
+	public async Task<IActionResult> Delete(Guid id)
 	{		
-	    await _sender.Send(new DeleteUserCommand(deleteUserDto.toEntity()));
+	    await _sender.Send(new DeleteUserCommand(id));
 	    return Ok();
 	}
 	

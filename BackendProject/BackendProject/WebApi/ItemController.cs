@@ -37,10 +37,10 @@ public class ItemController: ControllerBase
 	}
 	
 	[HttpDelete]    
-	[Route("/items")]
-	public async Task<IActionResult> Delete([FromBody] DeleteItemDto deleteItemDto)
+	[Route("/items/{id}")]
+	public async Task<IActionResult> Delete(Guid id)
 	{		
-	    await _sender.Send(new DeleteItemCommand(deleteItemDto.toEntity()));
+	    await _sender.Send(new DeleteItemCommand(id));
 	    return Ok();
 	}
 	

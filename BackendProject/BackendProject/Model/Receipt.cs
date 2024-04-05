@@ -14,4 +14,9 @@ public class Receipt : Entity
 	{
       	FullPrice = fullPrice;
 	}
+
+
+public void Update(Receipt entity) {
+	      		FullPrice = entity.FullPrice;
+}
 }

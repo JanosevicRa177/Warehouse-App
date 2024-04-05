@@ -25,4 +25,9 @@ public class ReceiptItem : Entity
       	WarehouseId = warehouseId;
       	Price = price;
 	}
+
+
+public void Update(ReceiptItem entity) {
+	      		Price = entity.Price;
+}
 }

@@ -37,10 +37,10 @@ public class AddressController: ControllerBase
 	}
 	
 	[HttpDelete]    
-	[Route("/addresss")]
-	public async Task<IActionResult> Delete([FromBody] DeleteAddressDto deleteAddressDto)
+	[Route("/addresss/{id}")]
+	public async Task<IActionResult> Delete(Guid id)
 	{		
-	    await _sender.Send(new DeleteAddressCommand(deleteAddressDto.toEntity()));
+	    await _sender.Send(new DeleteAddressCommand(id));
 	    return Ok();
 	}
 	

@@ -42,10 +42,10 @@ public class ${name}: ControllerBase
 	
 	<#if delete == true>
 	[HttpDelete]    
-	[Route("${route}")]
-	public async Task<IActionResult> Delete([FromBody] Delete${classname}Dto delete${classname}Dto)
+	[Route("${route}/{id}")]
+	public async Task<IActionResult> Delete(Guid id)
 	{		
-	    await _sender.Send(new Delete${classname}Command(delete${classname}Dto.toEntity()));
+	    await _sender.Send(new Delete${classname}Command(id));
 	    return Ok();
 	}
 	</#if>    

@@ -27,4 +27,11 @@ public class User : Entity
       	Email = email;
       	WarehouseId = warehouseId;
 	}
+
+
+public void Update(User entity) {
+	      		FirstName = entity.FirstName;
+	      		Contact = entity.Contact;
+	      		Email = entity.Email;
+}
 }
