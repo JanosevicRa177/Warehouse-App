@@ -27,6 +27,11 @@ import myplugin.generator.RepositoryInterfaceGenerator;
 import myplugin.generator.RoutingGenerator;
 import myplugin.generator.ServiceGenerator;
 import myplugin.generator.options.GeneratorOptions;
+import myplugin.generator.CRUDCommandGenerator;
+import myplugin.generator.CommandHandlerGenerator;
+import myplugin.generator.QueryGenerator;
+import myplugin.generator.QueryHandlerGenerator;
+import myplugin.generator.CRUDControllerGenerator;
 import myplugin.generator.options.ProjectOptions;
 
 /** Action that activate code generation */
@@ -40,6 +45,7 @@ class GenerateAction extends MDAction{
 
 	public void actionPerformed(ActionEvent evt) {
 		
+		JOptionPane.showMessageDialog(null, "Starting the generation");
 		if (Application.getInstance().getProject() == null) return;
 		try {
 			generateBackendModel();
@@ -47,6 +53,13 @@ class GenerateAction extends MDAction{
 			generateDbContext();
 			generateRepositories();
 			generateRepositoryInterfaces();
+			generateCRUDCommands();
+			generateCommandHandler();
+			generateQuery();
+			generateQueryHandler();
+			generateController();
+			
+			
 			generateAppModule();
 			generateAppComponent();
 			generateAppTemplate();
@@ -57,6 +70,7 @@ class GenerateAction extends MDAction{
 			generateCss();
 			generateRouter();
 			generateConfig();
+
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
@@ -94,8 +108,7 @@ class GenerateAction extends MDAction{
 		generator.generate();
 	}
 	
-	private void generateRepositories()
-			throws AnalyzeException {
+	private void generateRepositories()			throws AnalyzeException {
 		Package root = Application.getInstance().getProject().getModel();
 		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Repositories");
 		analyzer.prepareModel();
@@ -169,6 +182,7 @@ class GenerateAction extends MDAction{
 		generator.generate();
 	}
 	
+
 	private void generateRouter() throws AnalyzeException {
 		Package root = Application.getInstance().getProject().getModel();
 		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
@@ -202,6 +216,50 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("CssGenerator");
 		CssGenerator generator = new CssGenerator(generatorOptions);
+	}
+	
+	private void generateCRUDCommands() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Commands");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("CRUDCommandGenerator");
+		CRUDCommandGenerator generator = new CRUDCommandGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateCommandHandler() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Commands");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("CommandHandlerGenerator");
+		CommandHandlerGenerator generator = new CommandHandlerGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateQuery() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Queries");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("QueryGenerator");
+		QueryGenerator generator = new QueryGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateQueryHandler() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "Queries");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("QueryHandlerGenerator");
+		QueryHandlerGenerator generator = new QueryHandlerGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateController() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ControllerGenerator");
+		CRUDControllerGenerator generator = new CRUDControllerGenerator(generatorOptions);
 		generator.generate();
 	}
 
