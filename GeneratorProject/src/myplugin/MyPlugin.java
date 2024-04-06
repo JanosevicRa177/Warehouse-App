@@ -35,6 +35,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		commandHandlerOptions();
 		controllerOptions();
 		dtoOptions();
+		dependencyInjectionOptions();
 		
 		
 		
@@ -196,6 +197,13 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		GeneratorOptions generatorOptions = new GeneratorOptions(path +"BackendProject/BackendProject/WebApi/Dtos",
 				"dto", "templates", "{0}.cs", true, "BackendProject");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("DtoGenerator", generatorOptions);
+		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
+	}
+	
+	private void dependencyInjectionOptions() {
+		GeneratorOptions generatorOptions = new GeneratorOptions(path +"BackendProject",
+				"dependencyInjection", "templates", "{0}.cs", true, "BackendProject");
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("DependencyInjectionGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}
 

@@ -21,6 +21,7 @@ import myplugin.generator.ComponentGenerator;
 import myplugin.generator.CssGenerator;
 import myplugin.generator.ConfigGenerator;
 import myplugin.generator.DbContextGenerator;
+import myplugin.generator.DependencyInjectionGenerator;
 import myplugin.generator.HtmlGenerator;
 import myplugin.generator.RepositoryGenerator;
 import myplugin.generator.RepositoryInterfaceGenerator;
@@ -60,6 +61,7 @@ class GenerateAction extends MDAction{
 			generateQueryHandler();
 			generateController();
 			generateConfig();
+			generateDenepdencyInjection();
 			
 			
 			generateAppModule();
@@ -270,6 +272,15 @@ class GenerateAction extends MDAction{
 		analyzer.prepareModel();
 		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("DtoGenerator");
 		DtoGenerator generator = new DtoGenerator(generatorOptions);
+		generator.generate();
+	}
+	
+	private void generateDenepdencyInjection() throws AnalyzeException {
+		Package root = Application.getInstance().getProject().getModel();
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, "");
+		analyzer.prepareModel();
+		GeneratorOptions generatorOptions = ProjectOptions.getProjectOptions().getGeneratorOptions().get("DependencyInjectionGenerator");
+		DependencyInjectionGenerator generator = new DependencyInjectionGenerator(generatorOptions);
 		generator.generate();
 	}
 
