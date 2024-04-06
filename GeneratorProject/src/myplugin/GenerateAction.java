@@ -59,6 +59,7 @@ class GenerateAction extends MDAction{
 			generateQuery();
 			generateQueryHandler();
 			generateController();
+			generateConfig();
 			
 			
 			generateAppModule();
@@ -70,7 +71,6 @@ class GenerateAction extends MDAction{
 			generateHtml();
 			generateCss();
 			generateRouter();
-			generateConfig();
 			generateDto();
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());

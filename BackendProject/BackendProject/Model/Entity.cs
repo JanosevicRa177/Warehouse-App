@@ -2,5 +2,5 @@
 
 public class Entity
 {
-    public Guid Id {get; private set;}
+    public int Id {get; set;}
 }

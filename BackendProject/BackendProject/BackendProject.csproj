@@ -8,6 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
@@ -16,8 +18,48 @@
     <ItemGroup>
       <Folder Include="Api\" />
       <Folder Include="Application\" />
-      <Folder Include="Infrastructure\Configuration\" />
       <Folder Include="Infrastructure\Persistence\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Infrastructure\Configuration\**" />
+      <Compile Update="Configuration\AddressConfiguration.cs">
+        <Link>Infrastructure\Configuration\AddressConfiguration.cs</Link>
+      </Compile>
+      <Compile Update="Configuration\ItemConfiguration.cs">
+        <Link>Infrastructure\Configuration\ItemConfiguration.cs</Link>
+      </Compile>
+      <Compile Update="Configuration\ProductConfiguration.cs">
+        <Link>Infrastructure\Configuration\ProductConfiguration.cs</Link>
+      </Compile>
+      <Compile Update="Configuration\ReceiptConfiguration.cs">
+        <Link>Infrastructure\Configuration\ReceiptConfiguration.cs</Link>
+      </Compile>
+      <Compile Update="Configuration\ReceiptItemConfiguration.cs">
+        <Link>Infrastructure\Configuration\ReceiptItemConfiguration.cs</Link>
+      </Compile>
+      <Compile Update="Configuration\UserConfiguration.cs">
+        <Link>Infrastructure\Configuration\UserConfiguration.cs</Link>
+      </Compile>
+      <Compile Update="Configuration\WarehouseConfiguration.cs">
+        <Link>Infrastructure\Configuration\WarehouseConfiguration.cs</Link>
+      </Compile>
+      <Compile Remove="Configuration\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Infrastructure\Configuration\**" />
+      <EmbeddedResource Remove="Configuration\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Infrastructure\Configuration\**" />
+      <Content Remove="Configuration\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Infrastructure\Configuration\**" />
+      <None Remove="Configuration\**" />
     </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@ namespace BackendProject.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public virtual T? Find(Guid id)
+        public virtual T? Find(int id)
         {
             return _context.Set<T>().Find(id);
         }

@@ -1,6 +1,7 @@
-using BackendProject.Application.Shared;
-using BackendProject.Model.${classname};
+using BackendProject.Application.Interfaces;
+using BackendProject.Model;
 
+namespace BackendProject.Application.Queries;
 
 <#if type == "readAll">
 public sealed record ${name}() : IQuery<List<${classname}>>;
@@ -8,6 +9,6 @@ public sealed record ${name}() : IQuery<List<${classname}>>;
 
 
 <#if type == "read">
-public sealed record ${name}(Guid id) : IQuery<${classname}>;
+public sealed record ${name}(int id) : IQuery<${classname}>;
 </#if>
  

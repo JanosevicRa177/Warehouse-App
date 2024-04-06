@@ -1,50 +1,55 @@
+using BackendProject.Application.Interfaces;
 using BackendProject.Infrastructure.Interfaces;
+using BackendProject.Model;
 
+namespace BackendProject.Application.Commands;
 
 <#if type == "create">
-class ${name}Handler : ICommandHandler<${name}, Guid> {
+public class ${name}Handler : ICommandHandler<${name}, int> {
 
-	private I${classname}Repository _repository;
+	private readonly I${classname}Repository _repository;
 	
-	public ${name}(I${classname}Repository repository) {
+	public ${name}Handler (I${classname}Repository repository) {
 		_repository = repository;
 	}
 	
-	public async Task<Guid> Handle(${name} request, CancellationToken cancellationToken) {
-	   ${classname} obj = await _repository.Create(request.obj);
-	   return obj.Id;
+	public async Task<int> Handle(${name} request, CancellationToken cancellationToken) {
+	   var ${classname[0]?lower_case + classname[1..]} = await _repository.Create(request.${classname});
+	   return ${classname[0]?lower_case + classname[1..]}.Id;
 	}
 }
 </#if>
 
 
 <#if type == "update">
-class ${name}Handler : ICommandHandler<${name}, Guid> {
+public class ${name}Handler : ICommandHandler<${name}> {
 	private I${classname}Repository _repository;
 	
-	public ${name}(I${classname}Repository repository) {
+	public ${name}Handler (I${classname}Repository repository) {
 		_repository = repository;
 	}
 	
-	public async Task<Guid> Handle(${name} request, CancellationToken cancellationToken) {
-		${classname} existingObj = await _repository.Find(request.obj.Id);
-		if(obj is null) return;
-		await existingObj.Update(request.obj);
-		return existingObj.Id;
+	public async Task Handle(${name} request, CancellationToken cancellationToken) {
+		var ${classname[0]?lower_case + classname[1..]} = _repository.Find(request.${classname}.Id);
+		if(${classname[0]?lower_case + classname[1..]} is null) return;
+		${classname[0]?lower_case + classname[1..]}.Update(request.${classname});
+		_repository.Update(request.${classname});
 	}
 }
 </#if>
 
 <#if type == "delete">
-class ${name}Handler : ICommandHandler<${name}> {
+public class ${name}Handler : ICommandHandler<${name}> {
 		private I${classname}Repository _repository;
 	
-	public ${name}(I${classname}Repository repository) {
+	public ${name}Handler (I${classname}Repository repository) {
 		_repository = repository;
 	}
 	
-	public async Task<Guid> Handle(${name} request, CancellationToken cancellationToken) {
-		await _repository.Delete(request.Id);
+	public async Task Handle(${name} request, CancellationToken cancellationToken) {
+		var ${classname[0]?lower_case + classname[1..]} = _repository.Find(request.Id);
+		if(${classname[0]?lower_case + classname[1..]} is null) return;
+		_repository.Delete(${classname[0]?lower_case + classname[1..]});
 	}
 }
 </#if>

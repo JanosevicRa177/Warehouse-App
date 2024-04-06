@@ -7,12 +7,12 @@ namespace BackendProject.Model;
 [Table("item")]
 public class Item : Entity
 {  
-      public List<Product> Products {get; private set;} = new();
-      public List<ReceiptItem> ReceiptItems {get; private set;} = new();
+      public List<Product> Products {get; set;} = new();
+      public List<ReceiptItem> ReceiptItems {get; set;} = new();
       [Column("item_type")] 
-      public ItemType ItemType {get; private set;}   
+      public ItemType ItemType {get; set;}   
       [Column("item_name")] 
-      public string ItemName {get; private set;}   
+      public string ItemName {get; set;}   
 	public Item(){ }
 	public Item(ItemType itemType, string itemName) 
 	{

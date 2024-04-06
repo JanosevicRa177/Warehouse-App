@@ -7,15 +7,15 @@ namespace BackendProject.Model;
 public class Product : Entity
 {  
 	 [Column("item_id")] 
-      public Guid ItemId {get; private set;}
-      public Item Item {get; private set;}  
+      public int ItemId {get; set;}
+      public Item Item {get; set;}  
       [Column("price")] 
-      public int Price {get; private set;}   
+      public int Price {get; set;}   
 	 [Column("warehouse_id")] 
-      public Guid WarehouseId {get; private set;}
-      public Warehouse Warehouse {get; private set;}  
+      public int WarehouseId {get; set;}
+      public Warehouse Warehouse {get; set;}  
 	public Product(){ }
-	public Product(Guid itemId , int price, Guid warehouseId ) 
+	public Product(int itemId , int price, int warehouseId ) 
 	{
       	ItemId = itemId;
       	Price = price;

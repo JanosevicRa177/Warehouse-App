@@ -1,4 +1,3 @@
-using BackendProject.Infrastructure.Shared;
 using BackendProject.Infrastructure.Interfaces;
 using BackendProject.Infrastructure.Persistence;
 using BackendProject.Model;

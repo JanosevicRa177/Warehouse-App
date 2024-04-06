@@ -51,7 +51,6 @@ public class ConfigGenerator extends BasicGenerator {
 					if(clInner.getName().equals(prop.getType().getName())) {
 						for(FMProperty propInner : clInner.getProperties()) {
 							if(cl.getName().equals(propInner.getType().getName())) {
-								JOptionPane.showMessageDialog(null, cl.getName()+clInner.getName() +prop.getIsOwnerOf());
 								associations.add(new Association(propInner, prop));
 								break;
 							}

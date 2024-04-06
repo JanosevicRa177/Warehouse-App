@@ -31,21 +31,21 @@ public class ${class.name} : Entity
 	<#if property.upper == 1 >
 	<#if property.isClass && property.lower == 1>  
 	 [Column("${camelCaseToSnakeCase(property.type.name)}_id")] 
-      public Guid ${property.name}Id {get; private set;}
-      public ${property.type.name} ${property.name} {get; ${property.visibility} set;}  
+      public int ${property.name}Id {get; set;}
+      public ${property.type.name} ${property.name} {get; set;}  
     <#elseif !property.isClass> 
       [Column("${property.property.columnName}")] 
-      public ${property.type.name} ${property.name} {get; ${property.visibility} set;}   
+      public ${property.type.name} ${property.name} {get; set;}   
     </#if> 
     <#elseif property.upper == -1 > 
-      public List<${property.type.name}> ${property.name} {get; ${property.visibility} set;} = new();
+      public List<${property.type.name}> ${property.name} {get; set;} = new();
     </#if>     
 </#list>
 	public ${class.name}(){ }
 	<#assign y = 0>
 	<#list properties as property><#if property.upper == 1 ><#assign y++></#if></#list>
 <#if y != 0>
-	public ${class.name}(<#assign x = 0><#list properties as property><#if property.upper == 1 ><#if property.isClass && property.lower == 1 ><#if x != 0>, </#if><#assign x++>Guid ${property.name?uncap_first}Id <#elseif !property.isClass><#if x != 0>, </#if><#assign x++>${property.type.name} ${property.name?uncap_first}</#if></#if></#list>) 
+	public ${class.name}(<#assign x = 0><#list properties as property><#if property.upper == 1 ><#if property.isClass && property.lower == 1 ><#if x != 0>, </#if><#assign x++>int ${property.name?uncap_first}Id <#elseif !property.isClass><#if x != 0>, </#if><#assign x++>${property.type.name} ${property.name?uncap_first}</#if></#if></#list>) 
 	{
 	<#list properties as property>  
 	<#if property.upper == 1 >

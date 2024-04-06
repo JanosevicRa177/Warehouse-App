@@ -46,7 +46,7 @@ public class CRUDControllerGenerator extends BasicGenerator {
 					context.clear();
 					context.put("name", filename);
 					context.put("classname", cl.getName());
-					context.put("route", "/" + cl.getName().toLowerCase() + "s");
+					context.put("route", "/" + cl.getCrud().getPath());
 					context.put("create", create);
 					context.put("update", update);
 					context.put("delete", delete);

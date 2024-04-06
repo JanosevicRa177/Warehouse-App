@@ -1,16 +1,20 @@
+using BackendProject.Application.Interfaces;
 using BackendProject.Infrastructure.Interfaces;
+using BackendProject.Model;
+
+namespace BackendProject.Application.Queries;
 
 
 <#if type == "readAll">
-class ${name}Handler : IQueryHandler<${name}, List<${classname}>> {
+public class ${name}Handler : IQueryHandler<${name}, IEnumerable<${classname}>> {
 
-	private I${classname}Repository _repository;
+	private readonly I${classname}Repository _repository;
 	
-	public ${name}(I${classname}Repository repository) {
+	public ${name}Handler (I${classname}Repository repository) {
 		_repository = repository;
 	}
 	
-	public async Task<List<${classname}>> Handle(${name} request, CancellationToken cancellationToken) {
+	public async Task<IEnumerable<${classname}>> Handle(${name} request, CancellationToken cancellationToken) {
 	   return _repository.FindAll();
 	}
 }

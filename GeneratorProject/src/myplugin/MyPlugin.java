@@ -17,7 +17,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	String sara = "C:/Users/sara1/Desktop/master/MBRS-projekat/Warehouse-App/";
 	String ana = "C:/Users/smvul/OneDrive/Desktop/Warehouse-App/";
 	String srdjan = "C:/Fakultet/MBRS/Warehouse-App/";
-	String path = srdjan;
+	String path = dusan;
 
 	public void init() {
 		pluginDir = getDescriptor().getPluginDirectory().getPath();
@@ -193,7 +193,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	}
 	
 	private void dtoOptions() {
-		GeneratorOptions generatorOptions = new GeneratorOptions(path +"BackendProject/BackendProject/WebApi/",
+		GeneratorOptions generatorOptions = new GeneratorOptions(path +"BackendProject/BackendProject/WebApi/Dtos",
 				"dto", "templates", "{0}.cs", true, "BackendProject");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("DtoGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());

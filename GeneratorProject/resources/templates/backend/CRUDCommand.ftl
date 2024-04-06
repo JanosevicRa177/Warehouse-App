@@ -1,15 +1,18 @@
-using BackendProject.Application.Shared;
-using BackendProject.Model.${classname};
+using BackendProject.Application.Interfaces;
+using BackendProject.Model;
+
+namespace BackendProject.Application.Commands;
+
 
 
 <#if type == "create">
-public sealed record ${name}(${classname} obj) : ICommand<Guid>;
+public sealed record ${name}(${classname} ${classname}) : ICommand<int>;
 </#if>
 
 <#if type == "update">
-public sealed record ${name}(${classname} obj) : ICommand<Guid>;
+public sealed record ${name}(${classname} ${classname}) : ICommand;
 </#if>
 
 <#if type == "delete">
-public sealed record ${name}(Guid id) : ICommand;
+public sealed record ${name}(int Id) : ICommand;
 </#if>
