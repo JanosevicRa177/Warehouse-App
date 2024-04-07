@@ -16,13 +16,16 @@ export class ReceiptComponent implements OnInit {
 	
 	constructor(private receiptService: ReceiptService, private receiptItemService : ReceiptItemService, private toastr: ToastrService) { } 
 	
-	ngOnInit(): void {
+	getAll() : void {
 		this.receiptService.getReceipt().subscribe(
 			(data) => {
 				this.data = data
 			} 
 		)
-		
+	}
+	
+	ngOnInit(): void {
+		this.getAll();
 		
 		this.receiptItemService.getReceiptItem().subscribe(
 			(data) => {
@@ -35,6 +38,7 @@ export class ReceiptComponent implements OnInit {
 	delete(id: number) : void {
 	    this.receiptService.deleteReceipt(id).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('Receipt is deleted!');
 	  		},
 	  		(error : any) => {
@@ -46,6 +50,7 @@ export class ReceiptComponent implements OnInit {
 	create(entity: any) : void {
 	    this.receiptService.createReceipt(entity).subscribe(
 	  		() => {
+  				this.getAll();
 	  			this.toastr.success('Receipt created!');
 	  		},
 	  		(error : any) => {
@@ -57,6 +62,7 @@ export class ReceiptComponent implements OnInit {
 	edit(entity: any) : void {
 	    this.receiptService.updateReceipt(entity).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('Receipt edited!');
 	  		},
 	  		(error : any) => {

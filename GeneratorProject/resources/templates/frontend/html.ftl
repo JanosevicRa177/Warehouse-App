@@ -23,7 +23,7 @@
 	      <td>{{ item.${property.name?uncap_first} }}</td>
   			 </#if>
 		     <#if property.upper == -1 > 
-		  <td><div class="ids"><div *ngFor="let id of item.${property.name?uncap_first}Ids">{{ id }}</div></div></td>
+		  <td><div class="ids"><div *ngFor="let ${property.name?uncap_first} of item.${property.name?uncap_first}">{{ ${property.name?uncap_first}.id }}</div></div></td>
 		     </#if>     
 		</#list>
 		<#if class.crud.update == true >
@@ -59,7 +59,7 @@
   			 </#if>
 		     <#if property.upper == -1 > 
 		   <label for="${property.type.name?uncap_first}"><#if property.type.name?ends_with("s")>${property.type.name}es<#elseif property.type.name?ends_with("y")>${property.type.name?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name}s</#if>:</label>
-		   <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}Ids" multiple [ngModel]="selectedItem ? selectedItem.${property.name?uncap_first}Ids : null">
+		   <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}" multiple [ngModel]="selectedItem ? selectedItem.${property.name?uncap_first} : null">
 		      <option *ngFor="let item of <#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if>" [value]="item.id">{{ item.id }}</option>
 		   </select> 
 		    </#if>     

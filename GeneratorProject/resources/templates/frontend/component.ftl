@@ -22,14 +22,18 @@ export class ${class.name}Component implements OnInit {
 	
 	constructor(private ${class.name?uncap_first}Service: ${class.name}Service<#list properties as property><#if property.isClass>, private ${property.type.name?uncap_first}Service : ${property.type.name}Service</#if></#list>, private toastr: ToastrService) { } 
 	
-	ngOnInit(): void {
-		<#if class.crud.read == true >
+<#if class.crud.read == true >
+	getAll() : void {
 		this.${class.name?uncap_first}Service.get${class.name}().subscribe(
 			(data) => {
 				this.data = data
 			} 
 		)
-		</#if>
+	}
+</#if>
+	
+	ngOnInit(): void {
+		this.getAll();
 		
 		<#if class.crud.create == true || class.crud.update == true>
 		<#list properties as property>
@@ -49,6 +53,7 @@ export class ${class.name}Component implements OnInit {
 	delete(id: number) : void {
 	    this.${class.name?uncap_first}Service.delete${class.name}(id).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('${class.name} is deleted!');
 	  		},
 	  		(error : any) => {
@@ -62,6 +67,7 @@ export class ${class.name}Component implements OnInit {
 	create(entity: any) : void {
 	    this.${class.name?uncap_first}Service.create${class.name}(entity).subscribe(
 	  		() => {
+  				this.getAll();
 	  			this.toastr.success('${class.name} created!');
 	  		},
 	  		(error : any) => {
@@ -75,6 +81,7 @@ export class ${class.name}Component implements OnInit {
 	edit(entity: any) : void {
 	    this.${class.name?uncap_first}Service.update${class.name}(entity).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('${class.name} edited!');
 	  		},
 	  		(error : any) => {

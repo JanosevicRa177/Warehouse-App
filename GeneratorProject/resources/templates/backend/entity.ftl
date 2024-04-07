@@ -72,8 +72,8 @@ public class ${class.name}
 	    <#elseif property.upper == -1>
 			<#if property.isClass != true>   
 		${property.name} = update${classname}Dto.${property.name};
-			<#elseif !property.isClass>
-		${class.name?uncap_first}.${property.name} = ${property.name}Ids.Select(id => new ${property.type.name}
+			<#elseif property.isClass>
+		${property.name} = update${class.name}Dto.${property.name}Ids.Select(id => new ${property.type.name}
 		{
 			Id = id
 		}).ToList();

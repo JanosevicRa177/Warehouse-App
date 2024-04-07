@@ -27,7 +27,19 @@ public class Warehouse
       	SizeInM2 = sizeInM2;
 	}
 	public void Update(UpdateWarehouseDto updateWarehouseDto) {
+		ReceiptItems = updateWarehouseDto.ReceiptItemsIds.Select(id => new ReceiptItem
+		{
+			Id = id
+		}).ToList();
 		Name = updateWarehouseDto.Name;
 		SizeInM2 = updateWarehouseDto.SizeInM2;
+		Products = updateWarehouseDto.ProductsIds.Select(id => new Product
+		{
+			Id = id
+		}).ToList();
+		Workers = updateWarehouseDto.WorkersIds.Select(id => new User
+		{
+			Id = id
+		}).ToList();
 	}
 }

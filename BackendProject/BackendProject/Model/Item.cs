@@ -1,4 +1,3 @@
-using BackendProject.Model.Enum;
 using System.ComponentModel.DataAnnotations.Schema;   
 using BackendProject.WebApi.Dtos;
 
@@ -12,18 +11,22 @@ public class Item
 	public int Id {get; set;}
     public List<Product> Products {get; set;} = new();
     public List<ReceiptItem> ReceiptItems {get; set;} = new();
-    [Column("item_type")] 
-    public ItemType ItemType {get; set;}   
     [Column("item_name")] 
     public string ItemName {get; set;}   
 	public Item(){ }
-	public Item(ItemType itemType, string itemName) 
+	public Item(string itemName) 
 	{
-      	ItemType = itemType;
       	ItemName = itemName;
 	}
 	public void Update(UpdateItemDto updateItemDto) {
-		ItemType = updateItemDto.ItemType;
+		Products = updateItemDto.ProductsIds.Select(id => new Product
+		{
+			Id = id
+		}).ToList();
+		ReceiptItems = updateItemDto.ReceiptItemsIds.Select(id => new ReceiptItem
+		{
+			Id = id
+		}).ToList();
 		ItemName = updateItemDto.ItemName;
 	}
 }

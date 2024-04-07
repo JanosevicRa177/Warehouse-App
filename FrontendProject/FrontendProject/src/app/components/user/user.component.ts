@@ -18,13 +18,16 @@ export class UserComponent implements OnInit {
 	
 	constructor(private userService: UserService, private addressService : AddressService, private warehouseService : WarehouseService, private toastr: ToastrService) { } 
 	
-	ngOnInit(): void {
+	getAll() : void {
 		this.userService.getUser().subscribe(
 			(data) => {
 				this.data = data
 			} 
 		)
-		
+	}
+	
+	ngOnInit(): void {
+		this.getAll();
 		
 		this.addressService.getAddress().subscribe(
 			(data) => {
@@ -42,6 +45,7 @@ export class UserComponent implements OnInit {
 	delete(id: number) : void {
 	    this.userService.deleteUser(id).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('User is deleted!');
 	  		},
 	  		(error : any) => {
@@ -53,6 +57,7 @@ export class UserComponent implements OnInit {
 	create(entity: any) : void {
 	    this.userService.createUser(entity).subscribe(
 	  		() => {
+  				this.getAll();
 	  			this.toastr.success('User created!');
 	  		},
 	  		(error : any) => {
@@ -64,6 +69,7 @@ export class UserComponent implements OnInit {
 	edit(entity: any) : void {
 	    this.userService.updateUser(entity).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('User edited!');
 	  		},
 	  		(error : any) => {

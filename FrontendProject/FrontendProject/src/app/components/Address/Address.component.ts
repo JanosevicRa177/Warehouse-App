@@ -18,13 +18,16 @@ export class AddressComponent implements OnInit {
 	
 	constructor(private addressService: AddressService, private warehouseService : WarehouseService, private userService : UserService, private toastr: ToastrService) { } 
 	
-	ngOnInit(): void {
+	getAll() : void {
 		this.addressService.getAddress().subscribe(
 			(data) => {
 				this.data = data
 			} 
 		)
-		
+	}
+	
+	ngOnInit(): void {
+		this.getAll();
 		
 		this.warehouseService.getWarehouse().subscribe(
 			(data) => {
@@ -42,6 +45,7 @@ export class AddressComponent implements OnInit {
 	delete(id: number) : void {
 	    this.addressService.deleteAddress(id).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('Address is deleted!');
 	  		},
 	  		(error : any) => {
@@ -53,6 +57,7 @@ export class AddressComponent implements OnInit {
 	create(entity: any) : void {
 	    this.addressService.createAddress(entity).subscribe(
 	  		() => {
+  				this.getAll();
 	  			this.toastr.success('Address created!');
 	  		},
 	  		(error : any) => {
@@ -64,6 +69,7 @@ export class AddressComponent implements OnInit {
 	edit(entity: any) : void {
 	    this.addressService.updateAddress(entity).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('Address edited!');
 	  		},
 	  		(error : any) => {

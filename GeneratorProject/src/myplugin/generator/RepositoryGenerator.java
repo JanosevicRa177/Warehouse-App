@@ -37,6 +37,7 @@ public class RepositoryGenerator extends BasicGenerator {
 				if (out != null) {
 					context.clear();
 					context.put("class", cl);
+					context.put("properties", cl.getProperties());
 					getTemplate().process(context, out);
 					out.flush();
 				}

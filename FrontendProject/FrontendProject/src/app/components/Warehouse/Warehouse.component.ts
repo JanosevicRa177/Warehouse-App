@@ -22,13 +22,16 @@ export class WarehouseComponent implements OnInit {
 	
 	constructor(private warehouseService: WarehouseService, private receiptItemService : ReceiptItemService, private addressService : AddressService, private productService : ProductService, private userService : UserService, private toastr: ToastrService) { } 
 	
-	ngOnInit(): void {
+	getAll() : void {
 		this.warehouseService.getWarehouse().subscribe(
 			(data) => {
 				this.data = data
 			} 
 		)
-		
+	}
+	
+	ngOnInit(): void {
+		this.getAll();
 		
 		this.receiptItemService.getReceiptItem().subscribe(
 			(data) => {
@@ -56,6 +59,7 @@ export class WarehouseComponent implements OnInit {
 	delete(id: number) : void {
 	    this.warehouseService.deleteWarehouse(id).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('Warehouse is deleted!');
 	  		},
 	  		(error : any) => {
@@ -67,6 +71,7 @@ export class WarehouseComponent implements OnInit {
 	create(entity: any) : void {
 	    this.warehouseService.createWarehouse(entity).subscribe(
 	  		() => {
+  				this.getAll();
 	  			this.toastr.success('Warehouse created!');
 	  		},
 	  		(error : any) => {
@@ -78,6 +83,7 @@ export class WarehouseComponent implements OnInit {
 	edit(entity: any) : void {
 	    this.warehouseService.updateWarehouse(entity).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('Warehouse edited!');
 	  		},
 	  		(error : any) => {

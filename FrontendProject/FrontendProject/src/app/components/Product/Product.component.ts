@@ -18,13 +18,16 @@ export class ProductComponent implements OnInit {
 	
 	constructor(private productService: ProductService, private itemService : ItemService, private warehouseService : WarehouseService, private toastr: ToastrService) { } 
 	
-	ngOnInit(): void {
+	getAll() : void {
 		this.productService.getProduct().subscribe(
 			(data) => {
 				this.data = data
 			} 
 		)
-		
+	}
+	
+	ngOnInit(): void {
+		this.getAll();
 		
 		this.itemService.getItem().subscribe(
 			(data) => {
@@ -42,6 +45,7 @@ export class ProductComponent implements OnInit {
 	delete(id: number) : void {
 	    this.productService.deleteProduct(id).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('Product is deleted!');
 	  		},
 	  		(error : any) => {
@@ -53,6 +57,7 @@ export class ProductComponent implements OnInit {
 	create(entity: any) : void {
 	    this.productService.createProduct(entity).subscribe(
 	  		() => {
+  				this.getAll();
 	  			this.toastr.success('Product created!');
 	  		},
 	  		(error : any) => {
@@ -64,6 +69,7 @@ export class ProductComponent implements OnInit {
 	edit(entity: any) : void {
 	    this.productService.updateProduct(entity).subscribe(
 	  		() => {
+	  			this.getAll();
 	  			this.toastr.success('Product edited!');
 	  		},
 	  		(error : any) => {

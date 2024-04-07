@@ -18,6 +18,10 @@ public class Receipt
       	FullPrice = fullPrice;
 	}
 	public void Update(UpdateReceiptDto updateReceiptDto) {
+		ReceiptItems = updateReceiptDto.ReceiptItemsIds.Select(id => new ReceiptItem
+		{
+			Id = id
+		}).ToList();
 		FullPrice = updateReceiptDto.FullPrice;
 	}
 }
