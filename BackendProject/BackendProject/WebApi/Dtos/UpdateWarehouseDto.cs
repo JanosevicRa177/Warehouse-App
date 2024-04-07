@@ -7,7 +7,6 @@ namespace BackendProject.WebApi.Dtos;
 public class UpdateWarehouseDto {
       public List<int> ReceiptItemsIds {get; set;} = new();
       public int AddressId {get; set;}
-      public Address Address {get; set;}  
       public string Name {get; set;}   
       public int SizeInM2 {get; set;}   
       public List<int> ProductsIds {get; set;} = new();

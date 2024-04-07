@@ -8,7 +8,7 @@ public class ReadOneItemQueryHandler : IQueryHandler<ReadOneItemQuery, Item> {
 
 	private readonly IItemRepository _repository;
 	
-	public ReadOneItemQueryHandler (IItemRepository repository) {
+	public ReadOneItemQueryHandler(IItemRepository repository) {
 		_repository = repository;
 	}
 	

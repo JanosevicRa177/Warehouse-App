@@ -28,11 +28,9 @@ public class ReceiptItemController: ControllerBase
 	
 	[HttpPatch]    
 	[Route("/receipt-item/{id}")]
-	public async Task<IActionResult> Update([FromBody] UpdateReceiptItemDto updateReceiptItemDto,int id)
+	public async Task<IActionResult> Update([FromBody] UpdateReceiptItemDto updateReceiptItemDto, int id)
 	{
-		var receiptItem = updateReceiptItemDto.ToEntity();
-		receiptItem.Id = id;
-	    await _sender.Send(new UpdateReceiptItemCommand(receiptItem));
+	    await _sender.Send(new UpdateReceiptItemCommand(updateReceiptItemDto, id));
 	    return Ok();
 	}
 	
@@ -48,14 +46,14 @@ public class ReceiptItemController: ControllerBase
 	[Route("/receipt-item")]
 	public async Task<IActionResult> ReadAll()
 	{
-	    await _sender.Send(new ReadAllReceiptItemsQuery());
-	    return Ok();
+	    var receiptItems =  await _sender.Send(new ReadAllReceiptItemsQuery());
+	    return Ok(receiptItems);
 	}
 	[HttpGet]    
 	[Route("/receipt-item/{id}")]
 	public async Task<IActionResult> ReadOne(int id)
 	{
-	    await _sender.Send(new ReadOneReceiptItemQuery(id));
-	    return Ok();
+	    var receiptItem = await _sender.Send(new ReadOneReceiptItemQuery(id));
+	    return Ok(receiptItem);
 	}  
 }

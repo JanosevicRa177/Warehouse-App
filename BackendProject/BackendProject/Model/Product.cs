@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;   
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Model;
 
@@ -23,9 +24,7 @@ public class Product
       	Price = price;
       	WarehouseId = warehouseId;
 	}
-
-
-	public void Update(Product entity) {
-		Price = entity.Price;
+	public void Update(UpdateProductDto updateProductDto) {
+		Price = updateProductDto.Price;
 	}
 }

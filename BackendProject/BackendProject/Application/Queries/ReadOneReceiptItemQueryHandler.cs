@@ -8,7 +8,7 @@ public class ReadOneReceiptItemQueryHandler : IQueryHandler<ReadOneReceiptItemQu
 
 	private readonly IReceiptItemRepository _repository;
 	
-	public ReadOneReceiptItemQueryHandler (IReceiptItemRepository repository) {
+	public ReadOneReceiptItemQueryHandler(IReceiptItemRepository repository) {
 		_repository = repository;
 	}
 	

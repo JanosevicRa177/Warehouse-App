@@ -2,6 +2,7 @@
 using BackendProject.Model.Enum;
 </#if>
 using System.ComponentModel.DataAnnotations.Schema;   
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.${class.typePackage};
 
@@ -60,14 +61,23 @@ public class ${class.name}
 	</#list>
 	}
 </#if>
-
-
-	public void Update(${class.name} entity) {
+	public void Update(Update${class.name}Dto update${class.name}Dto) {
 		<#list properties as property>  
 		<#if property.upper == 1 >
-		<#if property.isClass != true>   
-		${property.name} = entity.${property.name};
-	    </#if>
+			<#if property.isClass != true>   
+		${property.name} = update${class.name}Dto.${property.name};
+			<#elseif !property.isClass>
+		${property.name}Id = update${class.name}Dto.${property.name}Id;
+		    </#if>
+	    <#elseif property.upper == -1>
+			<#if property.isClass != true>   
+		${property.name} = update${classname}Dto.${property.name};
+			<#elseif !property.isClass>
+		${class.name?uncap_first}.${property.name} = ${property.name}Ids.Select(id => new ${property.type.name}
+		{
+			Id = id
+		}).ToList();
+		    </#if>
 	    </#if>  
 		</#list>
 	}

@@ -15,7 +15,7 @@ export class ProductService {
   }
   
   updateProduct(data: any): Observable<any> {
-  	return this.http.put<any>('http://localhost:8000/product/' + data.id, data);
+  	return this.http.patch<any>('http://localhost:8000/product/' + data.id, data);
   }
   
   createProduct(data: any): Observable<any> {

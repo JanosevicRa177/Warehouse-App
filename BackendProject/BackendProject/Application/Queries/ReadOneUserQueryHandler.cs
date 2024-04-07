@@ -8,7 +8,7 @@ public class ReadOneUserQueryHandler : IQueryHandler<ReadOneUserQuery, User> {
 
 	private readonly IUserRepository _repository;
 	
-	public ReadOneUserQueryHandler (IUserRepository repository) {
+	public ReadOneUserQueryHandler(IUserRepository repository) {
 		_repository = repository;
 	}
 	

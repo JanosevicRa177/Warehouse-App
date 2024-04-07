@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;   
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Model;
 
@@ -24,12 +25,10 @@ public class Address
       	Street = street;
       	StreetNumber = streetNumber;
 	}
-
-
-	public void Update(Address entity) {
-		Country = entity.Country;
-		City = entity.City;
-		Street = entity.Street;
-		StreetNumber = entity.StreetNumber;
+	public void Update(UpdateAddressDto updateAddressDto) {
+		Country = updateAddressDto.Country;
+		City = updateAddressDto.City;
+		Street = updateAddressDto.Street;
+		StreetNumber = updateAddressDto.StreetNumber;
 	}
 }

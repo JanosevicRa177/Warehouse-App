@@ -18,7 +18,7 @@ export class ${class.name}Service {
   
   <#if class.crud.update == true >
   update${class.name}(data: any): Observable<any> {
-  	return this.http.put<any>('http://localhost:8000/${class.crud.path}/' + data.id, data);
+  	return this.http.patch<any>('http://localhost:8000/${class.crud.path}/' + data.id, data);
   }
   </#if>
   

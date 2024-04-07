@@ -1,6 +1,6 @@
 using BackendProject.Application.Interfaces;
-using BackendProject.Model;
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Application.Commands;
 
-public sealed record UpdateAddressCommand(Address Address) : ICommand;
+public sealed record UpdateAddressCommand(UpdateAddressDto UpdateAddressDto, int Id) : ICommand;

@@ -12,9 +12,9 @@ public class UpdateWarehouseCommandHandler : ICommandHandler<UpdateWarehouseComm
 	}
 	
 	public async Task Handle(UpdateWarehouseCommand request, CancellationToken cancellationToken) {
-		var warehouse = _repository.Find(request.Warehouse.Id);
+		var warehouse = _repository.Find(request.Id);
 		if(warehouse is null) return;
-		warehouse.Update(request.Warehouse);
-		_repository.Update(request.Warehouse);
+		warehouse.Update(request.UpdateWarehouseDto);
+		_repository.Update(warehouse);
 	}
 }

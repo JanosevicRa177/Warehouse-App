@@ -28,10 +28,10 @@ public class ${name}Handler : ICommandHandler<${name}> {
 	}
 	
 	public async Task Handle(${name} request, CancellationToken cancellationToken) {
-		var ${classname[0]?lower_case + classname[1..]} = _repository.Find(request.${classname}.Id);
+		var ${classname[0]?lower_case + classname[1..]} = _repository.Find(request.Id);
 		if(${classname[0]?lower_case + classname[1..]} is null) return;
-		${classname[0]?lower_case + classname[1..]}.Update(request.${classname});
-		_repository.Update(request.${classname});
+		${classname[0]?lower_case + classname[1..]}.Update(request.Update${classname}Dto);
+		_repository.Update(${classname[0]?lower_case + classname[1..]});
 	}
 }
 </#if>

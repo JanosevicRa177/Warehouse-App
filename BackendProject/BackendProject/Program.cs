@@ -48,8 +48,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services
     .AddApplication();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
 var app = builder.Build();
 
 app.UseCors(myAllowSpecificOrigins);

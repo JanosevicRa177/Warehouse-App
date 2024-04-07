@@ -3,5 +3,5 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Queries;
 
-public sealed record ReadAllProductsQuery() : IQuery<List<Product>>;
+public sealed record ReadAllProductsQuery() : IQuery<IEnumerable<Product>>;
  

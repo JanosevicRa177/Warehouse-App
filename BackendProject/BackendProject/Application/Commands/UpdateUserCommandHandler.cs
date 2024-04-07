@@ -12,9 +12,9 @@ public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand> {
 	}
 	
 	public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken) {
-		var user = _repository.Find(request.User.Id);
+		var user = _repository.Find(request.Id);
 		if(user is null) return;
-		user.Update(request.User);
-		_repository.Update(request.User);
+		user.Update(request.UpdateUserDto);
+		_repository.Update(user);
 	}
 }

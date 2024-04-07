@@ -8,7 +8,7 @@ public class ReadAllProductsQueryHandler : IQueryHandler<ReadAllProductsQuery, I
 
 	private readonly IProductRepository _repository;
 	
-	public ReadAllProductsQueryHandler (IProductRepository repository) {
+	public ReadAllProductsQueryHandler(IProductRepository repository) {
 		_repository = repository;
 	}
 	

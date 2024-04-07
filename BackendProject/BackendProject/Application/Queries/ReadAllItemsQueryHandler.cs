@@ -8,7 +8,7 @@ public class ReadAllItemsQueryHandler : IQueryHandler<ReadAllItemsQuery, IEnumer
 
 	private readonly IItemRepository _repository;
 	
-	public ReadAllItemsQueryHandler (IItemRepository repository) {
+	public ReadAllItemsQueryHandler(IItemRepository repository) {
 		_repository = repository;
 	}
 	

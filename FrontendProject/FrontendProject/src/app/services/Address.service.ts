@@ -15,7 +15,7 @@ export class AddressService {
   }
   
   updateAddress(data: any): Observable<any> {
-  	return this.http.put<any>('http://localhost:8000/address/' + data.id, data);
+  	return this.http.patch<any>('http://localhost:8000/address/' + data.id, data);
   }
   
   createAddress(data: any): Observable<any> {

@@ -8,7 +8,7 @@ public class ReadOneWarehouseQueryHandler : IQueryHandler<ReadOneWarehouseQuery,
 
 	private readonly IWarehouseRepository _repository;
 	
-	public ReadOneWarehouseQueryHandler (IWarehouseRepository repository) {
+	public ReadOneWarehouseQueryHandler(IWarehouseRepository repository) {
 		_repository = repository;
 	}
 	

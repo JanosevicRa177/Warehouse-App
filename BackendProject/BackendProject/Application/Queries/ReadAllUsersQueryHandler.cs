@@ -8,7 +8,7 @@ public class ReadAllUsersQueryHandler : IQueryHandler<ReadAllUsersQuery, IEnumer
 
 	private readonly IUserRepository _repository;
 	
-	public ReadAllUsersQueryHandler (IUserRepository repository) {
+	public ReadAllUsersQueryHandler(IUserRepository repository) {
 		_repository = repository;
 	}
 	
