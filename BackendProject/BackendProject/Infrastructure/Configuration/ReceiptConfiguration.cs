@@ -8,6 +8,9 @@ public class ReceiptConfiguration : IEntityTypeConfiguration<Receipt>
 {
     public void Configure(EntityTypeBuilder<Receipt> builder)
     {
+		builder
+		    .Property(x => x.Id)
+		    .ValueGeneratedOnAdd();
         builder.HasMany(x => x.ReceiptItems)
         .WithOne(x => x.Receipts) 
         .HasForeignKey(x => x.ReceiptsId); 

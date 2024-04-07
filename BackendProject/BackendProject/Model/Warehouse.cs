@@ -4,18 +4,20 @@ namespace BackendProject.Model;
 
 
 [Table("warehouse")]
-public class Warehouse : Entity
+public class Warehouse
 {  
-      public List<ReceiptItem> ReceiptItems {get; set;} = new();
-	 [Column("address_id")] 
-      public int AddressId {get; set;}
-      public Address Address {get; set;}  
-      [Column("warehouse_name")] 
-      public string Name {get; set;}   
-      [Column("warehouse_size")] 
-      public int SizeInM2 {get; set;}   
-      public List<Product> Products {get; set;} = new();
-      public List<User> Workers {get; set;} = new();
+	[Column("id")] 
+	public int Id {get; set;}
+    public List<ReceiptItem> ReceiptItems {get; set;} = new();
+	[Column("address_id")] 
+    public int AddressId {get; set;}
+    public Address Address {get; set;}  
+    [Column("warehouse_name")] 
+    public string Name {get; set;}   
+    [Column("warehouse_size")] 
+    public int SizeInM2 {get; set;}   
+    public List<Product> Products {get; set;} = new();
+    public List<User> Workers {get; set;} = new();
 	public Warehouse(){ }
 	public Warehouse(int addressId , string name, int sizeInM2) 
 	{
@@ -25,8 +27,8 @@ public class Warehouse : Entity
 	}
 
 
-public void Update(Warehouse entity) {
-	Name = entity.Name;
-	SizeInM2 = entity.SizeInM2;
-}
+	public void Update(Warehouse entity) {
+		Name = entity.Name;
+		SizeInM2 = entity.SizeInM2;
+	}
 }

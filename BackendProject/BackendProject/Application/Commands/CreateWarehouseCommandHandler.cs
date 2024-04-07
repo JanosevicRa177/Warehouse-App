@@ -17,6 +17,3 @@ public class CreateWarehouseCommandHandler : ICommandHandler<CreateWarehouseComm
 	   return warehouse.Id;
 	}
 }
-
-
-

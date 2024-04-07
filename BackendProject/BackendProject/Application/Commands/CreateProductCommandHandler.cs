@@ -17,6 +17,3 @@ public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand,
 	   return product.Id;
 	}
 }
-
-
-

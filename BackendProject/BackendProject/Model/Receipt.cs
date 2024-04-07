@@ -4,11 +4,13 @@ namespace BackendProject.Model;
 
 
 [Table("receipt")]
-public class Receipt : Entity
+public class Receipt
 {  
-      public List<ReceiptItem> ReceiptItems {get; set;} = new();
-      [Column("full_price")] 
-      public int FullPrice {get; set;}   
+	[Column("id")] 
+	public int Id {get; set;}
+    public List<ReceiptItem> ReceiptItems {get; set;} = new();
+    [Column("full_price")] 
+    public int FullPrice {get; set;}   
 	public Receipt(){ }
 	public Receipt(int fullPrice) 
 	{
@@ -16,7 +18,7 @@ public class Receipt : Entity
 	}
 
 
-public void Update(Receipt entity) {
-	FullPrice = entity.FullPrice;
-}
+	public void Update(Receipt entity) {
+		FullPrice = entity.FullPrice;
+	}
 }

@@ -10,21 +10,27 @@
     <ItemGroup>
         <PackageReference Include="FluentResults" Version="3.15.2" />
         <PackageReference Include="FluentValidation" Version="11.8.0" />
-        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+        <PackageReference Include="MediatR" Version="12.1.1" />
         <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Npgsql" Version="7.0.6" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Api\" />
       <Folder Include="Application\" />
-      <Folder Include="Infrastructure\Persistence\" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Infrastructure\Configuration\**" />
       <Compile Update="Configuration\AddressConfiguration.cs">
         <Link>Infrastructure\Configuration\AddressConfiguration.cs</Link>
       </Compile>
@@ -46,21 +52,19 @@
       <Compile Update="Configuration\WarehouseConfiguration.cs">
         <Link>Infrastructure\Configuration\WarehouseConfiguration.cs</Link>
       </Compile>
+      <Compile Include="Configuration\AddressConfiguration.cs" />
       <Compile Remove="Configuration\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="Infrastructure\Configuration\**" />
       <EmbeddedResource Remove="Configuration\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <Content Remove="Infrastructure\Configuration\**" />
       <Content Remove="Configuration\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Infrastructure\Configuration\**" />
       <None Remove="Configuration\**" />
     </ItemGroup>
 

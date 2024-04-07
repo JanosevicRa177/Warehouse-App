@@ -5,14 +5,16 @@ namespace BackendProject.Model;
 
 
 [Table("item")]
-public class Item : Entity
+public class Item
 {  
-      public List<Product> Products {get; set;} = new();
-      public List<ReceiptItem> ReceiptItems {get; set;} = new();
-      [Column("item_type")] 
-      public ItemType ItemType {get; set;}   
-      [Column("item_name")] 
-      public string ItemName {get; set;}   
+	[Column("id")] 
+	public int Id {get; set;}
+    public List<Product> Products {get; set;} = new();
+    public List<ReceiptItem> ReceiptItems {get; set;} = new();
+    [Column("item_type")] 
+    public ItemType ItemType {get; set;}   
+    [Column("item_name")] 
+    public string ItemName {get; set;}   
 	public Item(){ }
 	public Item(ItemType itemType, string itemName) 
 	{
@@ -21,8 +23,8 @@ public class Item : Entity
 	}
 
 
-public void Update(Item entity) {
-	ItemType = entity.ItemType;
-	ItemName = entity.ItemName;
-}
+	public void Update(Item entity) {
+		ItemType = entity.ItemType;
+		ItemName = entity.ItemName;
+	}
 }

@@ -25,20 +25,22 @@ namespace BackendProject.${class.typePackage};
 </#function>
 
 [Table("${class.entity.tableName}")]
-public class ${class.name} : Entity
+public class ${class.name}
 {  
+	[Column("id")] 
+	public int Id {get; set;}
 <#list properties as property>
 	<#if property.upper == 1 >
 	<#if property.isClass && property.lower == 1>  
-	 [Column("${camelCaseToSnakeCase(property.type.name)}_id")] 
-      public int ${property.name}Id {get; set;}
-      public ${property.type.name} ${property.name} {get; set;}  
+	[Column("${camelCaseToSnakeCase(property.type.name)}_id")] 
+    public int ${property.name}Id {get; set;}
+    public ${property.type.name} ${property.name} {get; set;}  
     <#elseif !property.isClass> 
-      [Column("${property.property.columnName}")] 
-      public ${property.type.name} ${property.name} {get; set;}   
+    [Column("${property.property.columnName}")] 
+    public ${property.type.name} ${property.name} {get; set;}   
     </#if> 
     <#elseif property.upper == -1 > 
-      public List<${property.type.name}> ${property.name} {get; set;} = new();
+    public List<${property.type.name}> ${property.name} {get; set;} = new();
     </#if>     
 </#list>
 	public ${class.name}(){ }
@@ -60,13 +62,13 @@ public class ${class.name} : Entity
 </#if>
 
 
-public void Update(${class.name} entity) {
-	<#list properties as property>  
-	<#if property.upper == 1 >
-	<#if property.isClass != true>   
-	${property.name} = entity.${property.name};
-    </#if>
-    </#if>  
-	</#list>
-}
+	public void Update(${class.name} entity) {
+		<#list properties as property>  
+		<#if property.upper == 1 >
+		<#if property.isClass != true>   
+		${property.name} = entity.${property.name};
+	    </#if>
+	    </#if>  
+		</#list>
+	}
 }

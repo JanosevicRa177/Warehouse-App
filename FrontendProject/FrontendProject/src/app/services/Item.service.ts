@@ -11,18 +11,18 @@ export class ItemService {
   constructor(private http: HttpClient) { } 
   
   getItem(): Observable<any[]> {
-  	return this.http.get<any[]>('https://jsonplaceholder.typicode.com/todos');
+  	return this.http.get<any[]>('http://localhost:8000/item/');
   }
   
   updateItem(data: any): Observable<any> {
-  	return this.http.put<any>('https://jsonplaceholder.typicode.com/todos', data);
+  	return this.http.put<any>('http://localhost:8000/item/' + data.id, data);
   }
   
   createItem(data: any): Observable<any> {
-  	return this.http.post<any>('https://jsonplaceholder.typicode.com/todos', data);
+  	return this.http.post<any>('http://localhost:8000/item/', data);
   }
   
   deleteItem(id: number): Observable<any> {
-  	return this.http.delete<any>('https://jsonplaceholder.typicode.com/todos');
+  	return this.http.delete<any>('http://localhost:8000/item/' + id);
   }
 }

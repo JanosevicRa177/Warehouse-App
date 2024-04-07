@@ -4,7 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Queries;
 
-
 public class ReadAllReceiptsQueryHandler : IQueryHandler<ReadAllReceiptsQuery, IEnumerable<Receipt>> {
 
 	private readonly IReceiptRepository _repository;

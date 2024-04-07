@@ -19,8 +19,6 @@ public class ${name}Handler : ICommandHandler<${name}, int> {
 	}
 }
 </#if>
-
-
 <#if type == "update">
 public class ${name}Handler : ICommandHandler<${name}> {
 	private I${classname}Repository _repository;
@@ -37,7 +35,6 @@ public class ${name}Handler : ICommandHandler<${name}> {
 	}
 }
 </#if>
-
 <#if type == "delete">
 public class ${name}Handler : ICommandHandler<${name}> {
 		private I${classname}Repository _repository;

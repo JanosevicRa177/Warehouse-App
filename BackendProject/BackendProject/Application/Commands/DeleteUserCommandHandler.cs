@@ -4,9 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Commands;
 
-
-
-
 public class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand> {
 		private IUserRepository _repository;
 	

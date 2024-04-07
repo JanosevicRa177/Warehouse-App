@@ -4,8 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Commands;
 
-
-
 public class UpdateAddressCommandHandler : ICommandHandler<UpdateAddressCommand> {
 	private IAddressRepository _repository;
 	
@@ -20,4 +18,3 @@ public class UpdateAddressCommandHandler : ICommandHandler<UpdateAddressCommand>
 		_repository.Update(request.Address);
 	}
 }
-

@@ -4,10 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BackendProject.Infrastructure.Configuration;
 
-public class ReceiptItemConfiguration : IEntityTypeConfiguration<ReceiptItem>
+public class AddressConfiguration : IEntityTypeConfiguration<Address>
 {
-    public void Configure(EntityTypeBuilder<ReceiptItem> builder)
+    public void Configure(EntityTypeBuilder<Address> builder)
     {
+		builder
+		    .Property(x => x.Id)
+		    .ValueGeneratedOnAdd();
         
     }
 }

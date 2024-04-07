@@ -8,6 +8,9 @@ public class WarehouseConfiguration : IEntityTypeConfiguration<Warehouse>
 {
     public void Configure(EntityTypeBuilder<Warehouse> builder)
     {
+		builder
+		    .Property(x => x.Id)
+		    .ValueGeneratedOnAdd();
         builder.HasMany(x => x.ReceiptItems)
         .WithOne(x => x.Warehouse) 
         .HasForeignKey(x => x.WarehouseId); 

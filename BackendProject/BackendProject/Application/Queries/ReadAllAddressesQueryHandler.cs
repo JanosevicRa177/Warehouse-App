@@ -4,16 +4,15 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Queries;
 
-
-public class ReadAllAddresssQueryHandler : IQueryHandler<ReadAllAddresssQuery, IEnumerable<Address>> {
+public class ReadAllAddressesQueryHandler : IQueryHandler<ReadAllAddressesQuery, IEnumerable<Address>> {
 
 	private readonly IAddressRepository _repository;
 	
-	public ReadAllAddresssQueryHandler (IAddressRepository repository) {
+	public ReadAllAddressesQueryHandler (IAddressRepository repository) {
 		_repository = repository;
 	}
 	
-	public async Task<IEnumerable<Address>> Handle(ReadAllAddresssQuery request, CancellationToken cancellationToken) {
+	public async Task<IEnumerable<Address>> Handle(ReadAllAddressesQuery request, CancellationToken cancellationToken) {
 	   return _repository.FindAll();
 	}
 }

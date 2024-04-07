@@ -53,7 +53,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	
 	
 	private void configOptions() {
-		GeneratorOptions generatorOptions = new GeneratorOptions(path +"BackendProject/BackendProject", "config", "templates", "{0}.cs", true, "BackendProject");
+		GeneratorOptions generatorOptions = new GeneratorOptions(path +"BackendProject/BackendProject/Infrastructure/", "config", "templates", "{0}.cs", true, "BackendProject");
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("ConfigGenerator", generatorOptions);
 		generatorOptions.setTemplateDir(pluginDir + File.separator + generatorOptions.getTemplateDir());
 	}

@@ -17,6 +17,3 @@ public class CreateAddressCommandHandler : ICommandHandler<CreateAddressCommand,
 	   return address.Id;
 	}
 }
-
-
-

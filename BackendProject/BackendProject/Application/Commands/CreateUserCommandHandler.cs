@@ -17,6 +17,3 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, int> 
 	   return user.Id;
 	}
 }
-
-
-

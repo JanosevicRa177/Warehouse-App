@@ -8,6 +8,9 @@ public class ${class.name}Configuration : IEntityTypeConfiguration<${class.name}
 {
     public void Configure(EntityTypeBuilder<${class.name}> builder)
     {
+		builder
+		    .Property(x => x.Id)
+		    .ValueGeneratedOnAdd();
 <#list associations as association>
 <#if association.notOwner.isOwnerOf>
         builder.<#if association.notOwner.upper == -1 >HasMany(x => x.${association.notOwner.name})<#else>HasOne(x => x.${association.notOwner.name})</#if>

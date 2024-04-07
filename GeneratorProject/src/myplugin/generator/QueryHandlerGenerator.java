@@ -12,6 +12,7 @@ import freemarker.template.TemplateException;
 import myplugin.generator.fmmodel.FMClass;
 import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.options.GeneratorOptions;
+import myplugin.generator.options.PluralUtil;
 
 public class QueryHandlerGenerator extends BasicGenerator {
 
@@ -35,9 +36,11 @@ public class QueryHandlerGenerator extends BasicGenerator {
 			}
 			
 			if(cl.getCrud().getRead() != null) {
-				String name = "ReadAll" + cl.getName() + "sQuery";
+				String name = "ReadAll" + PluralUtil.translateToPlural(cl.getName()) + "Query";
 				write(name, cl, "readAll");
-			}					
+			}
+			String name = "ReadOne" + cl.getName() + "Query";
+			write(name, cl, "read");
 		}
 	}
 	

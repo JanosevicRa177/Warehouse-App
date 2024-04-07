@@ -4,7 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Queries;
 
-
 public class ReadAllWarehousesQueryHandler : IQueryHandler<ReadAllWarehousesQuery, IEnumerable<Warehouse>> {
 
 	private readonly IWarehouseRepository _repository;

@@ -4,9 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Commands;
 
-
-
-
 public class DeleteAddressCommandHandler : ICommandHandler<DeleteAddressCommand> {
 		private IAddressRepository _repository;
 	

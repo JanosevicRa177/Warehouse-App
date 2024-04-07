@@ -4,9 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Commands;
 
-
-
-
 public class DeleteWarehouseCommandHandler : ICommandHandler<DeleteWarehouseCommand> {
 		private IWarehouseRepository _repository;
 	

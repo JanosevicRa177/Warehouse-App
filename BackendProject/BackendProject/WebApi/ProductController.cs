@@ -16,9 +16,7 @@ public class ProductController: ControllerBase
     public ProductController(ISender sender) {
     	_sender = sender;
     }
-
-
-
+    
 	[HttpPost]    
 	[Route("/product")]
 	public async Task<IActionResult> Create([FromBody] CreateProductDto createProductDto)
@@ -29,10 +27,12 @@ public class ProductController: ControllerBase
 	}
 	
 	[HttpPatch]    
-	[Route("/product")]
-	public async Task<IActionResult> Update([FromBody] UpdateProductDto updateProductDto)
+	[Route("/product/{id}")]
+	public async Task<IActionResult> Update([FromBody] UpdateProductDto updateProductDto,int id)
 	{
-	    await _sender.Send(new UpdateProductCommand(updateProductDto.ToEntity()));
+		var product = updateProductDto.ToEntity();
+		product.Id = id;
+	    await _sender.Send(new UpdateProductCommand(product));
 	    return Ok();
 	}
 	
@@ -51,4 +51,11 @@ public class ProductController: ControllerBase
 	    await _sender.Send(new ReadAllProductsQuery());
 	    return Ok();
 	}
+	[HttpGet]    
+	[Route("/product/{id}")]
+	public async Task<IActionResult> ReadOne(int id)
+	{
+	    await _sender.Send(new ReadOneProductQuery(id));
+	    return Ok();
+	}  
 }

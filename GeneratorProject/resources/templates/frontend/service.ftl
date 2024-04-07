@@ -12,25 +12,25 @@ export class ${class.name}Service {
   
   <#if class.crud.read == true >
   get${class.name}(): Observable<any[]> {
-  	return this.http.get<any[]>('https://jsonplaceholder.typicode.com/todos');
+  	return this.http.get<any[]>('http://localhost:8000/${class.crud.path}/');
   }
   </#if>  
   
   <#if class.crud.update == true >
   update${class.name}(data: any): Observable<any> {
-  	return this.http.put<any>('https://jsonplaceholder.typicode.com/todos', data);
+  	return this.http.put<any>('http://localhost:8000/${class.crud.path}/' + data.id, data);
   }
   </#if>
   
   <#if class.crud.create == true >
   create${class.name}(data: any): Observable<any> {
-  	return this.http.post<any>('https://jsonplaceholder.typicode.com/todos', data);
+  	return this.http.post<any>('http://localhost:8000/${class.crud.path}/', data);
   }
   </#if>
   
   <#if class.crud.delete == true >
   delete${class.name}(id: number): Observable<any> {
-  	return this.http.delete<any>('https://jsonplaceholder.typicode.com/todos');
+  	return this.http.delete<any>('http://localhost:8000/${class.crud.path}/' + id);
   }
   </#if>
 }

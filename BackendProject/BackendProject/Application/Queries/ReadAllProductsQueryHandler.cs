@@ -4,7 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Queries;
 
-
 public class ReadAllProductsQueryHandler : IQueryHandler<ReadAllProductsQuery, IEnumerable<Product>> {
 
 	private readonly IProductRepository _repository;

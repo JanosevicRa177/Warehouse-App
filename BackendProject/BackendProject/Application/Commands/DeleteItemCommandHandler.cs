@@ -4,9 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Commands;
 
-
-
-
 public class DeleteItemCommandHandler : ICommandHandler<DeleteItemCommand> {
 		private IItemRepository _repository;
 	

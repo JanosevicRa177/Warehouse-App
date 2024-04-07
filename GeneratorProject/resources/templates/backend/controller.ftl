@@ -16,9 +16,7 @@ public class ${name}: ControllerBase
     public ${name}(ISender sender) {
     	_sender = sender;
     }
-
-
-
+    
 	<#if create == true>
 	[HttpPost]    
 	[Route("${route}")]
@@ -32,10 +30,12 @@ public class ${name}: ControllerBase
 	
 	<#if update == true>
 	[HttpPatch]    
-	[Route("${route}")]
-	public async Task<IActionResult> Update([FromBody] Update${classname}Dto update${classname}Dto)
+	[Route("${route}/{id}")]
+	public async Task<IActionResult> Update([FromBody] Update${classname}Dto update${classname}Dto,int id)
 	{
-	    await _sender.Send(new Update${classname}Command(update${classname}Dto.ToEntity()));
+		var ${classname[0]?lower_case + classname[1..]} = update${classname}Dto.ToEntity();
+		${classname[0]?lower_case + classname[1..]}.Id = id;
+	    await _sender.Send(new Update${classname}Command(${classname[0]?lower_case + classname[1..]}));
 	    return Ok();
 	}
 	</#if>    
@@ -55,8 +55,15 @@ public class ${name}: ControllerBase
 	[Route("${route}")]
 	public async Task<IActionResult> ReadAll()
 	{
-	    await _sender.Send(new ReadAll${classname}sQuery());
+	    await _sender.Send(new ReadAll<#if classname?ends_with("s")>${classname}es<#elseif classname?ends_with("y")>${classname?substring(0, classname?length - 1)}ies<#else>${classname}s</#if>Query());
 	    return Ok();
 	}
-	</#if>    
+	</#if>  
+	[HttpGet]    
+	[Route("${route}/{id}")]
+	public async Task<IActionResult> ReadOne(int id)
+	{
+	    await _sender.Send(new ReadOne${classname}Query(id));
+	    return Ok();
+	}  
 }

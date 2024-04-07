@@ -17,6 +17,3 @@ public class CreateItemCommandHandler : ICommandHandler<CreateItemCommand, int> 
 	   return item.Id;
 	}
 }
-
-
-

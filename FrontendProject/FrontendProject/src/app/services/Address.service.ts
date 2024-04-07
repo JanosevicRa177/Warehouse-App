@@ -11,18 +11,18 @@ export class AddressService {
   constructor(private http: HttpClient) { } 
   
   getAddress(): Observable<any[]> {
-  	return this.http.get<any[]>('https://jsonplaceholder.typicode.com/todos');
+  	return this.http.get<any[]>('http://localhost:8000/address/');
   }
   
   updateAddress(data: any): Observable<any> {
-  	return this.http.put<any>('https://jsonplaceholder.typicode.com/todos', data);
+  	return this.http.put<any>('http://localhost:8000/address/' + data.id, data);
   }
   
   createAddress(data: any): Observable<any> {
-  	return this.http.post<any>('https://jsonplaceholder.typicode.com/todos', data);
+  	return this.http.post<any>('http://localhost:8000/address/', data);
   }
   
   deleteAddress(id: number): Observable<any> {
-  	return this.http.delete<any>('https://jsonplaceholder.typicode.com/todos');
+  	return this.http.delete<any>('http://localhost:8000/address/' + id);
   }
 }

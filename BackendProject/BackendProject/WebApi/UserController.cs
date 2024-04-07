@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BackendProject.WebApi;
 
 [ApiController]
-[Route("/")]
+[Route("/user")]
 public class UserController: ControllerBase
 {
 
@@ -16,11 +16,9 @@ public class UserController: ControllerBase
     public UserController(ISender sender) {
     	_sender = sender;
     }
-
-
-
+    
 	[HttpPost]    
-	[Route("/")]
+	[Route("/user")]
 	public async Task<IActionResult> Create([FromBody] CreateUserDto createUserDto)
 	{
 			
@@ -29,15 +27,17 @@ public class UserController: ControllerBase
 	}
 	
 	[HttpPatch]    
-	[Route("/")]
-	public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto)
+	[Route("/user/{id}")]
+	public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto,int id)
 	{
-	    await _sender.Send(new UpdateUserCommand(updateUserDto.ToEntity()));
+		var user = updateUserDto.ToEntity();
+		user.Id = id;
+	    await _sender.Send(new UpdateUserCommand(user));
 	    return Ok();
 	}
 	
 	[HttpDelete]    
-	[Route("//{id}")]
+	[Route("/user/{id}")]
 	public async Task<IActionResult> Delete(int id)
 	{		
 	    await _sender.Send(new DeleteUserCommand(id));
@@ -45,10 +45,17 @@ public class UserController: ControllerBase
 	}
 	
 	[HttpGet]    
-	[Route("/")]
+	[Route("/user")]
 	public async Task<IActionResult> ReadAll()
 	{
 	    await _sender.Send(new ReadAllUsersQuery());
 	    return Ok();
 	}
+	[HttpGet]    
+	[Route("/user/{id}")]
+	public async Task<IActionResult> ReadOne(int id)
+	{
+	    await _sender.Send(new ReadOneUserQuery(id));
+	    return Ok();
+	}  
 }

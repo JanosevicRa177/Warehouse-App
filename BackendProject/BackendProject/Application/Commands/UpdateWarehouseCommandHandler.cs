@@ -4,8 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Commands;
 
-
-
 public class UpdateWarehouseCommandHandler : ICommandHandler<UpdateWarehouseCommand> {
 	private IWarehouseRepository _repository;
 	
@@ -20,4 +18,3 @@ public class UpdateWarehouseCommandHandler : ICommandHandler<UpdateWarehouseComm
 		_repository.Update(request.Warehouse);
 	}
 }
-

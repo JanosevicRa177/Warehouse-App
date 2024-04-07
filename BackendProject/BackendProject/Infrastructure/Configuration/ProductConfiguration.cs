@@ -4,10 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BackendProject.Infrastructure.Configuration;
 
-public class AddressConfiguration : IEntityTypeConfiguration<Address>
+public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<Address> builder)
+    public void Configure(EntityTypeBuilder<Product> builder)
     {
+		builder
+		    .Property(x => x.Id)
+		    .ValueGeneratedOnAdd();
         
     }
 }

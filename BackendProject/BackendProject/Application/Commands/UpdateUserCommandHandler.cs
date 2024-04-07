@@ -4,8 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Commands;
 
-
-
 public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand> {
 	private IUserRepository _repository;
 	
@@ -20,4 +18,3 @@ public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand> {
 		_repository.Update(request.User);
 	}
 }
-

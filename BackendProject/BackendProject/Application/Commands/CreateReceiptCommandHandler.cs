@@ -17,6 +17,3 @@ public class CreateReceiptCommandHandler : ICommandHandler<CreateReceiptCommand,
 	   return receipt.Id;
 	}
 }
-
-
-

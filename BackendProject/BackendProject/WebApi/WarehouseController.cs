@@ -16,9 +16,7 @@ public class WarehouseController: ControllerBase
     public WarehouseController(ISender sender) {
     	_sender = sender;
     }
-
-
-
+    
 	[HttpPost]    
 	[Route("/warehouse")]
 	public async Task<IActionResult> Create([FromBody] CreateWarehouseDto createWarehouseDto)
@@ -29,10 +27,12 @@ public class WarehouseController: ControllerBase
 	}
 	
 	[HttpPatch]    
-	[Route("/warehouse")]
-	public async Task<IActionResult> Update([FromBody] UpdateWarehouseDto updateWarehouseDto)
+	[Route("/warehouse/{id}")]
+	public async Task<IActionResult> Update([FromBody] UpdateWarehouseDto updateWarehouseDto,int id)
 	{
-	    await _sender.Send(new UpdateWarehouseCommand(updateWarehouseDto.ToEntity()));
+		var warehouse = updateWarehouseDto.ToEntity();
+		warehouse.Id = id;
+	    await _sender.Send(new UpdateWarehouseCommand(warehouse));
 	    return Ok();
 	}
 	
@@ -51,4 +51,11 @@ public class WarehouseController: ControllerBase
 	    await _sender.Send(new ReadAllWarehousesQuery());
 	    return Ok();
 	}
+	[HttpGet]    
+	[Route("/warehouse/{id}")]
+	public async Task<IActionResult> ReadOne(int id)
+	{
+	    await _sender.Send(new ReadOneWarehouseQuery(id));
+	    return Ok();
+	}  
 }

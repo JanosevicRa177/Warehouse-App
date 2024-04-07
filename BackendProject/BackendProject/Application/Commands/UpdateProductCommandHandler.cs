@@ -4,8 +4,6 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Commands;
 
-
-
 public class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand> {
 	private IProductRepository _repository;
 	
@@ -20,4 +18,3 @@ public class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand>
 		_repository.Update(request.Product);
 	}
 }
-
