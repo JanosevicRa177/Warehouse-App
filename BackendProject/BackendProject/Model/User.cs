@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;   
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Model;
 
@@ -29,11 +30,9 @@ public class User
       	Email = email;
       	WarehouseId = warehouseId;
 	}
-
-
-	public void Update(User entity) {
-		FirstName = entity.FirstName;
-		Contact = entity.Contact;
-		Email = entity.Email;
+	public void Update(UpdateUserDto updateUserDto) {
+		FirstName = updateUserDto.FirstName;
+		Contact = updateUserDto.Contact;
+		Email = updateUserDto.Email;
 	}
 }

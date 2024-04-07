@@ -8,7 +8,7 @@ public class ReadOneProductQueryHandler : IQueryHandler<ReadOneProductQuery, Pro
 
 	private readonly IProductRepository _repository;
 	
-	public ReadOneProductQueryHandler (IProductRepository repository) {
+	public ReadOneProductQueryHandler(IProductRepository repository) {
 		_repository = repository;
 	}
 	

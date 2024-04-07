@@ -1,6 +1,6 @@
 using BackendProject.Application.Interfaces;
-using BackendProject.Model;
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Application.Commands;
 
-public sealed record UpdateWarehouseCommand(Warehouse Warehouse) : ICommand;
+public sealed record UpdateWarehouseCommand(UpdateWarehouseDto UpdateWarehouseDto, int Id) : ICommand;

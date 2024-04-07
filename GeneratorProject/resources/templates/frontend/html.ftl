@@ -44,11 +44,12 @@
 	</div>
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
-	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">	
+		<input type="text" id="selectedItem.id" name="id" [ngModel]="selectedItem ? selectedItem.id : null" hidden>	
 		<#list properties as property>
 			<#if property.upper == 1 && property.isClass> 
 	      <label for="${property.type.name?uncap_first}">${property.name}:</label>
-		  <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}" [ngModel]="selectedItem ? selectedItem.${property.name?uncap_first}Id : null">
+		  <select id="${property.type.name?uncap_first}Id" name="${property.type.name?uncap_first}Id" [ngModel]="selectedItem ? selectedItem.${property.name?uncap_first}Id : null">
 			  <option *ngFor="let item of <#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if>" [value]="item.id">{{ item.id }}</option>
 		  </select> 
 			 </#if>
@@ -58,7 +59,7 @@
   			 </#if>
 		     <#if property.upper == -1 > 
 		   <label for="${property.type.name?uncap_first}"><#if property.type.name?ends_with("s")>${property.type.name}es<#elseif property.type.name?ends_with("y")>${property.type.name?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name}s</#if>:</label>
-		   <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}" multiple [ngModel]="selectedItem ? selectedItem.${property.name?uncap_first}Ids : null">
+		   <select id="${property.type.name?uncap_first}" name="${property.type.name?uncap_first}Ids" multiple [ngModel]="selectedItem ? selectedItem.${property.name?uncap_first}Ids : null">
 		      <option *ngFor="let item of <#if property.type.name?ends_with("s")>${property.type.name?uncap_first}es<#elseif property.type.name?ends_with("y")>${property.type.name?uncap_first?substring(0, property.type.name?length - 1)}ies<#else>${property.type.name?uncap_first}s</#if>" [value]="item.id">{{ item.id }}</option>
 		   </select> 
 		    </#if>     

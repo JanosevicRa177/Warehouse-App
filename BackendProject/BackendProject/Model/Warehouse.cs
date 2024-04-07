@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;   
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Model;
 
@@ -25,10 +26,8 @@ public class Warehouse
       	Name = name;
       	SizeInM2 = sizeInM2;
 	}
-
-
-	public void Update(Warehouse entity) {
-		Name = entity.Name;
-		SizeInM2 = entity.SizeInM2;
+	public void Update(UpdateWarehouseDto updateWarehouseDto) {
+		Name = updateWarehouseDto.Name;
+		SizeInM2 = updateWarehouseDto.SizeInM2;
 	}
 }

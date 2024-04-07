@@ -1,6 +1,6 @@
 using BackendProject.Application.Interfaces;
-using BackendProject.Model;
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Application.Commands;
 
-public sealed record UpdateReceiptItemCommand(ReceiptItem ReceiptItem) : ICommand;
+public sealed record UpdateReceiptItemCommand(UpdateReceiptItemDto UpdateReceiptItemDto, int Id) : ICommand;

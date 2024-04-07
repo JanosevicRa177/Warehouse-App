@@ -12,9 +12,9 @@ public class UpdateReceiptCommandHandler : ICommandHandler<UpdateReceiptCommand>
 	}
 	
 	public async Task Handle(UpdateReceiptCommand request, CancellationToken cancellationToken) {
-		var receipt = _repository.Find(request.Receipt.Id);
+		var receipt = _repository.Find(request.Id);
 		if(receipt is null) return;
-		receipt.Update(request.Receipt);
-		_repository.Update(request.Receipt);
+		receipt.Update(request.UpdateReceiptDto);
+		_repository.Update(receipt);
 	}
 }

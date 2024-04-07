@@ -12,9 +12,9 @@ public class UpdateAddressCommandHandler : ICommandHandler<UpdateAddressCommand>
 	}
 	
 	public async Task Handle(UpdateAddressCommand request, CancellationToken cancellationToken) {
-		var address = _repository.Find(request.Address.Id);
+		var address = _repository.Find(request.Id);
 		if(address is null) return;
-		address.Update(request.Address);
-		_repository.Update(request.Address);
+		address.Update(request.UpdateAddressDto);
+		_repository.Update(address);
 	}
 }

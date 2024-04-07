@@ -8,7 +8,7 @@ public class ReadOneAddressQueryHandler : IQueryHandler<ReadOneAddressQuery, Add
 
 	private readonly IAddressRepository _repository;
 	
-	public ReadOneAddressQueryHandler (IAddressRepository repository) {
+	public ReadOneAddressQueryHandler(IAddressRepository repository) {
 		_repository = repository;
 	}
 	

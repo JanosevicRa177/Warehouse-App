@@ -3,5 +3,5 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Queries;
 
-public sealed record ReadAllReceiptsQuery() : IQuery<List<Receipt>>;
+public sealed record ReadAllReceiptsQuery() : IQuery<IEnumerable<Receipt>>;
  

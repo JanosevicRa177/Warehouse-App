@@ -35,13 +35,14 @@
 	</div>
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
-	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">	
+		<input type="text" id="selectedItem.id" name="id" [ngModel]="selectedItem ? selectedItem.id : null" hidden>	
 	      <label for="warehouse">Warehouse:</label>
-		  <select id="warehouse" name="warehouse" [ngModel]="selectedItem ? selectedItem.warehouseId : null">
+		  <select id="warehouseId" name="warehouseId" [ngModel]="selectedItem ? selectedItem.warehouseId : null">
 			  <option *ngFor="let item of warehouses" [value]="item.id">{{ item.id }}</option>
 		  </select> 
 	      <label for="user">User:</label>
-		  <select id="user" name="user" [ngModel]="selectedItem ? selectedItem.userId : null">
+		  <select id="userId" name="userId" [ngModel]="selectedItem ? selectedItem.userId : null">
 			  <option *ngFor="let item of users" [value]="item.id">{{ item.id }}</option>
 		  </select> 
 	      <label for="country">Country:</label>

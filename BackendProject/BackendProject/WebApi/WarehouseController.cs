@@ -28,11 +28,9 @@ public class WarehouseController: ControllerBase
 	
 	[HttpPatch]    
 	[Route("/warehouse/{id}")]
-	public async Task<IActionResult> Update([FromBody] UpdateWarehouseDto updateWarehouseDto,int id)
+	public async Task<IActionResult> Update([FromBody] UpdateWarehouseDto updateWarehouseDto, int id)
 	{
-		var warehouse = updateWarehouseDto.ToEntity();
-		warehouse.Id = id;
-	    await _sender.Send(new UpdateWarehouseCommand(warehouse));
+	    await _sender.Send(new UpdateWarehouseCommand(updateWarehouseDto, id));
 	    return Ok();
 	}
 	
@@ -48,14 +46,14 @@ public class WarehouseController: ControllerBase
 	[Route("/warehouse")]
 	public async Task<IActionResult> ReadAll()
 	{
-	    await _sender.Send(new ReadAllWarehousesQuery());
-	    return Ok();
+	    var warehouses =  await _sender.Send(new ReadAllWarehousesQuery());
+	    return Ok(warehouses);
 	}
 	[HttpGet]    
 	[Route("/warehouse/{id}")]
 	public async Task<IActionResult> ReadOne(int id)
 	{
-	    await _sender.Send(new ReadOneWarehouseQuery(id));
-	    return Ok();
+	    var warehouse = await _sender.Send(new ReadOneWarehouseQuery(id));
+	    return Ok(warehouse);
 	}  
 }

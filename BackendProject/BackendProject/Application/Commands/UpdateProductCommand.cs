@@ -1,6 +1,6 @@
 using BackendProject.Application.Interfaces;
-using BackendProject.Model;
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Application.Commands;
 
-public sealed record UpdateProductCommand(Product Product) : ICommand;
+public sealed record UpdateProductCommand(UpdateProductDto UpdateProductDto, int Id) : ICommand;

@@ -29,15 +29,16 @@
 	</div>
 	<h2 *ngIf="!selectedItem">Create form</h2>
 	<h2 *ngIf="selectedItem">Edit form</h2>
-	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">		
+	<form #entityForm="ngForm" (ngSubmit)="selectedItem ? edit(entityForm.value) : create(entityForm.value)">	
+		<input type="text" id="selectedItem.id" name="id" [ngModel]="selectedItem ? selectedItem.id : null" hidden>	
 	      <label for="item">Item:</label>
-		  <select id="item" name="item" [ngModel]="selectedItem ? selectedItem.itemId : null">
+		  <select id="itemId" name="itemId" [ngModel]="selectedItem ? selectedItem.itemId : null">
 			  <option *ngFor="let item of items" [value]="item.id">{{ item.id }}</option>
 		  </select> 
 	      <label for="price">Price:</label>
     	  <input type="text" id="price" name="price" [ngModel]="selectedItem ? selectedItem.price : null" required>
 	      <label for="warehouse">Warehouse:</label>
-		  <select id="warehouse" name="warehouse" [ngModel]="selectedItem ? selectedItem.warehouseId : null">
+		  <select id="warehouseId" name="warehouseId" [ngModel]="selectedItem ? selectedItem.warehouseId : null">
 			  <option *ngFor="let item of warehouses" [value]="item.id">{{ item.id }}</option>
 		  </select> 
 	<div *ngIf="!selectedItem">

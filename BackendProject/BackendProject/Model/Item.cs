@@ -1,5 +1,6 @@
 using BackendProject.Model.Enum;
 using System.ComponentModel.DataAnnotations.Schema;   
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Model;
 
@@ -21,10 +22,8 @@ public class Item
       	ItemType = itemType;
       	ItemName = itemName;
 	}
-
-
-	public void Update(Item entity) {
-		ItemType = entity.ItemType;
-		ItemName = entity.ItemName;
+	public void Update(UpdateItemDto updateItemDto) {
+		ItemType = updateItemDto.ItemType;
+		ItemName = updateItemDto.ItemName;
 	}
 }

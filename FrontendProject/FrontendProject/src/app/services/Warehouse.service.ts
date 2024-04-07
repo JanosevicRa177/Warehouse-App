@@ -15,7 +15,7 @@ export class WarehouseService {
   }
   
   updateWarehouse(data: any): Observable<any> {
-  	return this.http.put<any>('http://localhost:8000/warehouse/' + data.id, data);
+  	return this.http.patch<any>('http://localhost:8000/warehouse/' + data.id, data);
   }
   
   createWarehouse(data: any): Observable<any> {

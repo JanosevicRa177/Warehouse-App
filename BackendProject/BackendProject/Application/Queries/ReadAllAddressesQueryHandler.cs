@@ -8,7 +8,7 @@ public class ReadAllAddressesQueryHandler : IQueryHandler<ReadAllAddressesQuery,
 
 	private readonly IAddressRepository _repository;
 	
-	public ReadAllAddressesQueryHandler (IAddressRepository repository) {
+	public ReadAllAddressesQueryHandler(IAddressRepository repository) {
 		_repository = repository;
 	}
 	

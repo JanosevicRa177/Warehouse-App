@@ -3,5 +3,5 @@ using BackendProject.Model;
 
 namespace BackendProject.Application.Queries;
 
-public sealed record ReadAllUsersQuery() : IQuery<List<User>>;
+public sealed record ReadAllUsersQuery() : IQuery<IEnumerable<User>>;
  

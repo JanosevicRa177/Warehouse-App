@@ -31,11 +31,9 @@ public class ${name}: ControllerBase
 	<#if update == true>
 	[HttpPatch]    
 	[Route("${route}/{id}")]
-	public async Task<IActionResult> Update([FromBody] Update${classname}Dto update${classname}Dto,int id)
+	public async Task<IActionResult> Update([FromBody] Update${classname}Dto update${classname}Dto, int id)
 	{
-		var ${classname[0]?lower_case + classname[1..]} = update${classname}Dto.ToEntity();
-		${classname[0]?lower_case + classname[1..]}.Id = id;
-	    await _sender.Send(new Update${classname}Command(${classname[0]?lower_case + classname[1..]}));
+	    await _sender.Send(new Update${classname}Command(update${classname}Dto, id));
 	    return Ok();
 	}
 	</#if>    
@@ -55,15 +53,15 @@ public class ${name}: ControllerBase
 	[Route("${route}")]
 	public async Task<IActionResult> ReadAll()
 	{
-	    await _sender.Send(new ReadAll<#if classname?ends_with("s")>${classname}es<#elseif classname?ends_with("y")>${classname?substring(0, classname?length - 1)}ies<#else>${classname}s</#if>Query());
-	    return Ok();
+	    var <#if classname?ends_with("s")>${classname?uncap_first}es<#elseif classname?ends_with("y")>${classname?uncap_first?substring(0, classname?length - 1)}ies<#else>${classname?uncap_first}s</#if> =  await _sender.Send(new ReadAll<#if classname?ends_with("s")>${classname}es<#elseif classname?ends_with("y")>${classname?substring(0, classname?length - 1)}ies<#else>${classname}s</#if>Query());
+	    return Ok(<#if classname?ends_with("s")>${classname?uncap_first}es<#elseif classname?ends_with("y")>${classname?uncap_first?substring(0, classname?length - 1)}ies<#else>${classname?uncap_first}s</#if>);
 	}
 	</#if>  
 	[HttpGet]    
 	[Route("${route}/{id}")]
 	public async Task<IActionResult> ReadOne(int id)
 	{
-	    await _sender.Send(new ReadOne${classname}Query(id));
-	    return Ok();
+	    var ${classname?uncap_first} = await _sender.Send(new ReadOne${classname}Query(id));
+	    return Ok(${classname?uncap_first});
 	}  
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;   
+using BackendProject.WebApi.Dtos;
 
 namespace BackendProject.Model;
 
@@ -16,9 +17,7 @@ public class Receipt
 	{
       	FullPrice = fullPrice;
 	}
-
-
-	public void Update(Receipt entity) {
-		FullPrice = entity.FullPrice;
+	public void Update(UpdateReceiptDto updateReceiptDto) {
+		FullPrice = updateReceiptDto.FullPrice;
 	}
 }

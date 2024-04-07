@@ -28,11 +28,9 @@ public class UserController: ControllerBase
 	
 	[HttpPatch]    
 	[Route("/user/{id}")]
-	public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto,int id)
+	public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto, int id)
 	{
-		var user = updateUserDto.ToEntity();
-		user.Id = id;
-	    await _sender.Send(new UpdateUserCommand(user));
+	    await _sender.Send(new UpdateUserCommand(updateUserDto, id));
 	    return Ok();
 	}
 	
@@ -48,14 +46,14 @@ public class UserController: ControllerBase
 	[Route("/user")]
 	public async Task<IActionResult> ReadAll()
 	{
-	    await _sender.Send(new ReadAllUsersQuery());
-	    return Ok();
+	    var users =  await _sender.Send(new ReadAllUsersQuery());
+	    return Ok(users);
 	}
 	[HttpGet]    
 	[Route("/user/{id}")]
 	public async Task<IActionResult> ReadOne(int id)
 	{
-	    await _sender.Send(new ReadOneUserQuery(id));
-	    return Ok();
+	    var user = await _sender.Send(new ReadOneUserQuery(id));
+	    return Ok(user);
 	}  
 }

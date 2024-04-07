@@ -15,7 +15,7 @@ export class ItemService {
   }
   
   updateItem(data: any): Observable<any> {
-  	return this.http.put<any>('http://localhost:8000/item/' + data.id, data);
+  	return this.http.patch<any>('http://localhost:8000/item/' + data.id, data);
   }
   
   createItem(data: any): Observable<any> {

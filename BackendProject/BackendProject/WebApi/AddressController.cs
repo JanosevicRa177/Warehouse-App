@@ -28,10 +28,9 @@ public class AddressController: ControllerBase
 	
 	[HttpPatch]    
 	[Route("/address/{id}")]
-	public async Task<IActionResult> Update([FromBody] UpdateAddressDto updateAddressDto,int id)
+	public async Task<IActionResult> Update([FromBody] UpdateAddressDto updateAddressDto, int id)
 	{
-		var address = updateAddressDto.ToEntity();
-	    await _sender.Send(new UpdateAddressCommand(address));
+	    await _sender.Send(new UpdateAddressCommand(updateAddressDto, id));
 	    return Ok();
 	}
 	
@@ -47,14 +46,14 @@ public class AddressController: ControllerBase
 	[Route("/address")]
 	public async Task<IActionResult> ReadAll()
 	{
-	    await _sender.Send(new ReadAllAddressesQuery());
-	    return Ok();
+	    var addresses =  await _sender.Send(new ReadAllAddressesQuery());
+	    return Ok(addresses);
 	}
 	[HttpGet]    
 	[Route("/address/{id}")]
 	public async Task<IActionResult> ReadOne(int id)
 	{
-	    await _sender.Send(new ReadOneAddressQuery(id));
-	    return Ok();
+	    var address = await _sender.Send(new ReadOneAddressQuery(id));
+	    return Ok(address);
 	}  
 }

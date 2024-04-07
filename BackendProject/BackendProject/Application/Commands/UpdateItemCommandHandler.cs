@@ -12,9 +12,9 @@ public class UpdateItemCommandHandler : ICommandHandler<UpdateItemCommand> {
 	}
 	
 	public async Task Handle(UpdateItemCommand request, CancellationToken cancellationToken) {
-		var item = _repository.Find(request.Item.Id);
+		var item = _repository.Find(request.Id);
 		if(item is null) return;
-		item.Update(request.Item);
-		_repository.Update(request.Item);
+		item.Update(request.UpdateItemDto);
+		_repository.Update(item);
 	}
 }

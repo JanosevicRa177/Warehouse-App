@@ -15,7 +15,7 @@ export class ReceiptService {
   }
   
   updateReceipt(data: any): Observable<any> {
-  	return this.http.put<any>('http://localhost:8000/receipt/' + data.id, data);
+  	return this.http.patch<any>('http://localhost:8000/receipt/' + data.id, data);
   }
   
   createReceipt(data: any): Observable<any> {

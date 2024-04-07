@@ -9,7 +9,7 @@ public class ${name}Handler : IQueryHandler<${name}, IEnumerable<${classname}>> 
 
 	private readonly I${classname}Repository _repository;
 	
-	public ${name}Handler (I${classname}Repository repository) {
+	public ${name}Handler(I${classname}Repository repository) {
 		_repository = repository;
 	}
 	
@@ -23,7 +23,7 @@ public class ${name}Handler : IQueryHandler<${name}, ${classname}> {
 
 	private readonly I${classname}Repository _repository;
 	
-	public ${name}Handler (I${classname}Repository repository) {
+	public ${name}Handler(I${classname}Repository repository) {
 		_repository = repository;
 	}
 	
