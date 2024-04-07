@@ -1,4 +1,5 @@
 <div class="wrapper">
+<#if class.crud.read == true >
   <div class="table-container">
     <table class="data-table">
 	  <thead>
@@ -25,12 +26,18 @@
 		  <td><div class="ids"><div *ngFor="let id of item.${property.name?uncap_first}Ids">{{ id }}</div></div></td>
 		     </#if>     
 		</#list>
+		<#if class.crud.update == true >
 		  <td><button class="submit-btn" (click)="selectedItem = item">Edit</button></td>
+		</#if>
+		<#if class.crud.delete == true >
 		  <td><button class="delete-btn" (click)="delete(item.id)">Delete</button></td>
+		</#if>
 	    </tr>
 	  </tbody>
 	</table>
   </div>
+</#if>
+<#if class.crud.create == true || class.update == true>
   <div class="form-container">
   	<div class="create-btn-wrapper">
 	  <button class="submit-btn" (click)="selectedItem = null">Open create form</button>
@@ -64,4 +71,5 @@
 	</div>
 	</form>
   <div>
+</#if>
 </div>
